@@ -1,0 +1,257 @@
+{
+    "alteraciones0": {
+        "alteraciones": "sostenidos",
+        "cantidad": 0,
+        "mayor": "Do",
+        "menor": "La",
+        "velocidad": 80,
+        "dificultad": 5,
+        "apartados": {
+            "normal": true,
+            "terceras": true,
+            "cuartas": false,
+            "arpegio": true,
+            "melodica": true
+        },
+        "diasSinTocarla": 0,
+        "cambiosRecientes": false
+    },
+    "sostenido1": {
+        "alteraciones": "sostenidos",
+        "cantidad": 1,
+        "mayor": "Sol",
+        "menor": "Mi",
+        "velocidad": 80,
+        "dificultad": 5,
+        "apartados": {
+            "normal": true,
+            "terceras": true,
+            "cuartas": false,
+            "arpegio": true,
+            "melodica": true
+        },
+        "diasSinTocarla": 0,
+        "cambiosRecientes": false
+    },
+    "bemol1": {
+        "alteraciones": "bemoles",
+        "cantidad": 1,
+        "mayor": "Fa",
+        "menor": "Re",
+        "velocidad": 80,
+        "dificultad": 6,
+        "apartados": {
+            "normal": true,
+            "terceras": true,
+            "cuartas": false,
+            "arpegio": true,
+            "melodica": true
+        },
+        "diasSinTocarla": 0,
+        "cambiosRecientes": false
+    },
+    "sostenido2": {
+        "alteraciones": "sostenidos",
+        "cantidad": 2,
+        "mayor": "Re",
+        "menor": "Si",
+        "velocidad": 80,
+        "dificultad": 4,
+        "apartados": {
+            "normal": true,
+            "terceras": true,
+            "cuartas": false,
+            "arpegio": true,
+            "melodica": true
+        },
+        "diasSinTocarla": 0,
+        "cambiosRecientes": false
+    },
+    "bemol2": {
+        "alteraciones": "bemoles",
+        "cantidad": 2,
+        "mayor": "Sib",
+        "menor": "Sol",
+        "velocidad": 80,
+        "dificultad": 5,
+        "apartados": {
+            "normal": true,
+            "terceras": true,
+            "cuartas": false,
+            "arpegio": true,
+            "melodica": true
+        },
+        "diasSinTocarla": 0,
+        "cambiosRecientes": false
+    },
+    "sostenido3": {
+        "alteraciones": "sostenidos",
+        "cantidad": 3,
+        "mayor": "La",
+        "menor": "Fa#",
+        "velocidad": 80,
+        "dificultad": 5,
+        "apartados": {
+            "normal": true,
+            "terceras": true,
+            "cuartas": false,
+            "arpegio": true,
+            "melodica": true
+        },
+        "diasSinTocarla": 0,
+        "cambiosRecientes": false
+    },
+    "bemol3": {
+        "alteraciones": "bemoles",
+        "cantidad": 3,
+        "mayor": "Mib",
+        "menor": "Do",
+        "velocidad": 80,
+        "dificultad": 6,
+        "apartados": {
+            "normal": true,
+            "terceras": true,
+            "cuartas": false,
+            "arpegio": true,
+            "melodica": true
+        },
+        "diasSinTocarla": 0,
+        "cambiosRecientes": false
+    },
+    "sostenido4": {
+        "alteraciones": "sostenidos",
+        "cantidad": 4,
+        "mayor": "Mi",
+        "menor": "Do#",
+        "velocidad": 80,
+        "dificultad": 5,
+        "apartados": {
+            "normal": true,
+            "terceras": true,
+            "cuartas": false,
+            "arpegio": true,
+            "melodica": true
+        },
+        "diasSinTocarla": 0,
+        "cambiosRecientes": false
+    },
+    "bemol4": {
+        "alteraciones": "bemoles",
+        "cantidad": 4,
+        "mayor": "Lab",
+        "menor": "Fa",
+        "velocidad": 80,
+        "dificultad": 5,
+        "apartados": {
+            "normal": true,
+            "terceras": true,
+            "cuartas": false,
+            "arpegio": true,
+            "melodica": true
+        },
+        "diasSinTocarla": 0,
+        "cambiosRecientes": false
+    },
+    "sostenido5": {
+        "alteraciones": "sostenidos",
+        "cantidad": 5,
+        "mayor": "Si",
+        "menor": "Sol#",
+        "velocidad": 80,
+        "dificultad": 6,
+        "apartados": {
+            "normal": true,
+            "terceras": true,
+            "cuartas": false,
+            "arpegio": true,
+            "melodica": true
+        },
+        "diasSinTocarla": 0,
+        "cambiosRecientes": false
+    },
+    "bemol5": {
+        "alteraciones": "bemoles",
+        "cantidad": 5,
+        "mayor": "Reb",
+        "menor": "Sib",
+        "velocidad": 80,
+        "dificultad": 5,
+        "apartados": {
+            "normal": true,
+            "terceras": true,
+            "cuartas": false,
+            "arpegio": true,
+            "melodica": true
+        },
+        "diasSinTocarla": 0,
+        "cambiosRecientes": false
+    },
+    "sostenido6": {
+        "alteraciones": "sostenidos",
+        "cantidad": 6,
+        "mayor": "Fa#",
+        "menor": "Re#",
+        "velocidad": 80,
+        "dificultad": 5,
+        "apartados": {
+            "normal": true,
+            "terceras": true,
+            "cuartas": false,
+            "arpegio": true,
+            "melodica": true
+        },
+        "diasSinTocarla": 0,
+        "cambiosRecientes": false
+    },
+    "bemol6": {
+        "alteraciones": "bemoles",
+        "cantidad": 6,
+        "mayor": "Solb",
+        "menor": "Mib",
+        "velocidad": 80,
+        "dificultad": 6,
+        "apartados": {
+            "normal": true,
+            "terceras": true,
+            "cuartas": false,
+            "arpegio": true,
+            "melodica": true
+        },
+        "diasSinTocarla": 0,
+        "cambiosRecientes": false
+    },
+    "sostenido7": {
+        "alteraciones": "sostenidos",
+        "cantidad": 7,
+        "mayor": "Do#",
+        "menor": "La#",
+        "velocidad": 80,
+        "dificultad": 4,
+        "apartados": {
+            "normal": true,
+            "terceras": true,
+            "cuartas": false,
+            "arpegio": true,
+            "melodica": true
+        },
+        "diasSinTocarla": 0,
+        "cambiosRecientes": false
+    },
+    "bemol7": {
+        "alteraciones": "bemoles",
+        "cantidad": 7,
+        "mayor": "Dob",
+        "menor": "Lab",
+        "velocidad": 80,
+        "dificultad": 5,
+        "apartados": {
+            "normal": true,
+            "terceras": true,
+            "cuartas": false,
+            "arpegio": true,
+            "melodica": true
+        },
+        "diasSinTocarla": 0,
+        "cambiosRecientes": false
+    }
+}
