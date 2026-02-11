@@ -7,6 +7,10 @@ cantidad_hoy = int(input("¿Cuántas escalas vas a tocar?"))
 with open("data.json", "r", encoding="utf-8") as data_json:
     datos = json.load(data_json)
 
+# settings
+with open("settings.json", "r", encoding="utf-8") as settings_json:
+    settings = json.load(settings_json)
+
 # un diccionario que relaciona cada tonalidad con un número
 tonalidades = list(datos.keys())
 
@@ -25,6 +29,28 @@ def restaurar_valores():
 
 # una lista con las valocidades discretas
 velocidades_discretas = [50, 52, 54, 56, 58, 60, 63, 66, 69, 72, 76, 80, 84, 88, 92, 96, 100, 104, 108, 112, 116, 120, 126, 132, 138, 144]
+
+def aumentar_velocidad(tonalidad):
+    v = datos[tonalidad]["velocidad"]
+    if settings["velocidades"] == "discretas":
+        if v not in velocidades_discretas:
+            pass # debería coger el valor más cercano
+        else:
+            v = velocidades_discretas[velocidades_discretas.index(v) + 1]
+    else:
+        v = v + 1
+    datos[tonalidad]["velocidad"] = v
+
+def disminuir_velocidad(tonalidad):
+    v = datos[tonalidad]["velocidad"]
+    if settings["velocidades"] == "discretas":
+        if v not in velocidades_discretas:
+            pass # debería coger el valor más cercano
+        else:
+            v = velocidades_discretas[velocidades_discretas.index(v) - 1]
+    else:
+        v = v - 1
+    datos[tonalidad]["velocidad"] = v
 
 # las escalas que vas a tocar hoy
 escalas_hoy = random.sample(tonalidades, cantidad_hoy)
@@ -50,9 +76,11 @@ for x in escalas_hoy:
 # Cambiar la velocidad según la dificultad
 for tonalidad in tonalidades:
     if datos[tonalidad]["dificultad"] == 0:
-        datos[tonalidad]["velocidad"] += 1
+        aumentar_velocidad(tonalidad)
+        datos[tonalidad]["dificultad"] = 5
     elif datos[tonalidad]["dificultad"] == 8:
-        datos[tonalidad]["velocidad"] -=1
+        disminuir_velocidad(tonalidad)
+        datos[tonalidad]["dificultad"] = 5
 
 # cambiar los datos
 with open("data.json", mode="w", encoding="utf-8") as write_file:

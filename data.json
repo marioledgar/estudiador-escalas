@@ -39,7 +39,7 @@
         "mayor": "Fa",
         "menor": "Re",
         "velocidad": 80,
-        "dificultad": 6,
+        "dificultad": 7,
         "apartados": {
             "normal": true,
             "terceras": true,
@@ -124,7 +124,7 @@
         "mayor": "Mi",
         "menor": "Do#",
         "velocidad": 80,
-        "dificultad": 5,
+        "dificultad": 4,
         "apartados": {
             "normal": true,
             "terceras": true,
@@ -175,7 +175,7 @@
         "mayor": "Reb",
         "menor": "Sib",
         "velocidad": 80,
-        "dificultad": 5,
+        "dificultad": 6,
         "apartados": {
             "normal": true,
             "terceras": true,
@@ -226,7 +226,7 @@
         "mayor": "Do#",
         "menor": "La#",
         "velocidad": 80,
-        "dificultad": 4,
+        "dificultad": 5,
         "apartados": {
             "normal": true,
             "terceras": true,
@@ -243,7 +243,7 @@
         "mayor": "Dob",
         "menor": "Lab",
         "velocidad": 80,
-        "dificultad": 5,
+        "dificultad": 6,
         "apartados": {
             "normal": true,
             "terceras": true,
