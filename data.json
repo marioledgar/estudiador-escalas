@@ -39,7 +39,7 @@
         "mayor": "Fa",
         "menor": "Re",
         "velocidad": 80,
-        "dificultad": 7,
+        "dificultad": 5,
         "apartados": {
             "normal": true,
             "terceras": true,
@@ -56,7 +56,7 @@
         "mayor": "Re",
         "menor": "Si",
         "velocidad": 80,
-        "dificultad": 4,
+        "dificultad": 5,
         "apartados": {
             "normal": true,
             "terceras": true,
@@ -107,7 +107,7 @@
         "mayor": "Mib",
         "menor": "Do",
         "velocidad": 80,
-        "dificultad": 6,
+        "dificultad": 5,
         "apartados": {
             "normal": true,
             "terceras": true,
@@ -124,7 +124,7 @@
         "mayor": "Mi",
         "menor": "Do#",
         "velocidad": 80,
-        "dificultad": 4,
+        "dificultad": 5,
         "apartados": {
             "normal": true,
             "terceras": true,
@@ -158,7 +158,7 @@
         "mayor": "Si",
         "menor": "Sol#",
         "velocidad": 80,
-        "dificultad": 6,
+        "dificultad": 5,
         "apartados": {
             "normal": true,
             "terceras": true,
@@ -175,7 +175,7 @@
         "mayor": "Reb",
         "menor": "Sib",
         "velocidad": 80,
-        "dificultad": 6,
+        "dificultad": 5,
         "apartados": {
             "normal": true,
             "terceras": true,
@@ -209,7 +209,7 @@
         "mayor": "Solb",
         "menor": "Mib",
         "velocidad": 80,
-        "dificultad": 6,
+        "dificultad": 5,
         "apartados": {
             "normal": true,
             "terceras": true,
@@ -243,7 +243,7 @@
         "mayor": "Dob",
         "menor": "Lab",
         "velocidad": 80,
-        "dificultad": 6,
+        "dificultad": 5,
         "apartados": {
             "normal": true,
             "terceras": true,

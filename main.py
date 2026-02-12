@@ -18,7 +18,7 @@ tonalidades = list(datos.keys())
 def restaurar_valores():
     for tonalidad in tonalidades:
         datos[tonalidad]["dificultad"] = 5
-        datos[tonalidad]["velocidad"] = 72
+        datos[tonalidad]["velocidad"] = 80
         datos[tonalidad]["diasSinTocarla"] = 0
         datos[tonalidad]["cambiosRecientes"] = False
         datos[tonalidad]["apartados"]["normal"] = True
@@ -27,6 +27,8 @@ def restaurar_valores():
         datos[tonalidad]["apartados"]["cuartas"] = False
         datos[tonalidad]["apartados"]["melodica"] = True
 
+restaurar_valores()
+
 # una lista con las valocidades discretas
 velocidades_discretas = [50, 52, 54, 56, 58, 60, 63, 66, 69, 72, 76, 80, 84, 88, 92, 96, 100, 104, 108, 112, 116, 120, 126, 132, 138, 144]
 
@@ -34,7 +36,7 @@ def aumentar_velocidad(tonalidad):
     v = datos[tonalidad]["velocidad"]
     if settings["velocidades"] == "discretas":
         if v not in velocidades_discretas:
-            pass # debería coger el valor más cercano
+            v = min(x for x in velocidades_discretas if x >= v)
         else:
             v = velocidades_discretas[velocidades_discretas.index(v) + 1]
     else:
@@ -45,7 +47,7 @@ def disminuir_velocidad(tonalidad):
     v = datos[tonalidad]["velocidad"]
     if settings["velocidades"] == "discretas":
         if v not in velocidades_discretas:
-            pass # debería coger el valor más cercano
+            v = max(x for x in velocidades_discretas if x <= v)
         else:
             v = velocidades_discretas[velocidades_discretas.index(v) - 1]
     else:
@@ -75,10 +77,10 @@ for x in escalas_hoy:
 
 # Cambiar la velocidad según la dificultad
 for tonalidad in tonalidades:
-    if datos[tonalidad]["dificultad"] == 0:
+    if datos[tonalidad]["dificultad"] <= 0:
         aumentar_velocidad(tonalidad)
         datos[tonalidad]["dificultad"] = 5
-    elif datos[tonalidad]["dificultad"] == 8:
+    elif datos[tonalidad]["dificultad"] >= 8:
         disminuir_velocidad(tonalidad)
         datos[tonalidad]["dificultad"] = 5
 
