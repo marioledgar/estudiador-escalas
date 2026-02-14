@@ -1,7 +1,6 @@
 import json
 import random
 
-
 ################################
 ## FUNCIONES Y COSAS BASICAS  ##
 ################################
@@ -71,16 +70,23 @@ def tocar(tonalidad):
 
 ################################
 
-#cantidad_hoy = int(input("¿Cuántas escalas vas a tocar?"))
+cantidad_hoy = int(input("¿Cuántas escalas vas a tocar?"))
+mitad_antigua = cantidad_hoy // 2
+mitad_aleatoria = cantidad_hoy - mitad_antigua
 
 dias_sin_tocarlas = dict({})
 for tonalidad in tonalidades:
-    dias_sin_tocarlas.update({datos[tonalidad]["dias_sin_tocarla"]:tonalidad})
-#dias_sin_tocarlas = {k: v for k, v in sorted(dias_sin_tocarlas.items(), key=lambda item: item[0])}
-print(dias_sin_tocarlas)
+    dias_sin_tocarlas.update({tonalidad:datos[tonalidad]["dias_sin_tocarla"]})
+dias_sin_tocarlas = sorted(dias_sin_tocarlas.items(), key=lambda item: item[1], reverse=True)
+
 # las escalas que vas a tocar hoy
 escalas_hoy = []
-print(tonalidades)
+for i in range(mitad_antigua):
+    escalas_hoy.append(dias_sin_tocarlas[i][0])
+tonalidades_restantes = list(set(tonalidades) - set(escalas_hoy))
+tonalidades_aleatorias = random.sample(tonalidades_restantes, mitad_aleatoria)
+escalas_hoy = list(set(escalas_hoy) | set(tonalidades_aleatorias))
+print(escalas_hoy)
 
 # tocar cada escala
 for x in escalas_hoy:
@@ -101,6 +107,10 @@ for tonalidad in tonalidades:
         datos[tonalidad]["dias_sin_tocarla"] = 0
     else:
         datos[tonalidad]["dias_sin_tocarla"] += 1
+
+## para las pruebas
+if input("¿Restaurar valores? y/n") == "y":
+    restaurar_valores()
 
 ###############################
 # ESTO TIENE QUE IR LO ULTIMO #
