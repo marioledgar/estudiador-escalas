@@ -67,33 +67,7 @@ def tocar(tonalidad):
         pass
     else:
         print("No es un resultado admitido.")
-
-################################
-
-cantidad_hoy = int(input("¿Cuántas escalas vas a tocar?"))
-mitad_antigua = cantidad_hoy // 2
-mitad_aleatoria = cantidad_hoy - mitad_antigua
-
-dias_sin_tocarlas = dict({})
-for tonalidad in tonalidades:
-    dias_sin_tocarlas.update({tonalidad:datos[tonalidad]["dias_sin_tocarla"]})
-dias_sin_tocarlas = sorted(dias_sin_tocarlas.items(), key=lambda item: item[1], reverse=True)
-
-# las escalas que vas a tocar hoy
-escalas_hoy = []
-for i in range(mitad_antigua):
-    escalas_hoy.append(dias_sin_tocarlas[i][0])
-tonalidades_restantes = list(set(tonalidades) - set(escalas_hoy))
-tonalidades_aleatorias = random.sample(tonalidades_restantes, mitad_aleatoria)
-escalas_hoy = list(set(escalas_hoy) | set(tonalidades_aleatorias))
-print(escalas_hoy)
-
-# tocar cada escala
-for x in escalas_hoy:
-    tocar(x)
-
-# Cambiar la velocidad según la dificultad
-for tonalidad in tonalidades:
+    datos[tonalidad]["dias_sin_tocarla"] = 0
     if datos[tonalidad]["dificultad"] <= 0:
         aumentar_velocidad(tonalidad)
         datos[tonalidad]["dificultad"] = 5
@@ -101,12 +75,27 @@ for tonalidad in tonalidades:
         disminuir_velocidad(tonalidad)
         datos[tonalidad]["dificultad"] = 5
 
+
+################################
+
+cantidad_hoy = int(input("¿Cuántas escalas vas a tocar?"))
+mitad_antigua = cantidad_hoy // 2
+mitad_aleatoria = cantidad_hoy - mitad_antigua
+
+ordenadas = sorted(datos, key=lambda k: datos[k]["dias_sin_tocarla"], reverse=True)
+antiguas = ordenadas[:mitad_antigua]
+disponibles_azar = [t for t in ordenadas if t not in antiguas]
+aleatorias = random.sample(disponibles_azar, mitad_aleatoria)
+escalas_hoy = antiguas + aleatorias
+random.shuffle(escalas_hoy)
+
+# tocar cada escala
+for x in escalas_hoy:
+    tocar(x)
+
 # Cambiar los dias sin tocarla
 for tonalidad in tonalidades:
-    if tonalidad in escalas_hoy:
-        datos[tonalidad]["dias_sin_tocarla"] = 0
-    else:
-        datos[tonalidad]["dias_sin_tocarla"] += 1
+    if tonalidad  not in escalas_hoy: datos[tonalidad]["dias_sin_tocarla"] += 1
 
 ## para las pruebas
 if input("¿Restaurar valores? y/n") == "y":
