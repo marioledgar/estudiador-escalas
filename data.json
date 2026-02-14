@@ -13,7 +13,8 @@
             "arpegio": true,
             "melodica": true
         },
-        "diasSinTocarla": 0,
+        "dias_sin_tocarla": 30,
+        "cambios_recientes": false,
         "cambiosRecientes": false
     },
     "sostenido1": {
@@ -30,7 +31,8 @@
             "arpegio": true,
             "melodica": true
         },
-        "diasSinTocarla": 0,
+        "dias_sin_tocarla": 30,
+        "cambios_recientes": false,
         "cambiosRecientes": false
     },
     "bemol1": {
@@ -47,7 +49,8 @@
             "arpegio": true,
             "melodica": true
         },
-        "diasSinTocarla": 0,
+        "dias_sin_tocarla": 30,
+        "cambios_recientes": false,
         "cambiosRecientes": false
     },
     "sostenido2": {
@@ -64,7 +67,8 @@
             "arpegio": true,
             "melodica": true
         },
-        "diasSinTocarla": 0,
+        "dias_sin_tocarla": 30,
+        "cambios_recientes": false,
         "cambiosRecientes": false
     },
     "bemol2": {
@@ -81,7 +85,8 @@
             "arpegio": true,
             "melodica": true
         },
-        "diasSinTocarla": 0,
+        "dias_sin_tocarla": 30,
+        "cambios_recientes": false,
         "cambiosRecientes": false
     },
     "sostenido3": {
@@ -98,7 +103,8 @@
             "arpegio": true,
             "melodica": true
         },
-        "diasSinTocarla": 0,
+        "dias_sin_tocarla": 30,
+        "cambios_recientes": false,
         "cambiosRecientes": false
     },
     "bemol3": {
@@ -115,7 +121,8 @@
             "arpegio": true,
             "melodica": true
         },
-        "diasSinTocarla": 0,
+        "dias_sin_tocarla": 30,
+        "cambios_recientes": false,
         "cambiosRecientes": false
     },
     "sostenido4": {
@@ -132,7 +139,8 @@
             "arpegio": true,
             "melodica": true
         },
-        "diasSinTocarla": 0,
+        "dias_sin_tocarla": 30,
+        "cambios_recientes": false,
         "cambiosRecientes": false
     },
     "bemol4": {
@@ -149,7 +157,8 @@
             "arpegio": true,
             "melodica": true
         },
-        "diasSinTocarla": 0,
+        "dias_sin_tocarla": 30,
+        "cambios_recientes": false,
         "cambiosRecientes": false
     },
     "sostenido5": {
@@ -166,7 +175,8 @@
             "arpegio": true,
             "melodica": true
         },
-        "diasSinTocarla": 0,
+        "dias_sin_tocarla": 30,
+        "cambios_recientes": false,
         "cambiosRecientes": false
     },
     "bemol5": {
@@ -183,7 +193,8 @@
             "arpegio": true,
             "melodica": true
         },
-        "diasSinTocarla": 0,
+        "dias_sin_tocarla": 30,
+        "cambios_recientes": false,
         "cambiosRecientes": false
     },
     "sostenido6": {
@@ -200,7 +211,8 @@
             "arpegio": true,
             "melodica": true
         },
-        "diasSinTocarla": 0,
+        "dias_sin_tocarla": 30,
+        "cambios_recientes": false,
         "cambiosRecientes": false
     },
     "bemol6": {
@@ -217,7 +229,8 @@
             "arpegio": true,
             "melodica": true
         },
-        "diasSinTocarla": 0,
+        "dias_sin_tocarla": 30,
+        "cambios_recientes": false,
         "cambiosRecientes": false
     },
     "sostenido7": {
@@ -234,7 +247,8 @@
             "arpegio": true,
             "melodica": true
         },
-        "diasSinTocarla": 0,
+        "dias_sin_tocarla": 30,
+        "cambios_recientes": false,
         "cambiosRecientes": false
     },
     "bemol7": {
@@ -251,7 +265,8 @@
             "arpegio": true,
             "melodica": true
         },
-        "diasSinTocarla": 0,
+        "dias_sin_tocarla": 30,
+        "cambios_recientes": false,
         "cambiosRecientes": false
     }
 }

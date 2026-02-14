@@ -1,7 +1,10 @@
 import json
 import random
 
-cantidad_hoy = int(input("¿Cuántas escalas vas a tocar?"))
+
+################################
+## FUNCIONES Y COSAS BASICAS  ##
+################################
 
 # importar datos
 with open("data.json", "r", encoding="utf-8") as data_json:
@@ -11,7 +14,7 @@ with open("data.json", "r", encoding="utf-8") as data_json:
 with open("settings.json", "r", encoding="utf-8") as settings_json:
     settings = json.load(settings_json)
 
-# un diccionario que relaciona cada tonalidad con un número
+# tonalidades
 tonalidades = list(datos.keys())
 
 # valores predeterminados
@@ -19,15 +22,13 @@ def restaurar_valores():
     for tonalidad in tonalidades:
         datos[tonalidad]["dificultad"] = 5
         datos[tonalidad]["velocidad"] = 80
-        datos[tonalidad]["diasSinTocarla"] = 0
+        datos[tonalidad]["dias_sin_tocarla"] = 0
         datos[tonalidad]["cambiosRecientes"] = False
         datos[tonalidad]["apartados"]["normal"] = True
         datos[tonalidad]["apartados"]["arpegio"] = True
         datos[tonalidad]["apartados"]["terceras"] = True
         datos[tonalidad]["apartados"]["cuartas"] = False
         datos[tonalidad]["apartados"]["melodica"] = True
-
-restaurar_valores()
 
 # una lista con las valocidades discretas
 velocidades_discretas = [50, 52, 54, 56, 58, 60, 63, 66, 69, 72, 76, 80, 84, 88, 92, 96, 100, 104, 108, 112, 116, 120, 126, 132, 138, 144]
@@ -54,9 +55,6 @@ def disminuir_velocidad(tonalidad):
         v = v - 1
     datos[tonalidad]["velocidad"] = v
 
-# las escalas que vas a tocar hoy
-escalas_hoy = random.sample(tonalidades, cantidad_hoy)
-
 # Lo que hay que hacer al tocar la escala
 def tocar(tonalidad):
     print("Toca " + datos[tonalidad]["mayor"] + " Mayor a ", datos[tonalidad]["velocidad"], "bpm.")
@@ -71,6 +69,19 @@ def tocar(tonalidad):
     else:
         print("No es un resultado admitido.")
 
+################################
+
+#cantidad_hoy = int(input("¿Cuántas escalas vas a tocar?"))
+
+dias_sin_tocarlas = dict({})
+for tonalidad in tonalidades:
+    dias_sin_tocarlas.update({datos[tonalidad]["dias_sin_tocarla"]:tonalidad})
+#dias_sin_tocarlas = {k: v for k, v in sorted(dias_sin_tocarlas.items(), key=lambda item: item[0])}
+print(dias_sin_tocarlas)
+# las escalas que vas a tocar hoy
+escalas_hoy = []
+print(tonalidades)
+
 # tocar cada escala
 for x in escalas_hoy:
     tocar(x)
@@ -84,8 +95,17 @@ for tonalidad in tonalidades:
         disminuir_velocidad(tonalidad)
         datos[tonalidad]["dificultad"] = 5
 
+# Cambiar los dias sin tocarla
+for tonalidad in tonalidades:
+    if tonalidad in escalas_hoy:
+        datos[tonalidad]["dias_sin_tocarla"] = 0
+    else:
+        datos[tonalidad]["dias_sin_tocarla"] += 1
+
+###############################
+# ESTO TIENE QUE IR LO ULTIMO #
+###############################
+
 # cambiar los datos
 with open("data.json", mode="w", encoding="utf-8") as write_file:
     json.dump(datos, write_file, indent=4)
-
-# data.update(random.choice([*dictionary.items()]))
