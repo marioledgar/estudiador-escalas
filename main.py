@@ -56,23 +56,21 @@ def tocar(tonalidad):
         if datos[tonalidad]["apartados"][apartado][0] == True:
             print(f"Toca {apartado} a {datos[tonalidad]["apartados"][apartado][1]["v"]}")
             ejecucion = input("¿Cómo te ha salido? Elige: perfecto, bien, o mal.").strip().lower()
-            if efecucion in ["perfe", "perfecto", "p"]:
+            if ejecucion in ["perfe", "perfecto", "p"]:
                 datos[tonalidad]["apartados"][apartado][1]["v"] -= 1
-            elif efecucion in ["mal", "m"]:
+            elif ejecucion in ["mal", "m"]:
                 datos[tonalidad]["apartados"][apartado][1]["v"] += 1
             elif ejecucion in ["bien", "b", "bn"]:
                 pass
             else:
                 print("No es un resultado admitido")
-            if datos[tonalidad]["apartados"][apartado]["d"] <= 0:
+            if datos[tonalidad]["apartados"][apartado][1]["d"] <= 0:
                 aumentar_velocidad(apartado)
-                datos[tonalidad]["apartados"][apartado]["d"] = 5
-            elif datos[tonalidad]["apartados"][apartado]["d"] >= 8:
+                datos[tonalidad]["apartados"][apartado][1]["d"] = 5
+            elif datos[tonalidad]["apartados"][apartado][1]["d"] >= 8:
                 disminuir_velocidad(apartado)
-                datos[tonalidad]["apartados"][apartado]["d"] = 5
+                datos[tonalidad]["apartados"][apartado][1]["d"] = 5
     datos[tonalidad]["dias_sin_tocarla"] = 0
-        
-
         
 
 
