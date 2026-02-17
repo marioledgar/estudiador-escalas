@@ -28,7 +28,7 @@ def restaurar_valores():
 # una lista con las valocidades discretas
 velocidades_discretas = [50, 52, 54, 56, 58, 60, 63, 66, 69, 72, 76, 80, 84, 88, 92, 96, 100, 104, 108, 112, 116, 120, 126, 132, 138, 144]
 
-def aumentar_velocidad(apartado):
+def aumentar_velocidad(tonalidad, apartado):
     v = datos[tonalidad]["apartados"][apartado][1]["v"]
     if settings["velocidades"] == "discretas":
         if v not in velocidades_discretas:
@@ -39,7 +39,7 @@ def aumentar_velocidad(apartado):
         v = v + 1
     datos[tonalidad]["apartados"][apartado][1]["v"] = v
 
-def disminuir_velocidad(apartado):
+def disminuir_velocidad(tonalidad, apartado):
     v = datos[tonalidad]["apartados"][apartado][1]["v"]
     if settings["velocidades"] == "discretas":
         if v not in velocidades_discretas:
@@ -54,25 +54,23 @@ def disminuir_velocidad(apartado):
 def tocar(tonalidad):
     for apartado in datos[tonalidad]["apartados"]:
         if datos[tonalidad]["apartados"][apartado][0] == True:
-            print(f"Toca {apartado} a {datos[tonalidad]["apartados"][apartado][1]["v"]}")
+            print(f"Toca {apartado} a {datos[tonalidad]['apartados'][apartado][1]['v']}")
             ejecucion = input("¿Cómo te ha salido? Elige: perfecto, bien, o mal.").strip().lower()
             if ejecucion in ["perfe", "perfecto", "p"]:
-                datos[tonalidad]["apartados"][apartado][1]["v"] -= 1
+                datos[tonalidad]["apartados"][apartado][1]["d"] -= 1
             elif ejecucion in ["mal", "m"]:
-                datos[tonalidad]["apartados"][apartado][1]["v"] += 1
+                datos[tonalidad]["apartados"][apartado][1]["d"] += 1
             elif ejecucion in ["bien", "b", "bn"]:
                 pass
             else:
                 print("No es un resultado admitido")
             if datos[tonalidad]["apartados"][apartado][1]["d"] <= 0:
-                aumentar_velocidad(apartado)
+                aumentar_velocidad(tonalidad, apartado)
                 datos[tonalidad]["apartados"][apartado][1]["d"] = 5
             elif datos[tonalidad]["apartados"][apartado][1]["d"] >= 8:
-                disminuir_velocidad(apartado)
+                disminuir_velocidad(tonalidad, apartado)
                 datos[tonalidad]["apartados"][apartado][1]["d"] = 5
     datos[tonalidad]["dias_sin_tocarla"] = 0
-        
-
 
 ################################
 
@@ -110,4 +108,4 @@ if input("¿Restaurar valores? y/n") == "y":
 
 # cambiar los datos
 with open("data.json", mode="w", encoding="utf-8") as write_file:
-    json.dump(datos, write_file, indent=4)
+    json.dump(datos, write_file, indent=4)  
