@@ -15,8 +15,11 @@ except:
     sys.exit()
 
 # settings
-with open("settings.json", "r", encoding="utf-8") as settings_json:
-    settings = json.load(settings_json)
+try:
+    with open("settings.json", "r", encoding="utf-8") as settings_json:
+        settings = json.load(settings_json)
+except:
+    settings = {"idioma": "spanish", "velocidades": "discretas"}
 
 # tonalidades
 tonalidades = list(datos.keys())
@@ -33,26 +36,24 @@ def restaurar_valores():
 # una lista con las valocidades discretas
 velocidades_discretas = [50, 52, 54, 56, 58, 60, 63, 66, 69, 72, 76, 80, 84, 88, 92, 96, 100, 104, 108, 112, 116, 120, 126, 132, 138, 144]
 
-def aumentar_velocidad(tonalidad, apartado):
+def cambiar_velocidad(tonalidad, apartado, aumentar):
     v = datos[tonalidad]["apartados"][apartado][1]["v"]
-    if settings["velocidades"] == "discretas":
-        if v not in velocidades_discretas:
-            v = min(x for x in velocidades_discretas if x >= v)
+    if aumentar == True:
+        if settings["velocidades"] == "discretas":
+            if v not in velocidades_discretas:
+                v = min(x for x in velocidades_discretas if x >= v)
+            else:
+                v = velocidades_discretas[velocidades_discretas.index(v) + 1]
         else:
-            v = velocidades_discretas[velocidades_discretas.index(v) + 1]
-    else:
-        v = v + 1
-    datos[tonalidad]["apartados"][apartado][1]["v"] = v
-
-def disminuir_velocidad(tonalidad, apartado):
-    v = datos[tonalidad]["apartados"][apartado][1]["v"]
-    if settings["velocidades"] == "discretas":
-        if v not in velocidades_discretas:
-            v = max(x for x in velocidades_discretas if x <= v)
+            v = v + 1
+    elif aumentar == False:
+        if settings["velocidades"] == "discretas":
+            if v not in velocidades_discretas:
+                v = max(x for x in velocidades_discretas if x <= v)
+            else:
+                v = velocidades_discretas[velocidades_discretas.index(v) - 1]
         else:
-            v = velocidades_discretas[velocidades_discretas.index(v) - 1]
-    else:
-        v = v - 1
+            v = v - 1
     datos[tonalidad]["apartados"][apartado][1]["v"] = v
 
 # Lo que hay que hacer al tocar la escala
@@ -70,10 +71,10 @@ def tocar(tonalidad):
             else:
                 print("No es un resultado admitido")
             if datos[tonalidad]["apartados"][apartado][1]["d"] <= 0:
-                aumentar_velocidad(tonalidad, apartado)
+                cambiar_velocidad(tonalidad, apartado, True)
                 datos[tonalidad]["apartados"][apartado][1]["d"] = 5
             elif datos[tonalidad]["apartados"][apartado][1]["d"] >= 8:
-                disminuir_velocidad(tonalidad, apartado)
+                cambiar_velocidad(tonalidad, apartado, False)
                 datos[tonalidad]["apartados"][apartado][1]["d"] = 5
     datos[tonalidad]["dias_sin_tocarla"] = 0
 
