@@ -8,7 +8,7 @@ import sys
 
 # importar datos
 try:
-    with open("daa.json", "r", encoding="utf-8") as data_json:
+    with open("data.json", "r", encoding="utf-8") as data_json:
         datos = json.load(data_json)
 except:
     print("No se encuentra el archivo.")
