@@ -1,13 +1,18 @@
 import json
 import random
+import sys
 
 ################################
 ## FUNCIONES Y COSAS BASICAS  ##
 ################################
 
 # importar datos
-with open("data.json", "r", encoding="utf-8") as data_json:
-    datos = json.load(data_json)
+try:
+    with open("daa.json", "r", encoding="utf-8") as data_json:
+        datos = json.load(data_json)
+except:
+    print("No se encuentra el archivo.")
+    sys.exit()
 
 # settings
 with open("settings.json", "r", encoding="utf-8") as settings_json:
