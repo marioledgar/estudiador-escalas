@@ -59,23 +59,25 @@ def cambiar_velocidad(tonalidad, apartado, aumentar):
 # Lo que hay que hacer al tocar la escala
 def tocar(tonalidad):
     for apartado in datos[tonalidad]["apartados"]:
+        stats = datos[tonalidad]["apartados"][1]
         if datos[tonalidad]["apartados"][apartado][0] == True:
-            print(f"Toca {apartado} a {datos[tonalidad]['apartados'][apartado][1]['v']}")
+            print(f"Toca {apartado} a {stats['v']}")
             ejecucion = input("¿Cómo te ha salido? Elige: perfecto, bien, o mal.").strip().lower()
             if ejecucion in ["perfe", "perfecto", "p"]:
-                datos[tonalidad]["apartados"][apartado][1]["d"] -= 1
+                stats["d"] -= 1
             elif ejecucion in ["mal", "m"]:
-                datos[tonalidad]["apartados"][apartado][1]["d"] += 1
+                stats["d"] += 1
             elif ejecucion in ["bien", "b", "bn"]:
                 pass
             else:
-                print("No es un resultado admitido")
-            if datos[tonalidad]["apartados"][apartado][1]["d"] <= 0:
+                print("No es un resultado admitido. (Se usará 'bien')")
+            if stats["d"] <= 0:
                 cambiar_velocidad(tonalidad, apartado, True)
-                datos[tonalidad]["apartados"][apartado][1]["d"] = 5
-            elif datos[tonalidad]["apartados"][apartado][1]["d"] >= 8:
+                stats["d"] = 5
+            elif stats["d"] >= 8:
                 cambiar_velocidad(tonalidad, apartado, False)
-                datos[tonalidad]["apartados"][apartado][1]["d"] = 5
+                stats["d"] = 5
+        datos[tonalidad]["apartados"][1] = stats
     datos[tonalidad]["dias_sin_tocarla"] = 0
 
 ################################
@@ -102,7 +104,7 @@ for x in escalas_hoy:
 
 # Cambiar los dias sin tocarla
 for tonalidad in tonalidades:
-    if tonalidad  not in escalas_hoy: datos[tonalidad]["dias_sin_tocarla"] += 1
+    if tonalidad not in escalas_hoy: datos[tonalidad]["dias_sin_tocarla"] += 1
 
 ## para las pruebas
 if input("¿Restaurar valores? y/n") == "y":
