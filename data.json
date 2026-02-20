@@ -5,7 +5,7 @@
         "mayor": "Do",
         "menor": "La",
         "apartados": {
-            "normal": [
+            "normal_mayor": [
                 true,
                 {
                     "v": 80,
@@ -33,14 +33,14 @@
                     "d": 5
                 }
             ],
-            "arm\u00f3nica": [
+            "arm\u00f3nica_menor": [
                 true,
                 {
                     "v": 80,
                     "d": 5
                 }
             ],
-            "melodica": [
+            "mel\u00f3dica_menor": [
                 true,
                 {
                     "v": 80,
@@ -69,7 +69,7 @@
                 }
             ]
         },
-        "dias_sin_tocarla": 0,
+        "dias_sin_tocarla": 1,
         "cambios_recientes": false
     },
     "sostenido1": {
@@ -78,7 +78,7 @@
         "mayor": "Sol",
         "menor": "Mi",
         "apartados": {
-            "normal": [
+            "normal_mayor": [
                 true,
                 {
                     "v": 80,
@@ -106,14 +106,14 @@
                     "d": 5
                 }
             ],
-            "arm\u00f3nica": [
+            "arm\u00f3nica_menor": [
                 true,
                 {
                     "v": 80,
                     "d": 5
                 }
             ],
-            "melodica": [
+            "mel\u00f3dica_menor": [
                 true,
                 {
                     "v": 80,
@@ -142,7 +142,7 @@
                 }
             ]
         },
-        "dias_sin_tocarla": 0,
+        "dias_sin_tocarla": 1,
         "cambios_recientes": false
     },
     "bemol1": {
@@ -151,7 +151,7 @@
         "mayor": "Fa",
         "menor": "Re",
         "apartados": {
-            "normal": [
+            "normal_mayor": [
                 true,
                 {
                     "v": 80,
@@ -179,14 +179,14 @@
                     "d": 5
                 }
             ],
-            "arm\u00f3nica": [
+            "arm\u00f3nica_mayor": [
                 true,
                 {
                     "v": 80,
                     "d": 5
                 }
             ],
-            "melodica": [
+            "mel\u00f3dica_mayor": [
                 true,
                 {
                     "v": 80,
@@ -215,7 +215,7 @@
                 }
             ]
         },
-        "dias_sin_tocarla": 0,
+        "dias_sin_tocarla": 4,
         "cambios_recientes": false
     },
     "sostenido2": {
@@ -224,7 +224,7 @@
         "mayor": "Re",
         "menor": "Si",
         "apartados": {
-            "normal": [
+            "normal_mayor": [
                 true,
                 {
                     "v": 80,
@@ -252,14 +252,14 @@
                     "d": 5
                 }
             ],
-            "arm\u00f3nica": [
+            "arm\u00f3nica_mayor": [
                 true,
                 {
                     "v": 80,
                     "d": 5
                 }
             ],
-            "melodica": [
+            "mel\u00f3dica_mayor": [
                 true,
                 {
                     "v": 80,
@@ -288,7 +288,7 @@
                 }
             ]
         },
-        "dias_sin_tocarla": 0,
+        "dias_sin_tocarla": 3,
         "cambios_recientes": false
     },
     "bemol2": {
@@ -297,7 +297,7 @@
         "mayor": "Sib",
         "menor": "Sol",
         "apartados": {
-            "normal": [
+            "normal_mayor": [
                 true,
                 {
                     "v": 80,
@@ -325,14 +325,14 @@
                     "d": 5
                 }
             ],
-            "arm\u00f3nica": [
+            "arm\u00f3nica_mayor": [
                 true,
                 {
                     "v": 80,
                     "d": 5
                 }
             ],
-            "melodica": [
+            "mel\u00f3dica_mayor": [
                 true,
                 {
                     "v": 80,
@@ -370,7 +370,7 @@
         "mayor": "La",
         "menor": "Fa#",
         "apartados": {
-            "normal": [
+            "normal_mayor": [
                 true,
                 {
                     "v": 80,
@@ -398,14 +398,14 @@
                     "d": 5
                 }
             ],
-            "arm\u00f3nica": [
+            "arm\u00f3nica_mayor": [
                 true,
                 {
                     "v": 80,
                     "d": 5
                 }
             ],
-            "melodica": [
+            "mel\u00f3dica_mayor": [
                 true,
                 {
                     "v": 80,
@@ -434,7 +434,7 @@
                 }
             ]
         },
-        "dias_sin_tocarla": 0,
+        "dias_sin_tocarla": 5,
         "cambios_recientes": false
     },
     "bemol3": {
@@ -443,7 +443,7 @@
         "mayor": "Mib",
         "menor": "Do",
         "apartados": {
-            "normal": [
+            "normal_mayor": [
                 true,
                 {
                     "v": 80,
@@ -471,14 +471,14 @@
                     "d": 5
                 }
             ],
-            "arm\u00f3nica": [
+            "arm\u00f3nica_mayor": [
                 true,
                 {
                     "v": 80,
                     "d": 5
                 }
             ],
-            "melodica": [
+            "mel\u00f3dica_mayor": [
                 true,
                 {
                     "v": 80,
@@ -507,7 +507,7 @@
                 }
             ]
         },
-        "dias_sin_tocarla": 0,
+        "dias_sin_tocarla": 1,
         "cambios_recientes": false
     },
     "sostenido4": {
@@ -516,7 +516,7 @@
         "mayor": "Mi",
         "menor": "Do#",
         "apartados": {
-            "normal": [
+            "normal_mayor": [
                 true,
                 {
                     "v": 80,
@@ -544,14 +544,14 @@
                     "d": 5
                 }
             ],
-            "arm\u00f3nica": [
+            "arm\u00f3nica_mayor": [
                 true,
                 {
                     "v": 80,
                     "d": 5
                 }
             ],
-            "melodica": [
+            "mel\u00f3dica_mayor": [
                 true,
                 {
                     "v": 80,
@@ -580,7 +580,7 @@
                 }
             ]
         },
-        "dias_sin_tocarla": 0,
+        "dias_sin_tocarla": 5,
         "cambios_recientes": false
     },
     "bemol4": {
@@ -589,7 +589,7 @@
         "mayor": "Lab",
         "menor": "Fa",
         "apartados": {
-            "normal": [
+            "normal_mayor": [
                 true,
                 {
                     "v": 80,
@@ -617,14 +617,14 @@
                     "d": 5
                 }
             ],
-            "arm\u00f3nica": [
+            "arm\u00f3nica_mayor": [
                 true,
                 {
                     "v": 80,
                     "d": 5
                 }
             ],
-            "melodica": [
+            "mel\u00f3dica_mayor": [
                 true,
                 {
                     "v": 80,
@@ -653,7 +653,7 @@
                 }
             ]
         },
-        "dias_sin_tocarla": 0,
+        "dias_sin_tocarla": 5,
         "cambios_recientes": false
     },
     "sostenido5": {
@@ -662,7 +662,7 @@
         "mayor": "Si",
         "menor": "Sol#",
         "apartados": {
-            "normal": [
+            "normal_mayor": [
                 true,
                 {
                     "v": 80,
@@ -690,14 +690,14 @@
                     "d": 5
                 }
             ],
-            "arm\u00f3nica": [
+            "arm\u00f3nica_mayor": [
                 true,
                 {
                     "v": 80,
                     "d": 5
                 }
             ],
-            "melodica": [
+            "mel\u00f3dica_mayor": [
                 true,
                 {
                     "v": 80,
@@ -726,7 +726,7 @@
                 }
             ]
         },
-        "dias_sin_tocarla": 0,
+        "dias_sin_tocarla": 5,
         "cambios_recientes": false
     },
     "bemol5": {
@@ -735,7 +735,7 @@
         "mayor": "Reb",
         "menor": "Sib",
         "apartados": {
-            "normal": [
+            "normal_mayor": [
                 true,
                 {
                     "v": 80,
@@ -763,14 +763,14 @@
                     "d": 5
                 }
             ],
-            "arm\u00f3nica": [
+            "arm\u00f3nica_mayor": [
                 true,
                 {
                     "v": 80,
                     "d": 5
                 }
             ],
-            "melodica": [
+            "mel\u00f3dica_mayor": [
                 true,
                 {
                     "v": 80,
@@ -799,7 +799,7 @@
                 }
             ]
         },
-        "dias_sin_tocarla": 0,
+        "dias_sin_tocarla": 5,
         "cambios_recientes": false
     },
     "sostenido6": {
@@ -808,7 +808,7 @@
         "mayor": "Fa#",
         "menor": "Re#",
         "apartados": {
-            "normal": [
+            "normal_mayor": [
                 true,
                 {
                     "v": 80,
@@ -836,14 +836,14 @@
                     "d": 5
                 }
             ],
-            "arm\u00f3nica": [
+            "arm\u00f3nica_mayor": [
                 true,
                 {
                     "v": 80,
                     "d": 5
                 }
             ],
-            "melodica": [
+            "mel\u00f3dica_mayor": [
                 true,
                 {
                     "v": 80,
@@ -872,7 +872,7 @@
                 }
             ]
         },
-        "dias_sin_tocarla": 0,
+        "dias_sin_tocarla": 5,
         "cambios_recientes": false
     },
     "bemol6": {
@@ -881,7 +881,7 @@
         "mayor": "Solb",
         "menor": "Mib",
         "apartados": {
-            "normal": [
+            "normal_mayor": [
                 true,
                 {
                     "v": 80,
@@ -909,14 +909,14 @@
                     "d": 5
                 }
             ],
-            "arm\u00f3nica": [
+            "arm\u00f3nica_mayor": [
                 true,
                 {
                     "v": 80,
                     "d": 5
                 }
             ],
-            "melodica": [
+            "mel\u00f3dica_mayor": [
                 true,
                 {
                     "v": 80,
@@ -945,7 +945,7 @@
                 }
             ]
         },
-        "dias_sin_tocarla": 0,
+        "dias_sin_tocarla": 2,
         "cambios_recientes": false
     },
     "sostenido7": {
@@ -954,7 +954,7 @@
         "mayor": "Do#",
         "menor": "La#",
         "apartados": {
-            "normal": [
+            "normal_mayor": [
                 true,
                 {
                     "v": 80,
@@ -982,14 +982,14 @@
                     "d": 5
                 }
             ],
-            "arm\u00f3nica": [
+            "arm\u00f3nica_mayor": [
                 true,
                 {
                     "v": 80,
                     "d": 5
                 }
             ],
-            "melodica": [
+            "mel\u00f3dica_mayor": [
                 true,
                 {
                     "v": 80,
@@ -1018,7 +1018,7 @@
                 }
             ]
         },
-        "dias_sin_tocarla": 0,
+        "dias_sin_tocarla": 5,
         "cambios_recientes": false
     },
     "bemol7": {
@@ -1027,7 +1027,7 @@
         "mayor": "Dob",
         "menor": "Lab",
         "apartados": {
-            "normal": [
+            "normal_mayor": [
                 true,
                 {
                     "v": 80,
@@ -1055,14 +1055,14 @@
                     "d": 5
                 }
             ],
-            "arm\u00f3nica": [
+            "arm\u00f3nica_mayor": [
                 true,
                 {
                     "v": 80,
                     "d": 5
                 }
             ],
-            "melodica": [
+            "mel\u00f3dica_mayor": [
                 true,
                 {
                     "v": 80,
@@ -1091,7 +1091,7 @@
                 }
             ]
         },
-        "dias_sin_tocarla": 0,
+        "dias_sin_tocarla": 5,
         "cambios_recientes": false
     }
 }

@@ -58,12 +58,13 @@ def cambiar_velocidad(tonalidad, apartado, aumentar=True):
                 v = v - 1
     datos[tonalidad]["apartados"][apartado][1]["v"] = v
 
+simbolos = {"alteraciones": "\u266E", "bemol": "\u266D", "sostenido": "\u266F"}
 # Lo que hay que hacer al tocar la escala
 def tocar(tonalidad):
     for apartado in datos[tonalidad]["apartados"]:
-        stats = datos[tonalidad]["apartados"][1]
         if datos[tonalidad]["apartados"][apartado][0] == True:
-            print(f"Toca {apartado} a {stats['v']}")
+            stats = datos[tonalidad]["apartados"][apartado][1]
+            print(f"{tonalidad[-1]}{simbolos[tonalidad[:-1]]}: Toca {apartado[:-6]} a {stats['v']}")
             ejecucion = input("¿Cómo te ha salido? Elige: perfecto, bien, o mal.").strip().lower()
             if ejecucion in ["perfe", "perfecto", "p"]:
                 stats["d"] -= 1
@@ -79,7 +80,7 @@ def tocar(tonalidad):
             elif stats["d"] >= 8:
                 cambiar_velocidad(tonalidad, apartado, False)
                 stats["d"] = 5
-        datos[tonalidad]["apartados"][1] = stats
+            datos[tonalidad]["apartados"][apartado][1] = stats
     datos[tonalidad]["dias_sin_tocarla"] = 0
 
 ################################
