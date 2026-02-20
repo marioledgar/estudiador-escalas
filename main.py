@@ -64,8 +64,8 @@ def tocar(tonalidad):
     for apartado in datos[tonalidad]["apartados"]:
         if datos[tonalidad]["apartados"][apartado][0] == True:
             stats = datos[tonalidad]["apartados"][apartado][1]
-            print(f"{tonalidad[-1]}{simbolos[tonalidad[:-1]]}: Toca {apartado[:-6]} a {stats['v']}")
-            ejecucion = input("¿Cómo te ha salido? Elige: perfecto, bien, o mal.").strip().lower()
+            print(f"{tonalidad[-1]}{simbolos[tonalidad[:-1]]}: Toca {apartado[:-6]} a {stats['v']}.\n")
+            ejecucion = input("¿Cómo te ha salido? Elige: perfecto, bien, o mal.\n").strip().lower()
             if ejecucion in ["perfe", "perfecto", "p"]:
                 stats["d"] -= 1
             elif ejecucion in ["mal", "m"]:
@@ -85,12 +85,14 @@ def tocar(tonalidad):
 
 ################################
 
+# cuantas vas a tocar
 try:
     cantidad_hoy = int(input("¿Cuántas escalas vas a tocar? "))
 except ValueError:
     cantidad_hoy = 3
     print("Número no válido, usaremos 3.")
 
+# Elige cuales vas a tocar
 mitad_antigua = cantidad_hoy // 2
 mitad_aleatoria = cantidad_hoy - mitad_antigua
 
