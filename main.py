@@ -1,6 +1,7 @@
 import json
 import random
 import sys
+import os
 
 ################################
 ## FUNCIONES Y COSAS BASICAS  ##
@@ -63,16 +64,17 @@ simbolos = {"alteraciones": "\u266E", "bemol": "\u266D", "sostenido": "\u266F"}
 
 # Lo que hay que hacer al tocar la escala
 def tocar(tonalidad):
+    os.system('cls' if os.name == 'nt' else 'clear')
     for apartado in datos[tonalidad]["apartados"]:
         if datos[tonalidad]["apartados"][apartado][0] == True:
             stats = datos[tonalidad]["apartados"][apartado][1]
-            print(f"{tonalidad[-1]}{simbolos[tonalidad[:-1]]}: Toca {apartado[:-6]} a {stats['v']}.\n")
+            print(f"{tonalidad[-1]}{simbolos[tonalidad[:-1]]} {apartado[-5:]}: Toca {apartado[:-6]} a {stats['v']}.")
             ejecucion = input("¿Cómo te ha salido? Elige: perfecto, bien, o mal.\n").strip().lower()
-            if ejecucion in ["perfe", "perfecto", "p"]:
+            if ejecucion.startswith("p"):
                 stats["d"] -= 1
-            elif ejecucion in ["mal", "m"]:
+            elif ejecucion.startswith("m"):
                 stats["d"] += 1
-            elif ejecucion in ["bien", "b", "bn"]:
+            elif ejecucion.startswith("b"):
                 pass
             else:
                 print("No es un resultado admitido. (Se usará 'bien')")
