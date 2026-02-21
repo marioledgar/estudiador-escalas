@@ -3,6 +3,10 @@ import random
 import sys
 import os
 
+EJECUCION = "\033[92m"
+RESET = "\033[0m"
+PROMPT = "\033[35m"
+
 ################################
 ## FUNCIONES Y COSAS BASICAS  ##
 ################################
@@ -68,8 +72,8 @@ def tocar(tonalidad):
     for apartado in datos[tonalidad]["apartados"]:
         if datos[tonalidad]["apartados"][apartado][0] == True:
             stats = datos[tonalidad]["apartados"][apartado][1]
-            print(f"{tonalidad[-1]}{simbolos[tonalidad[:-1]]} {apartado[-5:]}: Toca {apartado[:-6]} a {stats['v']}.")
-            ejecucion = input("¿Cómo te ha salido? Elige: perfecto, bien, o mal.\n").strip().lower()
+            print(f"{PROMPT}{tonalidad[-1]}{simbolos[tonalidad[:-1]]} {apartado[-5:]}: Toca {apartado[:-6]} a {stats['v']}.\n{RESET}")
+            ejecucion = input(F"{EJECUCION}¿Cómo te ha salido? Elige: perfecto, bien, o mal.\n {RESET}").strip().lower()
             if ejecucion.startswith("p"):
                 stats["d"] -= 1
             elif ejecucion.startswith("m"):
@@ -99,7 +103,6 @@ except ValueError:
 # Elige cuales vas a tocar
 mitad_antigua = cantidad_hoy // 2
 mitad_aleatoria = cantidad_hoy - mitad_antigua
-
 
 ordenadas = sorted(datos, key=lambda k: datos[k]["dias_sin_tocarla"], reverse=True)
 antiguas = ordenadas[:mitad_antigua]
