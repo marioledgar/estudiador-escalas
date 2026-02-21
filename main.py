@@ -3,10 +3,11 @@ import random
 import sys
 import os
 
-EJECUCION = "\033[92m"
+VERDE = "\033[92m"
+MAGENTA = "\033[35m"
+ROJO = "\033[31m"
+AMARILLO = "\033[93m"
 RESET = "\033[0m"
-PROMPT = "\033[35m"
-RESTAURAR = "\033[31m"
 
 ################################
 ## FUNCIONES Y COSAS BASICAS  ##
@@ -73,8 +74,8 @@ def tocar(tonalidad):
     for apartado in datos[tonalidad]["apartados"]:
         if datos[tonalidad]["apartados"][apartado][0] == True:
             stats = datos[tonalidad]["apartados"][apartado][1]
-            print(f"{PROMPT}{tonalidad[-1]}{simbolos[tonalidad[:-1]]} {apartado[-5:]}: Toca {apartado[:-6]} a {stats['v']}.\n{RESET}")
-            ejecucion = input(F"{EJECUCION}¿Cómo te ha salido? Elige: perfecto, bien, o mal.\n {RESET}").strip().lower()
+            print(f"{MAGENTA}{tonalidad[-1]}{simbolos[tonalidad[:-1]]} {apartado[-5:]}: Toca {apartado[:-6]} a {stats['v']}.\n{RESET}")
+            ejecucion = input(F"{VERDE}¿Cómo te ha salido? Elige: perfecto, bien, o mal.\n {RESET}").strip().lower()
             if ejecucion.startswith("p"):
                 stats["d"] -= 1
             elif ejecucion.startswith("m"):
@@ -94,43 +95,61 @@ def tocar(tonalidad):
 
 ################################
 
-# cuantas vas a tocar
-try:
-    cantidad_hoy = int(input("¿Cuántas escalas vas a tocar? "))
-except ValueError:
-    cantidad_hoy = 3
-    print("Número no válido, usaremos 3.")
+def ejecutar_sesion():
+    # cuantas vas a tocar
+    try:
+        cantidad_hoy = int(input("¿Cuántas escalas vas a tocar? "))
+    except ValueError:
+        cantidad_hoy = 3
+        print("Número no válido, usaremos 3.")
 
-# Elige cuales vas a tocar
-mitad_antigua = cantidad_hoy // 2
-mitad_aleatoria = cantidad_hoy - mitad_antigua
+    # Elige cuales vas a tocar
+    mitad_antigua = cantidad_hoy // 2
+    mitad_aleatoria = cantidad_hoy - mitad_antigua
 
-ordenadas = sorted(datos, key=lambda k: datos[k]["dias_sin_tocarla"], reverse=True)
-antiguas = ordenadas[:mitad_antigua]
-disponibles_azar = [t for t in ordenadas if t not in antiguas]
-if len(disponibles_azar) < mitad_aleatoria:
-    aleatorias = disponibles_azar
-else:
-    aleatorias = random.sample(disponibles_azar, mitad_aleatoria)
-escalas_hoy = antiguas + aleatorias
-random.shuffle(escalas_hoy)
+    ordenadas = sorted(datos, key=lambda k: datos[k]["dias_sin_tocarla"], reverse=True)
+    antiguas = ordenadas[:mitad_antigua]
+    disponibles_azar = [t for t in ordenadas if t not in antiguas]
+    if len(disponibles_azar) < mitad_aleatoria:
+        aleatorias = disponibles_azar
+    else:
+        aleatorias = random.sample(disponibles_azar, mitad_aleatoria)
+    escalas_hoy = antiguas + aleatorias
+    random.shuffle(escalas_hoy)
 
-# tocar cada escala
-for x in escalas_hoy:
-    tocar(x)
+    # tocar cada escala
+    for x in escalas_hoy:
+        tocar(x)
 
-# Cambiar los dias sin tocarla
-for tonalidad in tonalidades:
-    if tonalidad not in escalas_hoy: datos[tonalidad]["dias_sin_tocarla"] += 1
+    # Cambiar los dias sin tocarla
+    for tonalidad in tonalidades:
+        if tonalidad not in escalas_hoy: datos[tonalidad]["dias_sin_tocarla"] += 1
 
-## para las pruebas
-if input(f"{RESTAURAR}\n¿Restaurar valores? y/n{RESET}") == "y":
-    restaurar_valores()
+    print(f"{VERDE}Sesión terminada!")
 
-###############################
-# ESTO TIENE QUE IR LO ULTIMO #
-###############################
 
-# cambiar los datos
-with open("data.json", mode="w", encoding="utf-8") as write_file:
-    json.dump(datos, write_file, indent=4)  
+
+# menu
+def menu_principal():
+    while True:
+        print(f"""
+1. Empezar sesión
+2. Datos
+{ROJO}3. Restaurar datos{RESET}
+{AMARILLO}4. Salir{RESET}
+        """)
+        match input():
+            case "1":
+                ejecutar_sesion()
+            case "2":
+                pass
+            case "3":
+                restaurar_valores()
+            case "4":
+                with open("data.json", mode="w", encoding="utf-8") as write_file:
+                    json.dump(datos, write_file, indent=4)  
+                break
+            case _:
+                print("Opción no válida, intenta de nuevo.")
+
+menu_principal()
