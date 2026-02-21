@@ -98,10 +98,14 @@ except ValueError:
 mitad_antigua = cantidad_hoy // 2
 mitad_aleatoria = cantidad_hoy - mitad_antigua
 
+
 ordenadas = sorted(datos, key=lambda k: datos[k]["dias_sin_tocarla"], reverse=True)
 antiguas = ordenadas[:mitad_antigua]
 disponibles_azar = [t for t in ordenadas if t not in antiguas]
-aleatorias = random.sample(disponibles_azar, mitad_aleatoria)
+if len(disponibles_azar) < mitad_aleatoria:
+    aleatorias = disponibles_azar
+else:
+    aleatorias = random.sample(disponibles_azar, mitad_aleatoria)
 escalas_hoy = antiguas + aleatorias
 random.shuffle(escalas_hoy)
 
