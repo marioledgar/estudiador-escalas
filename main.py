@@ -93,6 +93,9 @@ def tocar(tonalidad):
             datos[tonalidad]["apartados"][apartado][1] = stats
     datos[tonalidad]["dias_sin_tocarla"] = 0
 
+def mostrar_datos():
+    pass
+
 ################################
 
 def ejecutar_sesion():
@@ -127,9 +130,8 @@ def ejecutar_sesion():
 
     print(f"{VERDE}Sesión terminada!")
 
-
-
 # menu
+
 def menu_principal():
     while True:
         print(f"""
@@ -142,7 +144,7 @@ def menu_principal():
             case "1":
                 ejecutar_sesion()
             case "2":
-                pass
+                mostrar_datos()
             case "3":
                 restaurar_valores()
             case "4":
