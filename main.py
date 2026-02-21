@@ -6,6 +6,7 @@ import os
 EJECUCION = "\033[92m"
 RESET = "\033[0m"
 PROMPT = "\033[35m"
+RESTAURAR = "\033[31m"
 
 ################################
 ## FUNCIONES Y COSAS BASICAS  ##
@@ -123,7 +124,7 @@ for tonalidad in tonalidades:
     if tonalidad not in escalas_hoy: datos[tonalidad]["dias_sin_tocarla"] += 1
 
 ## para las pruebas
-if input("¿Restaurar valores? y/n") == "y":
+if input(f"{RESTAURAR}\n¿Restaurar valores? y/n{RESET}") == "y":
     restaurar_valores()
 
 ###############################
