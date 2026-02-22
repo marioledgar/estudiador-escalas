@@ -2,6 +2,7 @@ import json
 import random
 import sys
 import os
+import datetime as dt
 
 VERDE = "\033[92m"
 MAGENTA = "\033[35m"
@@ -39,6 +40,7 @@ def restaurar_valores():
         datos[tonalidad]["cambios_recientes"] = False
         for apartado in datos[tonalidad]["apartados"]:
             datos[tonalidad]["apartados"].update({apartado: [True, {"v": 80, "d": 5}]})
+    os.remove("historial.json")
 
 # una lista con las valocidades discretas
 velocidades_discretas = [30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60, 63, 66, 69, 72, 76, 80, 84, 88, 92, 96, 100, 104, 108, 112, 116, 120, 126, 132, 138, 144]
@@ -66,7 +68,32 @@ def cambiar_velocidad(tonalidad, apartado, aumentar=True):
                 v = v - 1
     datos[tonalidad]["apartados"][apartado][1]["v"] = v
 
-simbolos = {"alteraciones": "\u266E", "bemol": "\u266D", "sostenido": "\u266F"}
+# simbolos de las alteraciones
+simbolos = {"alteraciones": "\u266D/\u266F", "bemol": "\u266D", "sostenido": "\u266F"}
+
+def guardar_historial(tonalidad, apartado): 
+    # 1. Intentar cargar el archivo actual
+    stats =  datos[tonalidad]["apartados"][apartado][1]
+    try:
+        with open("historial.json", "r", encoding="utf-8") as f:
+            historia = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        historia = [] # Si el archivo no existe o está vacío, empezamos de cero
+
+    # 2. Crear el nuevo registro
+    nuevo_evento = {
+        "fecha": str(dt.date.today()), 
+        "tonalidad": tonalidad, 
+        "apartado": apartado, 
+        "velocidad": stats["v"],
+        "dificultad": stats["d"]
+    }
+
+    # 3. Añadir a la lista y guardar todo
+    historia.append(nuevo_evento)
+    
+    with open("historial.json", "w", encoding="utf-8") as f:
+        json.dump(historia, f, indent=4)
 
 # Lo que hay que hacer al tocar la escala
 def tocar(tonalidad):
@@ -74,6 +101,7 @@ def tocar(tonalidad):
     for apartado in datos[tonalidad]["apartados"]:
         if datos[tonalidad]["apartados"][apartado][0] == True:
             stats = datos[tonalidad]["apartados"][apartado][1]
+            guardar_historial(tonalidad, apartado)
             print(f"{MAGENTA}{tonalidad[-1]}{simbolos[tonalidad[:-1]]} {apartado[-5:]}: Toca {apartado[:-6]} a {stats['v']}.\n{RESET}")
             ejecucion = input(F"{VERDE}¿Cómo te ha salido? Elige: perfecto, bien, o mal.\n {RESET}").strip().lower()
             if ejecucion.startswith("p"):
@@ -90,7 +118,7 @@ def tocar(tonalidad):
             elif stats["d"] >= 8:
                 cambiar_velocidad(tonalidad, apartado, False)
                 stats["d"] = 5
-            datos[tonalidad]["apartados"][apartado][1] = stats
+            datos[tonalidad]["apartados"][apartado][1] = stats 
     datos[tonalidad]["dias_sin_tocarla"] = 0
 
 def mostrar_datos():
@@ -128,7 +156,7 @@ def ejecutar_sesion():
     for tonalidad in tonalidades:
         if tonalidad not in escalas_hoy: datos[tonalidad]["dias_sin_tocarla"] += 1
 
-    print(f"{VERDE}Sesión terminada!")
+    print(f"{VERDE}Sesión terminada!{RESET}")
 
 # menu
 
