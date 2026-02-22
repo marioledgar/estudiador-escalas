@@ -3,6 +3,7 @@ import random
 import sys
 import os
 import datetime as dt
+import pyfiglet
 
 VERDE = "\033[92m"
 MAGENTA = "\033[35m"
@@ -21,6 +22,11 @@ try:
 except:
     print("No se encuentra el archivo.")
     sys.exit()
+
+
+def print_big(texto, COLOR):
+    grande = pyfiglet.figlet_format(texto, justify="center")
+    print(f"{COLOR}{grande}{RESET}")
 
 # settings
 try:
@@ -69,7 +75,8 @@ def cambiar_velocidad(tonalidad, apartado, aumentar=True):
     datos[tonalidad]["apartados"][apartado][1]["v"] = v
 
 # simbolos de las alteraciones
-simbolos = {"alteraciones": "\u266D/\u266F", "bemol": "\u266D", "sostenido": "\u266F"}
+# simbolos = {"alteraciones": "\u266D/\u266F", "bemol": "\u266D", "sostenido": "\u266F"}
+simbolos = {"alteraciones": "b/#", "bemol": "b", "sostenido": "#"}
 
 def guardar_historial(tonalidad, apartado): 
     # 1. Intentar cargar el archivo actual
@@ -79,7 +86,6 @@ def guardar_historial(tonalidad, apartado):
             historia = json.load(f)
     except (FileNotFoundError, json.JSONDecodeError):
         historia = [] # Si el archivo no existe o está vacío, empezamos de cero
-
     # 2. Crear el nuevo registro
     nuevo_evento = {
         "fecha": str(dt.date.today()), 
@@ -88,21 +94,21 @@ def guardar_historial(tonalidad, apartado):
         "velocidad": stats["v"],
         "dificultad": stats["d"]
     }
-
     # 3. Añadir a la lista y guardar todo
     historia.append(nuevo_evento)
-    
     with open("historial.json", "w", encoding="utf-8") as f:
         json.dump(historia, f, indent=4)
 
 # Lo que hay que hacer al tocar la escala
 def tocar(tonalidad):
-    os.system('cls' if os.name == 'nt' else 'clear')
     for apartado in datos[tonalidad]["apartados"]:
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print_big(f"{tonalidad[-1]}{simbolos[tonalidad[:-1]]}", MAGENTA)
+
         if datos[tonalidad]["apartados"][apartado][0] == True:
             stats = datos[tonalidad]["apartados"][apartado][1]
             guardar_historial(tonalidad, apartado)
-            print(f"{MAGENTA}{tonalidad[-1]}{simbolos[tonalidad[:-1]]} {apartado[-5:]}: Toca {apartado[:-6]} a {stats['v']}.\n{RESET}")
+            print(f"{MAGENTA}{apartado[-5:]}: Toca {apartado[:-6]} a {stats['v']}.\n{RESET}")
             ejecucion = input(F"{VERDE}¿Cómo te ha salido? Elige: perfecto, bien, o mal.\n {RESET}").strip().lower()
             if ejecucion.startswith("p"):
                 stats["d"] -= 1
