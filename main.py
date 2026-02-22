@@ -24,8 +24,8 @@ except:
     sys.exit()
 
 #texto grande
-def print_big(texto, COLOR):
-    grande = pyfiglet.figlet_format(texto, justify="center")
+def print_big(texto, COLOR=none, _justify=none, _font=none):
+    grande = pyfiglet.figlet_format(texto, justify=_justify, font=_font)
     print(f"{COLOR}{grande}{RESET}")
 
 # settings
