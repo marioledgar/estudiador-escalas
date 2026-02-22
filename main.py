@@ -23,7 +23,7 @@ except:
     print("No se encuentra el archivo.")
     sys.exit()
 
-
+#texto grande
 def print_big(texto, COLOR):
     grande = pyfiglet.figlet_format(texto, justify="center")
     print(f"{COLOR}{grande}{RESET}")
@@ -92,7 +92,8 @@ def guardar_historial(tonalidad, apartado):
         "tonalidad": tonalidad, 
         "apartado": apartado, 
         "velocidad": stats["v"],
-        "dificultad": stats["d"]
+        "dificultad": stats["d"],
+        "ejecucion": ejecucion
     }
     # 3. Añadir a la lista y guardar todo
     historia.append(nuevo_evento)
@@ -107,9 +108,9 @@ def tocar(tonalidad):
 
         if datos[tonalidad]["apartados"][apartado][0] == True:
             stats = datos[tonalidad]["apartados"][apartado][1]
-            guardar_historial(tonalidad, apartado)
             print(f"{MAGENTA}{apartado[-5:]}: Toca {apartado[:-6]} a {stats['v']}.\n{RESET}")
             ejecucion = input(F"{VERDE}¿Cómo te ha salido? Elige: perfecto, bien, o mal.\n {RESET}").strip().lower()
+            guardar_historial(tonalidad, apartado)
             if ejecucion.startswith("p"):
                 stats["d"] -= 1
             elif ejecucion.startswith("m"):
