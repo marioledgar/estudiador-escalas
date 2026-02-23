@@ -54,12 +54,6 @@ tonalidades = list(datos.keys())
 
 # valores predeterminados
 def restaurar_valores():
-    """for tonalidad in tonalidades:
-        datos[tonalidad]["cambios_recientes"] = True    
-        datos[tonalidad]["dias_sin_tocarla"] = 0
-        datos[tonalidad]["cambios_recientes"] = False
-        for apartado in datos[tonalidad]["apartados"]:
-            datos[tonalidad]["apartados"].update({apartado: [True, {"v": 80, "d": 5}]})"""
     try:
         os.remove("data.json")
     except:
