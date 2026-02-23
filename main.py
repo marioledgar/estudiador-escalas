@@ -78,15 +78,13 @@ def cambiar_velocidad(tonalidad, apartado, aumentar=True):
 # simbolos = {"alteraciones": "\u266D/\u266F", "bemol": "\u266D", "sostenido": "\u266F"}
 simbolos = {"alteraciones": "b/#", "bemol": "b", "sostenido": "#"}
 
-def guardar_historial(tonalidad, apartado): 
-    # 1. Intentar cargar el archivo actual
+def guardar_historial(tonalidad, apartado, ejecucion): 
     stats =  datos[tonalidad]["apartados"][apartado][1]
     try:
         with open("historial.json", "r", encoding="utf-8") as f:
             historia = json.load(f)
     except (FileNotFoundError, json.JSONDecodeError):
-        historia = [] # Si el archivo no existe o está vacío, empezamos de cero
-    # 2. Crear el nuevo registro
+        historia = []
     nuevo_evento = {
         "fecha": str(dt.date.today()), 
         "tonalidad": tonalidad, 
@@ -95,7 +93,6 @@ def guardar_historial(tonalidad, apartado):
         "dificultad": stats["d"],
         "ejecucion": ejecucion
     }
-    # 3. Añadir a la lista y guardar todo
     historia.append(nuevo_evento)
     with open("historial.json", "w", encoding="utf-8") as f:
         json.dump(historia, f, indent=4)
@@ -109,8 +106,12 @@ def tocar(tonalidad):
         if datos[tonalidad]["apartados"][apartado][0] == True:
             stats = datos[tonalidad]["apartados"][apartado][1]
             print(f"{MAGENTA}{apartado[-5:]}: Toca {apartado[:-6]} a {stats['v']}.\n{RESET}")
-            ejecucion = input(F"{VERDE}¿Cómo te ha salido? Elige: perfecto, bien, o mal.\n {RESET}").strip().lower()
-            guardar_historial(tonalidad, apartado)
+            try:
+                ejec = input(F"{VERDE}¿Cómo te ha salido? Elige: perfecto, bien, o mal.\n {RESET}").strip().lower()[0]
+            except:
+                ejec = "b"
+            ejecucion = ejec if ejec in ["b", "m", "p"] else "b"
+            guardar_historial(tonalidad, apartado, ejecucion)
             if ejecucion.startswith("p"):
                 stats["d"] -= 1
             elif ejecucion.startswith("m"):
