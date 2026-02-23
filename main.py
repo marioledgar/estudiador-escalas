@@ -4,6 +4,7 @@ import sys
 import os
 import datetime as dt
 import pyfiglet
+import shutil
 
 VERDE = "\033[92m"
 MAGENTA = "\033[35m"
@@ -16,12 +17,25 @@ RESET = "\033[0m"
 ################################
 
 # importar datos
+if not os.path.exists("data.json"):
+    if os.path.exists("data_template.json"):
+        shutil.copy("data_template.json", "data.json")
+        print(f"{VERDE}Se ha creado un nuevo archivo data.json desde la plantilla.{RESET}")
+    else:
+        print(f"{ROJO}Error crítico: No existe data.json ni data_template.json.{RESET}")
+        sys.exit()
 try:
     with open("data.json", "r", encoding="utf-8") as data_json:
         datos = json.load(data_json)
-except:
-    print("No se encuentra el archivo.")
+except Exception as e:
+    print(f"{ROJO}Error al leer data.json: {e}{RESET}")
     sys.exit()
+
+try:
+    with open("historial.json", "r", encoding="utf-8") as f:
+        historia = json.load(f)
+except (FileNotFoundError, json.JSONDecodeError):
+        historia = []
 
 #texto grande
 def print_big(texto, COLOR=None, _justify=None, _font="block"):
@@ -40,13 +54,20 @@ tonalidades = list(datos.keys())
 
 # valores predeterminados
 def restaurar_valores():
-    for tonalidad in tonalidades:
+    """for tonalidad in tonalidades:
         datos[tonalidad]["cambios_recientes"] = True    
         datos[tonalidad]["dias_sin_tocarla"] = 0
         datos[tonalidad]["cambios_recientes"] = False
         for apartado in datos[tonalidad]["apartados"]:
-            datos[tonalidad]["apartados"].update({apartado: [True, {"v": 80, "d": 5}]})
-    os.remove("historial.json")
+            datos[tonalidad]["apartados"].update({apartado: [True, {"v": 80, "d": 5}]})"""
+    try:
+        os.remove("data.json")
+    except:
+        pass
+    try:
+        os.remove("historial.json")
+    except:
+        pass
 
 # una lista con las valocidades discretas
 velocidades_discretas = [30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60, 63, 66, 69, 72, 76, 80, 84, 88, 92, 96, 100, 104, 108, 112, 116, 120, 126, 132, 138, 144]
