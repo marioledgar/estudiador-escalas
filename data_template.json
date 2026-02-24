@@ -69,7 +69,7 @@
                 }
             ]
         },
-        "dias_sin_tocarla": 1,
+        "dias_sin_tocarla": 0,
         "cambios_recientes": false
     },
     "sostenido1": {
@@ -142,7 +142,7 @@
                 }
             ]
         },
-        "dias_sin_tocarla": 1,
+        "dias_sin_tocarla": 0,
         "cambios_recientes": false
     },
     "bemol1": {
@@ -215,7 +215,7 @@
                 }
             ]
         },
-        "dias_sin_tocarla": 1,
+        "dias_sin_tocarla": 0,
         "cambios_recientes": false
     },
     "sostenido2": {
@@ -288,7 +288,7 @@
                 }
             ]
         },
-        "dias_sin_tocarla": 1,
+        "dias_sin_tocarla": 0,
         "cambios_recientes": false
     },
     "bemol2": {
@@ -361,7 +361,7 @@
                 }
             ]
         },
-        "dias_sin_tocarla": 1,
+        "dias_sin_tocarla": 0,
         "cambios_recientes": false
     },
     "sostenido3": {
@@ -434,7 +434,7 @@
                 }
             ]
         },
-        "dias_sin_tocarla": 1,
+        "dias_sin_tocarla": 0,
         "cambios_recientes": false
     },
     "bemol3": {
@@ -507,7 +507,7 @@
                 }
             ]
         },
-        "dias_sin_tocarla": 1,
+        "dias_sin_tocarla": 0,
         "cambios_recientes": false
     },
     "sostenido4": {
@@ -580,7 +580,7 @@
                 }
             ]
         },
-        "dias_sin_tocarla": 1,
+        "dias_sin_tocarla": 0,
         "cambios_recientes": false
     },
     "bemol4": {
@@ -653,7 +653,7 @@
                 }
             ]
         },
-        "dias_sin_tocarla": 1,
+        "dias_sin_tocarla": 0,
         "cambios_recientes": false
     },
     "sostenido5": {
@@ -726,7 +726,7 @@
                 }
             ]
         },
-        "dias_sin_tocarla": 1,
+        "dias_sin_tocarla": 0,
         "cambios_recientes": false
     },
     "bemol5": {
@@ -799,7 +799,7 @@
                 }
             ]
         },
-        "dias_sin_tocarla": 1,
+        "dias_sin_tocarla": 0,
         "cambios_recientes": false
     },
     "sostenido6": {
@@ -872,7 +872,7 @@
                 }
             ]
         },
-        "dias_sin_tocarla": 1,
+        "dias_sin_tocarla": 0,
         "cambios_recientes": false
     },
     "bemol6": {
@@ -945,7 +945,7 @@
                 }
             ]
         },
-        "dias_sin_tocarla": 1,
+        "dias_sin_tocarla": 0,
         "cambios_recientes": false
     },
     "sostenido7": {
@@ -1018,7 +1018,7 @@
                 }
             ]
         },
-        "dias_sin_tocarla": 1,
+        "dias_sin_tocarla": 0,
         "cambios_recientes": false
     },
     "bemol7": {
@@ -1091,7 +1091,7 @@
                 }
             ]
         },
-        "dias_sin_tocarla": 1,
+        "dias_sin_tocarla": 0,
         "cambios_recientes": false
     }
 }

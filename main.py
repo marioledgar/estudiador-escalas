@@ -56,6 +56,9 @@ tonalidades = list(datos.keys())
 def restaurar_valores():
     try:
         os.remove("data.json")
+        shutil.copy("data_template.json", "data.json")
+        with open("data.json", "r", encoding="utf-8") as data_json:
+            datos = json.load(data_json)
     except:
         pass
     try:
