@@ -147,8 +147,32 @@ def tocar(tonalidad):
             datos[tonalidad]["apartados"][apartado][1] = stats 
     datos[tonalidad]["dias_sin_tocarla"] = 0
 
-def mostrar_datos():
+def ver_editar_datos():
     pass
+def insights():
+    pass
+def graficas():
+    pass
+
+def menu_datos():
+    while True:
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print(f"""
+1. Ver/editar datos
+2. Insights
+3. Gráficas
+4. Atrás""")
+        match input():
+            case "1":
+                ver_editar_datos()
+            case "2":
+                insights()
+            case "3":
+                graficas()
+            case "4":
+                break
+            case _:
+                print("Opción no válida, intenta de nuevo.")
 
 ################################
 
@@ -188,6 +212,7 @@ def ejecutar_sesion():
 
 def menu_principal():
     while True:
+        os.system('cls' if os.name == 'nt' else 'clear')
         print(f"""
 1. Empezar sesión
 2. Datos
@@ -198,7 +223,7 @@ def menu_principal():
             case "1":
                 ejecutar_sesion()
             case "2":
-                mostrar_datos()
+                menu_datos()
             case "3":
                 restaurar_valores()
             case "4":
