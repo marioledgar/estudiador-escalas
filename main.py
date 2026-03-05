@@ -148,7 +148,15 @@ def tocar(tonalidad):
     datos[tonalidad]["dias_sin_tocarla"] = 0
 
 def ver_editar_datos():
-    pass
+    os.system('cls' if os.name == 'nt' else 'clear')
+    tonalidad_mostrar = input("""
+¿?Qué tonalidad quieres ver?
+Ejemplo: alteraciones0, sostenido2, bemol4...
+""")
+    for apartado in datos[tonalidad_mostrar]["apartados"]:
+        print(f"{apartado}: {datos[tonalidad_mostrar][apartado][1]}")
+        if input() == "\b":
+            break
 def insights():
     pass
 def graficas():
@@ -156,12 +164,13 @@ def graficas():
 
 def menu_datos():
     while True:
-        os.system('cls' if os.name == 'nt' else 'clear')
+        os.system('cls' if os.name == 'nt' else 'clear') # aquí hay q mejorarlo para que el intentalo de nuevo se printee
         print(f"""
 1. Ver/editar datos
 2. Insights
 3. Gráficas
-4. Atrás""")
+4. Atrás
+""")
         match input():
             case "1":
                 ver_editar_datos()
@@ -218,7 +227,7 @@ def menu_principal():
 2. Datos
 {ROJO}3. Restaurar datos{RESET}
 {AMARILLO}4. Salir{RESET}
-        """)
+""")
         match input():
             case "1":
                 ejecutar_sesion()
