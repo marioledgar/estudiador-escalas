@@ -164,28 +164,23 @@ def ver_editar_datos():
     apartados_actuales = datos[tonalidad_mostrar]["apartados"]
     texto_inicial = json.dumps(apartados_actuales, indent=4)
     
-    # 1. CREAMOS UN ARCHIVO TEMPORAL
     with tempfile.NamedTemporaryFile(mode='w+', suffix='.json', delete=False, encoding='utf-8') as tf:
         tf.write(texto_inicial)
         ruta_temporal = tf.name
 
     print(f"{AMARILLO}Abriendo el editor de texto...{RESET}")
-    print("Guarda el archivo (Ctrl+G) y ciérralo cuando termines para continuar.")
+    print("Guarda el archivo (Ctrl+S) y ciérralo cuando termines para continuar.")
 
-    # 2. ABRIMOS EL BLOC DE NOTAS / NANO
     if platform.system() == 'Windows':
         os.system(f'code --wait "{ruta_temporal}"')
     else:
         os.system(f'code --wait "{ruta_temporal}"')
 
-    # 3. LEEMOS EL ARCHIVO TRAS CERRAR EL EDITOR
     with open(ruta_temporal, 'r', encoding='utf-8') as tf:
         texto_editado = tf.read()
 
-    # 4. BORRAMOS EL ARCHIVO TEMPORAL (Para no dejar basura)
     os.remove(ruta_temporal)
 
-    # 5. GUARDAMOS LOS DATOS (igual que tenías antes)
     try:
         nuevos_apartados = json.loads(texto_editado)
         datos[tonalidad_mostrar]["apartados"] = nuevos_apartados
