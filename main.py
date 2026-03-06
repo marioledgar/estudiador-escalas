@@ -5,6 +5,8 @@ import os
 import datetime as dt
 import pyfiglet
 import shutil
+import tempfile
+import platform
 
 VERDE = "\033[92m"
 MAGENTA = "\033[35m"
@@ -153,12 +155,49 @@ def tocar(tonalidad):
 
 def ver_editar_datos():
     os.system('cls' if os.name == 'nt' else 'clear')
-    tonalidad_mostrar = input("""
-¿?Qué tonalidad quieres ver?
-Ejemplo: alteraciones0, sostenido2, bemol4...
-""")
-    for apartado in datos[tonalidad_mostrar]["apartados"]:
-        print(f"{apartado}: {datos[tonalidad_mostrar]["apartados"][apartado]}")
+    tonalidad_mostrar = input("¿Qué tonalidad quieres ver?\nPor ejemplo, alteraciones0, sostenido2, bemol4...\n").strip()
+    
+    if tonalidad_mostrar not in datos:
+        print(f"{ROJO}Esa tonalidad no existe.{RESET}")
+        return
+
+    apartados_actuales = datos[tonalidad_mostrar]["apartados"]
+    texto_inicial = json.dumps(apartados_actuales, indent=4)
+    
+    # 1. CREAMOS UN ARCHIVO TEMPORAL
+    with tempfile.NamedTemporaryFile(mode='w+', suffix='.json', delete=False, encoding='utf-8') as tf:
+        tf.write(texto_inicial)
+        ruta_temporal = tf.name
+
+    print(f"{AMARILLO}Abriendo el editor de texto...{RESET}")
+    print("Guarda el archivo (Ctrl+G) y ciérralo cuando termines para continuar.")
+
+    # 2. ABRIMOS EL BLOC DE NOTAS / NANO
+    if platform.system() == 'Windows':
+        os.system(f'code --wait "{ruta_temporal}"')
+    else:
+        os.system(f'code --wait "{ruta_temporal}"')
+
+    # 3. LEEMOS EL ARCHIVO TRAS CERRAR EL EDITOR
+    with open(ruta_temporal, 'r', encoding='utf-8') as tf:
+        texto_editado = tf.read()
+
+    # 4. BORRAMOS EL ARCHIVO TEMPORAL (Para no dejar basura)
+    os.remove(ruta_temporal)
+
+    # 5. GUARDAMOS LOS DATOS (igual que tenías antes)
+    try:
+        nuevos_apartados = json.loads(texto_editado)
+        datos[tonalidad_mostrar]["apartados"] = nuevos_apartados
+        
+        with open("data.json", "w", encoding="utf-8") as f:
+            json.dump(datos, f, indent=4)
+            
+        print(f"{VERDE}¡Datos actualizados correctamente!{RESET}")
+        
+    except json.JSONDecodeError:
+        print(f"{ROJO}Error al guardar: El formato JSON se ha roto. Cambios cancelados.{RESET}")
+
 def insights():
     pass
 def graficas():
