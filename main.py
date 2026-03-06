@@ -147,6 +147,10 @@ def tocar(tonalidad):
             datos[tonalidad]["apartados"][apartado][1] = stats 
     datos[tonalidad]["dias_sin_tocarla"] = 0
 
+#########
+# DATOS #
+#########
+
 def ver_editar_datos():
     os.system('cls' if os.name == 'nt' else 'clear')
     tonalidad_mostrar = input("""
@@ -154,24 +158,28 @@ def ver_editar_datos():
 Ejemplo: alteraciones0, sostenido2, bemol4...
 """)
     for apartado in datos[tonalidad_mostrar]["apartados"]:
-        print(f"{apartado}: {datos[tonalidad_mostrar][apartado][1]}")
-        if input() == "\b":
-            break
+        print(f"{apartado}: {datos[tonalidad_mostrar]["apartados"][apartado]}")
 def insights():
     pass
 def graficas():
     pass
 
 def menu_datos():
+    msg = ""
     while True:
-        os.system('cls' if os.name == 'nt' else 'clear') # aquí hay q mejorarlo para que el intentalo de nuevo se printee
+        os.system('cls' if os.name == 'nt' else 'clear')
+        
+        if msg:
+            print(f"--- {msg} ---")
+            msg = ""
+
         print(f"""
 1. Ver/editar datos
 2. Insights
 3. Gráficas
 4. Atrás
 """)
-        match input():
+        match input("Selecciona una opción: "):
             case "1":
                 ver_editar_datos()
             case "2":
@@ -181,7 +189,7 @@ def menu_datos():
             case "4":
                 break
             case _:
-                print("Opción no válida, intenta de nuevo.")
+                msg = "Opción no válida, intenta de nuevo"
 
 ################################
 
@@ -220,6 +228,7 @@ def ejecutar_sesion():
 # menu
 
 def menu_principal():
+    msg = ""
     while True:
         os.system('cls' if os.name == 'nt' else 'clear')
         print(f"""
@@ -228,7 +237,11 @@ def menu_principal():
 {ROJO}3. Restaurar datos{RESET}
 {AMARILLO}4. Salir{RESET}
 """)
-        match input():
+        if msg:
+            print(f"--- {msg} ---")
+            msg = ""
+
+        match input("Selecciona una opción: "):
             case "1":
                 ejecutar_sesion()
             case "2":
@@ -240,6 +253,6 @@ def menu_principal():
                     json.dump(datos, write_file, indent=4)  
                 break
             case _:
-                print("Opción no válida, intenta de nuevo.")
+                msg = "Opción no válida, intenta de nuevo"
 
 menu_principal()
