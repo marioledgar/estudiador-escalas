@@ -171,10 +171,13 @@ def ver_editar_datos():
     print(f"{AMARILLO}Abriendo el editor de texto...{RESET}")
     print("Guarda el archivo (Ctrl+S) y ciérralo cuando termines para continuar.")
 
-    if platform.system() == 'Windows':
+    try:
         os.system(f'code --wait "{ruta_temporal}"')
-    else:
-        os.system(f'code --wait "{ruta_temporal}"')
+    except:
+        if platform.system() == "Windows":
+            os.system(f'notepad "{ruta_temporal}"')
+        else:
+            os.system(f'nano "{ruta_temporal}"')
 
     with open(ruta_temporal, 'r', encoding='utf-8') as tf:
         texto_editado = tf.read()
