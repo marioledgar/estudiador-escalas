@@ -153,21 +153,26 @@ def tocar(tonalidad):
 # DATOS #
 #########
 
-def ver_editar_datos():
-    os.system('cls' if os.name == 'nt' else 'clear')
-    tonalidad_mostrar = input("¿Qué tonalidad quieres ver?\nPor ejemplo, alteraciones0, sostenido2, bemol4...\n").strip()
-    
-    if tonalidad_mostrar not in datos:
-        print(f"{ROJO}Esa tonalidad no existe.{RESET}")
-        return
+def editar_global():
+    msg = ""
+    while True:
+        os.system('cls' if os.name == 'nt' else 'clear')
+        apartado_cambiar = input(f"¿Qué apartado deseas cambiar?\nOpciones:\n{"\n".join(apartado for apartado in datos["alteraciones0"]["apartados"])}\n").strip().lower()
+        if msg:
+            print(f"--- {msg} ---")
+            msg = ""
+        if apartado_cambiar not in datos["alteraciones0"]["apartados"]:
+            msg = "Apartado no válido, intenta de nuevo."
+        else:
+            break
+        
+    apartado_actual = datos["alteraciones0"]["apartados"][apartado_cambiar]
+    texto_inicial = json.dumps(apartado_actual, indent=4)
 
-    apartados_actuales = datos[tonalidad_mostrar]["apartados"]
-    texto_inicial = json.dumps(apartados_actuales, indent=4)
-    
     with tempfile.NamedTemporaryFile(mode='w+', suffix='.json', delete=False, encoding='utf-8') as tf:
         tf.write(texto_inicial)
         ruta_temporal = tf.name
-
+    
     print(f"{AMARILLO}Abriendo el editor de texto...{RESET}")
     print("Guarda el archivo (Ctrl+S) y ciérralo cuando termines para continuar.")
 
@@ -178,23 +183,66 @@ def ver_editar_datos():
             os.system(f'notepad "{ruta_temporal}"')
         else:
             os.system(f'nano "{ruta_temporal}"')
-
+        
     with open(ruta_temporal, 'r', encoding='utf-8') as tf:
         texto_editado = tf.read()
-
     os.remove(ruta_temporal)
 
     try:
-        nuevos_apartados = json.loads(texto_editado)
-        datos[tonalidad_mostrar]["apartados"] = nuevos_apartados
-        
+        nuevo_apartado = json.loads(texto_editado)
+        for tonalidad in datos:
+            datos[tonalidad]["apartados"][apartado_cambiar] = nuevo_apartado
         with open("data.json", "w", encoding="utf-8") as f:
             json.dump(datos, f, indent=4)
-            
         print(f"{VERDE}¡Datos actualizados correctamente!{RESET}")
-        
     except json.JSONDecodeError:
         print(f"{ROJO}Error al guardar: El formato JSON se ha roto. Cambios cancelados.{RESET}")
+
+def ver_editar_datos():
+    if input("¿Deseas editar globalmente? Si editass globalmente, podrás cambiar los datos de todas las escalas a la vez. [Y/n]").lower().strip() == "y":
+        editar_global()
+    else:
+        os.system('cls' if os.name == 'nt' else 'clear')
+        tonalidad_mostrar = input("¿Qué tonalidad quieres ver?\nPor ejemplo, alteraciones0, sostenido2, bemol4...\n").strip()
+        
+        if tonalidad_mostrar not in datos:
+            print(f"{ROJO}Esa tonalidad no existe.{RESET}")
+            return
+
+        apartados_actuales = datos[tonalidad_mostrar]["apartados"]
+        texto_inicial = json.dumps(apartados_actuales, indent=4)
+        
+        with tempfile.NamedTemporaryFile(mode='w+', suffix='.json', delete=False, encoding='utf-8') as tf:
+            tf.write(texto_inicial)
+            ruta_temporal = tf.name
+
+        print(f"{AMARILLO}Abriendo el editor de texto...{RESET}")
+        print("Guarda el archivo (Ctrl+S) y ciérralo cuando termines para continuar.")
+
+        try:
+            os.system(f'code --wait "{ruta_temporal}"')
+        except:
+            if platform.system() == "Windows":
+                os.system(f'notepad "{ruta_temporal}"')
+            else:
+                os.system(f'nano "{ruta_temporal}"')
+
+        with open(ruta_temporal, 'r', encoding='utf-8') as tf:
+            texto_editado = tf.read()
+
+        os.remove(ruta_temporal)
+
+        try:
+            nuevos_apartados = json.loads(texto_editado)
+            datos[tonalidad_mostrar]["apartados"] = nuevos_apartados
+            
+            with open("data.json", "w", encoding="utf-8") as f:
+                json.dump(datos, f, indent=4)
+                
+            print(f"{VERDE}¡Datos actualizados correctamente!{RESET}")
+            
+        except json.JSONDecodeError:
+            print(f"{ROJO}Error al guardar: El formato JSON se ha roto. Cambios cancelados.{RESET}")
 
 def insights():
     pass
