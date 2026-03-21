@@ -1,5 +1,6 @@
-const STORAGE_KEY = "data";
+const STORAGE_KEY = "escalas_data";
 
+// FILE HANDLING
 async function loadJSON(filePath) {
     try {
         const response = await fetch(filePath);
@@ -9,6 +10,15 @@ async function loadJSON(filePath) {
         console.error(`Error loading ${filePath}:`, error);
         return null;
     }
+}
+
+async function loadSettings() {
+    let settings = await loadJSON('settings.json');
+    if (!settings) {
+        console.warn("User settings not found, loading defaults.");
+        settings = await loadJSON('settings_default.json');
+    }
+    return settings;
 }
 
 async function loadData() {
@@ -27,12 +37,12 @@ async function loadData() {
 
     // Primera vez o error en datos locales: descarga la plantilla del servidor
     const template = await loadJSON('data_template.json');
-
+    
     if (template) {
         // Y la guarda en su navegador para la próxima vez
         saveData(template);
     }
-
+    
     return template;
 }
 
@@ -40,24 +50,32 @@ function saveData(data) {
     if (!data) return;
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
 }
+// FIN DE FILE HANDLING
 
 async function main() {
     const inputElement = document.getElementById("cantidad_hoy");
     const cantidad_hoy = inputElement ? inputElement.value : null;
 
-    let data = await loadData();
+    // Load settings
+    const settings = await loadSettings();
+    if (settings) {
+        console.log("Settings loaded:", settings);
+    } else {
+        console.error("Failed to load settings.");
+    }
 
+    // Load data
+    let data = await loadData();
+    
     if (!data) {
         console.error("No se pudieron cargar los datos de las escalas.");
         return;
     }
 
     console.log("Datos cargados correctamente:", data);
-
+    
     if (cantidad_hoy) {
         console.log(`El usuario quiere tocar ${cantidad_hoy} escalas.`);
-        // TODO: Implementar la lógica de selección de escalas aquí
+        // TODO: Implementar la lógica de selección de escalas aquí usando 'data' y 'settings'
     }
-
-    // Solo llama a saveData(data) después de modificar 'data'.
 }

@@ -1,5 +1,6 @@
 historial.json
 data.json
+settings.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

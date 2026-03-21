@@ -50,7 +50,6 @@ try:
         settings = json.load(settings_json)
 except:
     settings = {"idioma": "spanish", "velocidades": "discretas"}
-
 # tonalidades
 tonalidades = list(datos.keys())
 
