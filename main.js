@@ -74,6 +74,33 @@ const velocidadesDiscretas = [30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54
 const simbolos = { "ninguna": "b/#", "bemol": "b", "sostenidos": "#" }
 // fin de constantes
 
+//cambiar velocidad
+function cambiarVelocidad(tonalidad, apartado, aumentar = True) {
+    let v = data.tonalidad.apartados.apartado[1].v;
+    if (aumentar === True) {
+        if (v <= 144) {
+            if (settings.velocidades === 'discretas') {
+                if (!velocidadesDiscretas.includes(v)) {
+                    v = velocidades_discretas.find(x => x >= v);
+                } else {
+                    v = velocidadesDiscretas[velocidadesDiscretas.indexOf(v) + 1];
+                }
+            } else { v++; }
+        }
+    } elseif(aumentar === False); {
+        if (v >= 30) {
+            if (settings.velocidades === 'discretas') {
+                if (!velocidadesDiscretas.includes(v)) {
+                    v = velocidades_discretas.findLast(x => x <= v);
+                } else {
+                    v = velocidadesDiscretas[velocidadesDiscretas.indexOf(v) - 1];
+                }
+            } else { v--; }
+        }
+    }
+    data.tonalidad.apartados.apartado[1].v = v;
+}
+
 async function main() {
     const inputElement = document.getElementById("cantidad_hoy");
     const cantidad_hoy = inputElement ? inputElement.value : null;
