@@ -1,4 +1,4 @@
-const STORAGE_KEY = "escalas_data";
+const STORAGE_KEY = "data";
 
 // FILE HANDLING
 async function loadJSON(filePath) {
@@ -37,18 +37,34 @@ async function loadData() {
 
     // Primera vez o error en datos locales: descarga la plantilla del servidor
     const template = await loadJSON('data_template.json');
-    
+
     if (template) {
         // Y la guarda en su navegador para la próxima vez
         saveData(template);
     }
-    
+
     return template;
 }
 
 function saveData(data) {
     if (!data) return;
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+}
+
+async function restaurarValores() {
+    if (confirm("¿Estás seguro de que deseas restaurar los valores predeterminados? Se perderá todo el progreso.")) {
+        localStorage.removeItem(STORAGE_KEY);
+        localStorage.removeItem("historial");
+        
+        const template = await loadJSON('data_template.json');
+        if (template) {
+            saveData(template);
+            alert("Valores restaurados correctamente.");
+            location.reload();
+        } else {
+            alert("Error al cargar la plantilla de datos.");
+        }
+    }
 }
 // FIN DE FILE HANDLING
 
@@ -66,14 +82,14 @@ async function main() {
 
     // Load data
     let data = await loadData();
-    
+
     if (!data) {
         console.error("No se pudieron cargar los datos de las escalas.");
         return;
     }
 
     console.log("Datos cargados correctamente:", data);
-    
+
     if (cantidad_hoy) {
         console.log(`El usuario quiere tocar ${cantidad_hoy} escalas.`);
         // TODO: Implementar la lógica de selección de escalas aquí usando 'data' y 'settings'
