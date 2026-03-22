@@ -55,7 +55,7 @@ async function restaurarValores() {
     if (confirm("¿Estás seguro de que deseas restaurar los valores predeterminados? Se perderá todo el progreso.")) {
         localStorage.removeItem(STORAGE_KEY);
         localStorage.removeItem("historial");
-        
+
         const template = await loadJSON('data_template.json');
         if (template) {
             saveData(template);
@@ -67,6 +67,12 @@ async function restaurarValores() {
     }
 }
 // FIN DE FILE HANDLING
+
+// algunas constantes
+const tonalidades = Object.keys(data)
+const velocidadesDiscretas = [30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60, 63, 66, 69, 72, 76, 80, 84, 88, 92, 96, 100, 104, 108, 112, 116, 120, 126, 132, 138, 144]
+const simbolos = { "ninguna": "b/#", "bemol": "b", "sostenidos": "#" }
+// fin de constantes
 
 async function main() {
     const inputElement = document.getElementById("cantidad_hoy");
