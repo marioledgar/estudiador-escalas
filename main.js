@@ -111,7 +111,8 @@ async function restaurarValores() {
         }
     }
 }
-window.exportarDatos = function() {
+
+window.exportarDatos = function () {
     const backup = {
         datos: JSON.parse(localStorage.getItem(DATA_KEY)),
         settings: JSON.parse(localStorage.getItem(SETTINGS_KEY)),
@@ -126,7 +127,7 @@ window.exportarDatos = function() {
     URL.revokeObjectURL(url);
 }
 
-window.importarDatos = function() {
+window.importarDatos = function () {
     const input = document.createElement("input");
     input.type = "file";
     input.accept = ".json";
@@ -149,10 +150,9 @@ window.importarDatos = function() {
     };
     input.click();
 }
-
+//fin file handling
 
 // algunas constantes
-const tonalidades = ['alteraciones0', 'sostenido1', 'bemol1', 'sostenido2', 'bemol2', 'sostenido3', 'bemol3', 'sostenido4', 'bemol4', 'sostenido5', 'bemol5', 'sostenido6', 'bemol6', 'sostenido7', 'bemol7'];
 const velocidadesDiscretas = [30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60, 63, 66, 69, 72, 76, 80, 84, 88, 92, 96, 100, 104, 108, 112, 116, 120, 126, 132, 138, 144];
 const simbolos = { "ninguna": "b/#", "bemol": "b", "sostenidos": "#" };
 // fin de constantes
@@ -183,6 +183,7 @@ function cambiarVelocidad(tonalidad, apartado, aumentar = true) {
     }
     datos[tonalidad].apartados[apartado][1].v = v;
 }
+//fin cambiar velocidad
 
 async function main() {
     const inputElement = document.getElementById("cantidad_hoy");
@@ -199,144 +200,3 @@ async function main() {
 
     ejecutarSesion(cantidad_hoy);
 }
-
-let escalasSesionOriginal = [];
-
-function ejecutarSesion(cantidad_hoy) {
-    if (isNaN(cantidad_hoy) || cantidad_hoy <= 0) cantidad_hoy = 3;
-
-    const tonalidadesKeys = Object.keys(datos);
-    // Ordenar por días sin tocarla (descendente)
-    const ordenadas = [...tonalidadesKeys].sort((a, b) => {
-        return (datos[b].dias_sin_tocarla || 0) - (datos[a].dias_sin_tocarla || 0);
-    });
-
-    const mitadAntigua = Math.floor(cantidad_hoy / 2);
-    const mitadAleatoria = cantidad_hoy - mitadAntigua;
-
-    const antiguas = ordenadas.slice(0, mitadAntigua);
-    const disponiblesAzar = ordenadas.slice(mitadAntigua);
-
-    // Shuffle disponiblesAzar
-    for (let i = disponiblesAzar.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [disponiblesAzar[i], disponiblesAzar[j]] = [disponiblesAzar[j], disponiblesAzar[i]];
-    }
-
-    const aleatorias = disponiblesAzar.slice(0, mitadAleatoria);
-    let escalasHoy = antiguas.concat(aleatorias);
-
-    // Shuffle escalasHoy
-    for (let i = escalasHoy.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [escalasHoy[i], escalasHoy[j]] = [escalasHoy[j], escalasHoy[i]];
-    }
-
-    escalasSesionOriginal = [...escalasHoy];
-    console.log("Escalas para hoy:", escalasHoy);
-    iniciarEstudio(escalasHoy);
-}
-
-let colaEscalas = [];
-let escalaActual = null;
-let apartadoActualIdx = 0;
-let apartadosKeys = [];
-
-function iniciarEstudio(escalas) {
-    colaEscalas = escalas;
-    proximaEscala();
-}
-
-function proximaEscala() {
-    if (colaEscalas.length === 0) {
-        finalizarSesion();
-        return;
-    }
-    escalaActual = colaEscalas.shift();
-    apartadosKeys = Object.keys(datos[escalaActual].apartados);
-    apartadoActualIdx = 0;
-    proximoApartado();
-}
-
-function proximoApartado() {
-    if (apartadoActualIdx >= apartadosKeys.length) {
-        datos[escalaActual].dias_sin_tocarla = 0;
-        proximaEscala();
-        return;
-    }
-
-    const nombreApartado = apartadosKeys[apartadoActualIdx];
-    const info = datos[escalaActual].apartados[nombreApartado];
-
-    if (info[0] === true) {
-        mostrarInterfazEstudio(escalaActual, nombreApartado, info[1]);
-    } else {
-        apartadoActualIdx++;
-        proximoApartado();
-    }
-}
-
-function mostrarInterfazEstudio(tonalidad, nombreApartado, stats) {
-    const container = document.body;
-    container.innerHTML = `
-        <div style="text-align: center; font-family: sans-serif; padding: 20px;">
-            <h1 style="font-size: 80pt; color: magenta;">${formatearTonalidad(tonalidad)}</h1>
-            <h2 style="font-size: 30pt;">${nombreApartado.slice(0, -6)}: Toca a ${stats.v}</h2>
-            <p style="font-size: 20pt; color: green;">¿Cómo te ha salido?</p>
-            <div style="display: flex; justify-content: center; gap: 20px;">
-                <button onclick="registrarResultado('p')" style="font-size: 20pt; padding: 10px 20px;">Perfecto</button>
-                <button onclick="registrarResultado('b')" style="font-size: 20pt; padding: 10px 20px;">Bien</button>
-                <button onclick="registrarResultado('m')" style="font-size: 20pt; padding: 10px 20px;">Mal</button>
-            </div>
-        </div>
-    `;
-}
-
-function formatearTonalidad(t) {
-    const num = t.match(/\d+/)[0];
-    const tipo = t.replace(num, "");
-    let s = "";
-    if (tipo === "alteraciones") s = "b/#";
-    else if (tipo === "bemol") s = "b";
-    else if (tipo === "sostenido") s = "#";
-    return num + s;
-}
-
-window.registrarResultado = function(ejecucion) {
-    const nombreApartado = apartadosKeys[apartadoActualIdx];
-    const stats = datos[escalaActual].apartados[nombreApartado][1];
-
-    agregarAlHistorial(escalaActual, nombreApartado, ejecucion);
-
-    if (ejecucion === 'p') {
-        stats.d--;
-    } else if (ejecucion === 'm') {
-        stats.d++;
-    }
-
-    if (stats.d <= 0) {
-        cambiarVelocidad(escalaActual, nombreApartado, true);
-        stats.d = 5;
-    } else if (stats.d >= 8) {
-        cambiarVelocidad(escalaActual, nombreApartado, false);
-        stats.d = 5;
-    }
-
-    saveData(datos);
-    apartadoActualIdx++;
-    proximoApartado();
-}
-
-function finalizarSesion() {
-    const tonalidadesKeys = Object.keys(datos);
-    tonalidadesKeys.forEach(t => {
-        if (!escalasSesionOriginal.includes(t)) {
-            datos[t].dias_sin_tocarla = (datos[t].dias_sin_tocarla || 0) + 1;
-        }
-    });
-
-    saveData(datos);
-    alert("¡Sesión terminada!");
-    location.href = 'estudiador-escalas.html';
-}
-
