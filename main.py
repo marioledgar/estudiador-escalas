@@ -74,7 +74,7 @@ velocidades_discretas = [30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56,
 def cambiar_velocidad(tonalidad, apartado, aumentar=True):
     v = datos[tonalidad]["apartados"][apartado][1]["v"]
     if aumentar == True:
-        if v <= 144:            
+        if v < 144:            
             if settings["velocidades"] == "discretas":
                 if v not in velocidades_discretas:
                     v = min(x for x in velocidades_discretas if x >= v)
@@ -83,7 +83,7 @@ def cambiar_velocidad(tonalidad, apartado, aumentar=True):
             else:
                 v = v + 1
     elif aumentar == False:
-        if v >= 30:
+        if v > 30:
             if settings["velocidades"] == "discretas":
                 if v not in velocidades_discretas:
                     v = max(x for x in velocidades_discretas if x <= v)

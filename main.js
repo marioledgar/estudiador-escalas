@@ -1,5 +1,6 @@
 const STORAGE_KEY = "data";
-
+let datos;
+let settings;
 // FILE HANDLING
 async function loadJSON(filePath) {
     try {
@@ -69,36 +70,37 @@ async function restaurarValores() {
 // FIN DE FILE HANDLING
 
 // algunas constantes
-const tonalidades = Object.keys(data)
-const velocidadesDiscretas = [30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60, 63, 66, 69, 72, 76, 80, 84, 88, 92, 96, 100, 104, 108, 112, 116, 120, 126, 132, 138, 144]
-const simbolos = { "ninguna": "b/#", "bemol": "b", "sostenidos": "#" }
+const tonalidades = ['alteraciones0', 'sostenido1', 'bemol1', 'sostenido2', 'bemol2', 'sostenido3', 'bemol3', 'sostenido4', 'bemol4', 'sostenido5', 'bemol5', 'sostenido6', 'bemol6', 'sostenido7', 'bemol7'];
+const velocidadesDiscretas = [30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60, 63, 66, 69, 72, 76, 80, 84, 88, 92, 96, 100, 104, 108, 112, 116, 120, 126, 132, 138, 144];
+const simbolos = { "ninguna": "b/#", "bemol": "b", "sostenidos": "#" };
 // fin de constantes
 
 //cambiar velocidad
-function cambiarVelocidad(tonalidad, apartado, aumentar = True) {
-    let v = data.tonalidad.apartados.apartado[1].v;
-    if (aumentar === True) {
-        if (v <= 144) {
+function cambiarVelocidad(tonalidad, apartado, aumentar = true) {
+    let v = datos[tonalidad].apartados[apartado][1].v;
+    if (aumentar) {
+        if (v < 144) {
             if (settings.velocidades === 'discretas') {
                 if (!velocidadesDiscretas.includes(v)) {
-                    v = velocidades_discretas.find(x => x >= v);
+                    v = velocidadesDiscretas.find(x => x >= v);
                 } else {
                     v = velocidadesDiscretas[velocidadesDiscretas.indexOf(v) + 1];
                 }
             } else { v++; }
         }
-    } elseif(aumentar === False); {
-        if (v >= 30) {
+    } else {
+        if (v > 30) {
             if (settings.velocidades === 'discretas') {
                 if (!velocidadesDiscretas.includes(v)) {
-                    v = velocidades_discretas.findLast(x => x <= v);
+                    v = velocidadesDiscretas.findLast(x => x <= v);
                 } else {
                     v = velocidadesDiscretas[velocidadesDiscretas.indexOf(v) - 1];
                 }
             } else { v--; }
         }
     }
-    data.tonalidad.apartados.apartado[1].v = v;
+    datos[tonalidad].apartados[apartado][1].v = v;
+    saveData(datos);
 }
 
 async function main() {
@@ -106,7 +108,7 @@ async function main() {
     const cantidad_hoy = inputElement ? inputElement.value : null;
 
     // Load settings
-    const settings = await loadSettings();
+    settings = await loadSettings();
     if (settings) {
         console.log("Settings loaded:", settings);
     } else {
@@ -114,14 +116,14 @@ async function main() {
     }
 
     // Load data
-    let data = await loadData();
+    datos = await loadData();
 
-    if (!data) {
+    if (!datos) {
         console.error("No se pudieron cargar los datos de las escalas.");
         return;
     }
 
-    console.log("Datos cargados correctamente:", data);
+    console.log("Datos cargados correctamente:", datos);
 
     if (cantidad_hoy) {
         console.log(`El usuario quiere tocar ${cantidad_hoy} escalas.`);
