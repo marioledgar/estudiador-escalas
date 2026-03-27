@@ -218,7 +218,7 @@ function elegirEscalas() {
     return escalasHoy;
 }
 
-function tocar(tonalidad) {
+function tocar(tonalidad, apartado) {
 
 }
 
@@ -229,14 +229,15 @@ function ejecutarSesion(cantidad) {
 async function main() {
     const inputElement = document.getElementById("cantidad_hoy");
     cantidadHoy = inputElement ? parseInt(inputElement.value) : 3;
-    tonalidades = Object.keys(datos);
 
     settings = await loadSettings();
     datos = await loadData();
-    historial = loadHistorial();
-
     if (!datos) {
         alert("No se pudieron cargar los datos.");
         return;
     }
+    historial = loadHistorial();
+
+    tonalidades = Object.keys(datos);
+    elegirEscalas();
 }
