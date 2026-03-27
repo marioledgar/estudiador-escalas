@@ -5,6 +5,20 @@ const HISTORY_KEY = "estudiador_historial";
 let datos;
 let settings;
 let historial;
+let tonalidades;
+let cantidadHoy;
+
+// función importante
+function pickRandom(array, n) {
+    const copy = [...array];
+    const result = [];
+    for (let i = 0; i < n && copy.length > 0; i++) {
+        const index = Math.floor(Math.random() * copy.length);
+        result.push(copy.splice(index, 1)[0]);
+    }
+    return result;
+}
+//
 
 // FILE HANDLING
 async function fetchJSON(filePath) {
@@ -185,9 +199,37 @@ function cambiarVelocidad(tonalidad, apartado, aumentar = true) {
 }
 //fin cambiar velocidad
 
+function elegirEscalas() {
+    // TODO: añadir un user prompt para confirmar si quiere tocar demasiadas escalas (y tendría q repetir algunas)
+    let escalasHoy = [];
+    let resto = cantidadHoy;
+    while (tonalidades.length < resto) {
+        resto -= tonalidades.length;
+        escalasHoy.push(...tonalidades);
+    }
+    let mitadAntigua = Math.floor(resto / 2);
+    let mitadAleatoria = resto - mitadAntigua;
+    const ordenadas = Object.keys(datos).sort((a, b) => datos[b].dias_sin_tocarla - datos[a].dias_sin_tocarla);
+    const antiguas = ordenadas.slice(0, mitadAntigua);
+    escalasHoy.push(...antiguas);
+    const disponiblesAzar = ordenadas.filter(x => !antiguas.includes(x));
+    escalasHoy.push(...pickRandom(disponiblesAzar, mitadAleatoria));
+    escalasHoy.sort(() => Math.random() - 0.5);
+    return escalasHoy;
+}
+
+function tocar(tonalidad) {
+
+}
+
+function ejecutarSesion(cantidad) {
+
+}
+
 async function main() {
     const inputElement = document.getElementById("cantidad_hoy");
-    const cantidad_hoy = inputElement ? parseInt(inputElement.value) : 3;
+    cantidadHoy = inputElement ? parseInt(inputElement.value) : 3;
+    tonalidades = Object.keys(datos);
 
     settings = await loadSettings();
     datos = await loadData();
@@ -197,6 +239,4 @@ async function main() {
         alert("No se pudieron cargar los datos.");
         return;
     }
-
-    ejecutarSesion(cantidad_hoy);
 }
