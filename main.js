@@ -218,16 +218,39 @@ function elegirEscalas() {
     return escalasHoy;
 }
 
-function tocar(tonalidad, apartado) {
-
+function tocarApartado(tonalidad, apartado) {
+    const v = datos[tonalidad].apartados[apartado][1].v;
+    document.body.innerHTML = `
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 50px;">
+            <h2>Toca ${apartado} en ${tonalidad} a ${v} BPM</h2>
+            <form id="formEjecucion" style="display: flex; flex-direction: column; gap: 10px;">
+                <label><input type="radio" name="ejecucion" value="mal"> Mal</label>
+                <label><input type="radio" name="ejecucion" value="regular"> Regular</label>
+                <label><input type="radio" name="ejecucion" value="bien"> Bien</label>
+                <label><input type="radio" name="ejecucion" value="perfecto"> Perfecto</label>
+                <button type="button" onclick="siguienteApartado()" style="margin-top: 20px; padding: 10px;">Siguiente</button>
+            </form>
+        </div>
+    `;
 }
 
 function ejecutarSesion(cantidad) {
 
 }
 
-async function main() {
-    const inputElement = document.getElementById("cantidad_hoy");
+function pantallaPreguntarCantidad() {
+    document.getElementById("pantalla-inicial").remove();
+    document.body.innerHTML = `
+    <div><form style="display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 50px;">
+        <label style="font-size: 20pt;">¿Cuántas escalas quieres tocar?</label>
+        <input type="number" name="cantidadHoy" id="cantidadHoy" style="font-size: 20pt; width: 100px; text-align: center;">
+        <input type="button" value="Empezar" onclick="tocar()" style="padding: 10px 40px; font-size: 15pt; cursor: pointer;">
+    </form></div>
+    `;
+}
+
+async function tocar() {
+    const inputElement = document.getElementById("cantidadHoy");
     cantidadHoy = inputElement ? parseInt(inputElement.value) : 3;
 
     settings = await loadSettings();
@@ -240,4 +263,19 @@ async function main() {
 
     tonalidades = Object.keys(datos);
     elegirEscalas();
+}
+
+function pantallaInicial() {
+    document.body.innerHTML = `
+    <div id="pantalla-inicial" style="display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 50px;">
+        <button onclick="pantallaPreguntarCantidad()" type="button"
+            style="height: 150px; width: 300px; font-size: 40pt; cursor: pointer;">Tocar</button>
+        <div style="display: flex; gap: 10px;">
+            <button onclick="restaurarValores()" style="padding: 10px; cursor: pointer;">Restaurar valores
+                predeterminados</button>
+            <button onclick="exportarDatos()" style="padding: 10px; cursor: pointer;">Exportar datos (JSON)</button>
+            <button onclick="importarDatos()" style="padding: 10px; cursor: pointer;">Importar datos (JSON)</button>
+        </div>
+    </div>
+    `;
 }
