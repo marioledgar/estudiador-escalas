@@ -276,7 +276,9 @@ function siguienteTonalidad(tonalidad) {
 }
 
 function acabarSesion() {
-
+    alert('Sesión guardada con éxito');
+    document.body.innerHTML = '';
+    pantallaInicial();
 }
 
 function pantallaPreguntarCantidad() {
