@@ -197,6 +197,7 @@ function cambiarVelocidad(tonalidad, apartado, aumentar = true) {
         }
     }
     datos[tonalidad].apartados[apartado][1].v = v;
+    datos[tonalidad].apartados[apartado][1].d = 5;
 }
 //fin cambiar velocidad
 
@@ -254,9 +255,20 @@ function tocarTonalidad(tonalidadActual) {
 }
 
 function acabarTonalidad(tonalidad) {
+    Object.keys(datos[tonalidad].apartados).forEach(apartado => {
+        if (datos[tonalidad].apartados[apartado][0]) {
+            const formulario = document.getElementById(`formEjecucion${apartado}`);
+            if (formulario) {
+                const data = new FormData(formulario);
+                const ejecucion = data.get('ejecucion'); // Obtiene el "value" del radio seleccionado
+                agregarAlHistorial(tonalidad, apartado, ejecucion);
+                if (datos[tonalidad].apartados[apartado][1].d === 8) { cambiarVelocidad(tonalidad, apartado, false); }
+                else if (datos[tonalidad].apartados[apartado][1].d === 0) { cambiarVelocidad(tonalidad, apartado, true); }
+            }
+        }
+    });
 
 }
-
 function siguienteTonalidad(tonalidad) {
     document.body.innerHTML = /*html*/``;
     let i = tonalidadesHoy.indexOf(tonalidad);
@@ -270,7 +282,7 @@ function acabarSesion() {
 function pantallaPreguntarCantidad() {
     document.getElementById("pantalla-inicial").remove();
     document.body.innerHTML = /*html*/`
-    <div><form style="display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 50px;">
+    <div id="preguntar-cantidad"><form style="display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 50px;">
         <label style="font-size: 20pt;">¿Cuántas escalas quieres tocar?</label>
         <input type="number" name="cantidadHoy" id="cantidadHoy" style="font-size: 20pt; width: 100px; text-align: center;">
         <input type="button" value="Empezar" onclick="tocar()" style="padding: 10px 40px; font-size: 15pt; cursor: pointer;">
