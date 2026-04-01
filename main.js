@@ -221,15 +221,13 @@ function elegirEscalas() {
 
 function tocarApartado(tonalidad, apartado) {
     const v = datos[tonalidad].apartados[apartado][1].v;
-    document.body.innerHTML = `
+    document.getElementById("forms-ejecucion").innerHTML += /*html*/`
         <div style="display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 50px;">
-            <h2>Toca ${apartado} en ${tonalidad} a ${v} BPM</h2>
-            <form id="formEjecucion" style="display: flex; flex-direction: column; gap: 10px;">
+            <h2>Toca ${apartado} a ${v} BPM</h2>
+            <form id="formEjecucion${apartado}" style="display: flex; flex-direction: column; gap: 10px;">
                 <label><input type="radio" name="ejecucion" value="mal"> Mal</label>
-                <label><input type="radio" name="ejecucion" value="regular"> Regular</label>
                 <label><input type="radio" name="ejecucion" value="bien"> Bien</label>
                 <label><input type="radio" name="ejecucion" value="perfecto"> Perfecto</label>
-                <button type="button" onclick="siguienteApartado()" style="margin-top: 20px; padding: 10px;">Siguiente</button>
             </form>
         </div>
     `;
@@ -241,7 +239,7 @@ function ejecutarSesion(cantidad) {
 
 function pantallaPreguntarCantidad() {
     document.getElementById("pantalla-inicial").remove();
-    document.body.innerHTML = `
+    document.body.innerHTML = /*html*/`
     <div><form style="display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 50px;">
         <label style="font-size: 20pt;">¿Cuántas escalas quieres tocar?</label>
         <input type="number" name="cantidadHoy" id="cantidadHoy" style="font-size: 20pt; width: 100px; text-align: center;">
@@ -267,7 +265,7 @@ async function tocar() {
 }
 
 function pantallaInicial() {
-    document.body.innerHTML = `
+    document.body.innerHTML = /*html*/`
     <div id="pantalla-inicial" style="display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 50px;">
         <button onclick="pantallaPreguntarCantidad()" type="button"
             style="height: 150px; width: 300px; font-size: 40pt; cursor: pointer;">Tocar</button>
@@ -279,5 +277,4 @@ function pantallaInicial() {
         </div>
     </div>
     `;
-
 }
