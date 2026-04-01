@@ -233,7 +233,37 @@ function tocarApartado(tonalidad, apartado) {
     `;
 }
 
-function ejecutarSesion(cantidad) {
+function tocarTonalidad(tonalidadActual) {
+    document.body.innerHTML = /*html*/`
+    <h3>${tonalidadActual}</h3>
+    <div id="${tonalidadActual}">
+    <div id="forms-ejecucion"></div><div></div>
+    `;
+    Object.keys(datos[tonalidadActual].apartados).forEach(apartado => {
+        if (datos[tonalidadActual].apartados[apartado][0]) {
+            tocarApartado(tonalidadActual, apartado);
+        }
+    });
+    if (tonalidadesHoy[tonalidadesHoy.length - 1] !== tonalidadActual) {
+        document.getElementById(`${tonalidadActual}`).innerHTML += /*html*/`
+        <button onclick="acabarTonalidad('${tonalidadActual}'); siguienteTonalidad('${tonalidadActual}')">Siguiente</button>`
+    } else {
+        document.getElementById(`${tonalidadActual}`).innerHTML += /*html*/`
+        <button onclick="acabarTonalidad('${tonalidadActual}'); acabarSesion()">Acabar sesión</button>`
+    }
+}
+
+function acabarTonalidad(tonalidad) {
+
+}
+
+function siguienteTonalidad(tonalidad) {
+    document.body.innerHTML = ``;
+    let i = tonalidadesHoy.indexOf(tonalidad);
+    tocarTonalidad(tonalidadesHoy[i + 1]);
+}
+
+function acabarSesion() {
 
 }
 
@@ -262,6 +292,9 @@ async function tocar() {
 
     tonalidades = Object.keys(datos);
     tonalidadesHoy = elegirEscalas();
+
+    document.getElementById("preguntar-cantidad").remove();
+    tocarTonalidad(tonalidadesHoy[0]);
 }
 
 function pantallaInicial() {
