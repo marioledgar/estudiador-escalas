@@ -258,7 +258,7 @@ function acabarTonalidad(tonalidad) {
 }
 
 function siguienteTonalidad(tonalidad) {
-    document.body.innerHTML = ``;
+    document.body.innerHTML = /*html*/``;
     let i = tonalidadesHoy.indexOf(tonalidad);
     tocarTonalidad(tonalidadesHoy[i + 1]);
 }
