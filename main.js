@@ -312,10 +312,10 @@ function tocarTonalidad(tonalidadActual) {
     });
     if (tonalidadesHoy[tonalidadesHoy.length - 1] !== tonalidadActual) {
         document.getElementById(`${tonalidadActual}`).innerHTML += /*html*/`
-        <button onclick="acabarTonalidad('${tonalidadActual}'); siguienteTonalidad('${tonalidadActual}')">Siguiente</button>`
+        <button class="boton-siguiente" onclick="acabarTonalidad('${tonalidadActual}'); siguienteTonalidad('${tonalidadActual}')">Siguiente</button>`
     } else {
         document.getElementById(`${tonalidadActual}`).innerHTML += /*html*/`
-        <button onclick="acabarTonalidad('${tonalidadActual}'); acabarSesion()">Acabar sesión</button>`
+        <button class="boton-siguiente" onclick="acabarTonalidad('${tonalidadActual}'); acabarSesion()">Acabar sesión</button>`
     }
 }
 

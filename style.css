@@ -5,6 +5,7 @@
 body {
     font-family: lato;
     background-color: #1f1f1f;
+    color: rgb(226, 226, 226)
 }
 
 .boton {
@@ -20,10 +21,6 @@ body {
     background-color: rgb(46, 131, 210);
 }
 
-#texto-preguntar-cantidad {
-    color: rgb(191, 191, 191);
-}
-
 /*#boton-preguntar-cantidad {
     color: #1f1f1f;
     background-color: rgb(32, 151, 255);
@@ -33,15 +30,6 @@ body {
 
 .ejecucion-input {
     display: none;
-}
-
-label {
-    cursor: pointer;
-}
-
-input:checked+label {
-    background-color: blueviolet;
-    /*cambiar esto obv*/
 }
 
 .ejecucion-form {
@@ -56,25 +44,44 @@ input:checked+label {
 .r-pill-form-item-perf {
     display: inline-block;
     padding: 10px 20px;
-    color: white;
+    color: rgba(255, 255, 255, 0.5);
+    /* dim text when unselected */
     text-align: center;
     min-width: 80px;
-    /*border: 1px solid #444;*/
     margin: 0;
-    transition: background 0.2s;
+    transition: background 0.2s, color 0.2s;
 }
 
 .r-pill-form-item-mal {
-    background-color: #c62121;
+    background-color: #4a0c0c;
+    /* dim red */
     border-radius: 15px 0px 0px 15px;
 }
 
 .r-pill-form-item-bien {
-    background-color: #2fc621;
-    border-radius: 0px 0px 0px 0px;
+    background-color: #0f3d0e;
+    /* dim green */
+    border-radius: 0px;
 }
 
 .r-pill-form-item-perf {
-    background-color: #1ac8d4;
+    background-color: #0a3d40;
+    /* dim cyan */
     border-radius: 0px 15px 15px 0px;
+}
+
+/* Vivid when selected */
+input:checked+.r-pill-form-item-mal {
+    background-color: #c62121;
+    color: white;
+}
+
+input:checked+.r-pill-form-item-bien {
+    background-color: #2fc621;
+    color: white;
+}
+
+input:checked+.r-pill-form-item-perf {
+    background-color: #1ac8d4;
+    color: white;
 }
