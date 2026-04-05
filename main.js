@@ -285,9 +285,9 @@ function pantallaPreguntarCantidad() {
     document.getElementById("pantalla-inicial").remove();
     document.body.innerHTML = /*html*/`
     <div id="preguntar-cantidad"><form style="display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 50px;">
-        <label style="font-size: 20pt;">¿Cuántas escalas quieres tocar?</label>
+        <label id="texto-preguntar-cantidad" style="font-size: 20pt;">¿Cuántas escalas quieres tocar?</label>
         <input type="number" name="cantidadHoy" id="cantidadHoy" style="font-size: 20pt; width: 100px; text-align: center;">
-        <input type="button" value="Empezar" onclick="tocar()" style="padding: 10px 40px; font-size: 15pt; cursor: pointer;">
+        <input id="boton-preguntar-cantidad" class="boton" type="button" value="Empezar" onclick="tocar()" style="padding: 10px 40px; font-size: 15pt; cursor: pointer;">
     </form></div>
     `;
 }
@@ -314,13 +314,13 @@ async function tocar() {
 function pantallaInicial() {
     document.body.innerHTML = /*html*/`
     <div id="pantalla-inicial" style="display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 50px;">
-        <button onclick="pantallaPreguntarCantidad()" type="button"
+        <button class="boton" onclick="pantallaPreguntarCantidad()" type="button"
             style="height: 150px; width: 300px; font-size: 40pt; cursor: pointer;">Tocar</button>
         <div style="display: flex; gap: 10px;">
-            <button onclick="restaurarValores()" style="padding: 10px; cursor: pointer;">Restaurar valores
+            <button class="boton" onclick="restaurarValores()" style="padding: 10px; cursor: pointer;">Restaurar valores
                 predeterminados</button>
-            <button onclick="exportarDatos()" style="padding: 10px; cursor: pointer;">Exportar datos (JSON)</button>
-            <button onclick="importarDatos()" style="padding: 10px; cursor: pointer;">Importar datos (JSON)</button>
+            <button class="boton" onclick="exportarDatos()" style="padding: 10px; cursor: pointer;">Exportar datos (JSON)</button>
+            <button class="boton" onclick="importarDatos()" style="padding: 10px; cursor: pointer;">Importar datos (JSON)</button>
         </div>
     </div>
     `;

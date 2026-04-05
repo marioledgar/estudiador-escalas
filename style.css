@@ -1,3 +1,28 @@
-* {
+body {
     font-family: lato;
+    background-color: #1f1f1f;
 }
+
+.boton {
+    padding: 0;
+    border: none;
+    background: none;
+    background-color: rgb(32, 151, 255);
+    border-radius: 5px;
+    color: #1f1f1f;
+}
+
+.boton:hover {
+    background-color: rgb(46, 131, 210);
+}
+
+#texto-preguntar-cantidad {
+    color: rgb(191, 191, 191);
+}
+
+/*#boton-preguntar-cantidad {
+    color: #1f1f1f;
+    background-color: rgb(32, 151, 255);
+    border: none;
+    border-radius: 5px;
+}*/
