@@ -46,6 +46,7 @@ body {
     padding: 10px 20px;
     color: rgba(255, 255, 255, 0.5);
     /* dim text when unselected */
+    cursor: pointer;
     text-align: center;
     min-width: 80px;
     margin: 0;
