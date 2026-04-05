@@ -8,6 +8,7 @@ let historial;
 let tonalidades;
 let cantidadHoy;
 let tonalidadesHoy;
+let formActivo = 0;
 
 // función importante
 function pickRandom(array, n) {
@@ -345,3 +346,38 @@ function acabarSesion() {
     document.body.innerHTML = '';
     pantallaInicial();
 }
+
+//controles con flechas!! editarlo q está mal
+document.addEventListener('keydown', function (event) {
+    if (!document.getElementById("forms-ejecucion")) { return }; //hay q estar en la pantalla de tocar
+
+    const forms = document.querySelectorAll('.ejecucion-form');
+    if (forms.length === 0) return;
+
+    const form = forms[formActivo]; // grab the currently active form
+    const radios = Array.from(form.querySelectorAll('input[type="radio"]'));
+
+    // Find which radio is currently checked
+    let indiceActual = radios.findIndex(r => r.checked);
+    if (indiceActual === -1) indiceActual = 1; // default to "bien" if none checked
+
+    if (event.key === 'ArrowLeft') {
+        // Move left, but don't go below 0
+        const nuevoIndice = Math.max(0, indiceActual - 1);
+        radios[nuevoIndice].checked = true;
+
+    } else if (event.key === 'ArrowRight') {
+        // Move right, but don't go past the last option
+        const nuevoIndice = Math.min(radios.length - 1, indiceActual + 1);
+        radios[nuevoIndice].checked = true;
+
+    } else if (event.key === 'Enter') {
+        if (formActivo === forms.length - 1) {
+            document.querySelector('.boton-siguiente').click();
+        } else {
+            formActivo = Math.min(forms.length - 1, formActivo + 1);
+            /*if (event.key === 'ArrowDown') 
+            if (event.key === 'ArrowUp') formActivo = Math.max(0, formActivo - 1);*/
+        }
+    }
+});
