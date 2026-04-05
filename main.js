@@ -268,13 +268,33 @@ function elegirEscalas() {
 function tocarApartado(tonalidad, apartado) {
     const v = datos[tonalidad].apartados[apartado][1].v;
     document.getElementById("forms-ejecucion").innerHTML += /*html*/`
-        <div style="display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 50px;">
-            <h2>Toca ${apartado} a ${v} BPM</h2>
-            <form id="formEjecucion${apartado}" style="display: flex; flex-direction: column; gap: 10px;">
-                <label><input type="radio" name="ejecucion" value="mal"> Mal</label>
-                <label><input type="radio" name="ejecucion" value="bien"> Bien</label>
-                <label><input type="radio" name="ejecucion" value="perfecto"> Perfecto</label>
-            </form>
+        <div class="div-apartado" style="display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 50px;">
+            <!-- <h2>Toca ${apartado} a ${v} BPM</h2>
+                <input class="ejecucion-input" type="radio" name="ejecucion" value="mal" id="mal-${apartado}">
+                <label for="mal-${apartado}">Mal</label>
+                <input class="ejecucion-input" type="radio" name="ejecucion" value="bien" id="bien-${apartado}" checked>
+                <label for="bien-${apartado}">Bien</label>
+                <input class="ejecucion-input" type="radio" name="ejecucion" value="perfecto" id="perf-${apartado}">
+                <label for="perf-${apartado}">Perfecto</label>
+            </form> -->
+
+            <fieldset class="r-pill-form-fieldset">
+            <legend>Toca ${apartado} a ${v} BPM</legend>
+            <div class="r-pill-form-group">
+                <form class="ejecucion-form" id="formEjecucion${apartado}">
+	                <input class="ejecucion-input" type="radio" name="ejecucion" value="mal" id="mal-${apartado}">
+                    <label class="r-pill-form-item-mal" for="mal-${apartado}">Mal</label>
+
+                    <input class="ejecucion-input" type="radio" name="ejecucion" value="bien" id="bien-${apartado}" checked>
+                    <label class="r-pill-form-item-bien" for="bien-${apartado}">Bien</label>
+
+                    <input class="ejecucion-input" type="radio" name="ejecucion" value="perfecto" id="perf-${apartado}">
+                    <label class="r-pill-form-item-perf" for="perf-${apartado}">Perfecto</label>
+                </form>
+            </div>
+            </fieldset>
+            
+
         </div>
     `;
 }

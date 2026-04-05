@@ -1,3 +1,7 @@
+:root {
+    --azul-boton: rgb(32, 151, 255);
+}
+
 body {
     font-family: lato;
     background-color: #1f1f1f;
@@ -7,7 +11,7 @@ body {
     padding: 0;
     border: none;
     background: none;
-    background-color: rgb(32, 151, 255);
+    background-color: var(--azul-boton);
     border-radius: 5px;
     color: #1f1f1f;
 }
@@ -26,3 +30,51 @@ body {
     border: none;
     border-radius: 5px;
 }*/
+
+.ejecucion-input {
+    display: none;
+}
+
+label {
+    cursor: pointer;
+}
+
+input:checked+label {
+    background-color: blueviolet;
+    /*cambiar esto obv*/
+}
+
+.ejecucion-form {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 0;
+}
+
+.r-pill-form-item-mal,
+.r-pill-form-item-bien,
+.r-pill-form-item-perf {
+    display: inline-block;
+    padding: 10px 20px;
+    color: white;
+    text-align: center;
+    min-width: 80px;
+    /*border: 1px solid #444;*/
+    margin: 0;
+    transition: background 0.2s;
+}
+
+.r-pill-form-item-mal {
+    background-color: #c62121;
+    border-radius: 15px 0px 0px 15px;
+}
+
+.r-pill-form-item-bien {
+    background-color: #2fc621;
+    border-radius: 0px 0px 0px 0px;
+}
+
+.r-pill-form-item-perf {
+    background-color: #1ac8d4;
+    border-radius: 0px 15px 15px 0px;
+}
