@@ -204,14 +204,13 @@ function cambiarVelocidad(tonalidad, apartado, aumentar = true) {
 
 function pantallaInicial() {
     document.body.innerHTML = /*html*/`
-    <div id="pantalla-inicial" style="display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 50px;">
-        <button class="boton" onclick="pantallaPreguntarCantidad()" type="button"
-            style="height: 150px; width: 300px; font-size: 40pt; cursor: pointer;">Tocar</button>
-        <div style="display: flex; gap: 10px;">
-            <button class="boton" onclick="restaurarValores()" style="padding: 10px; cursor: pointer;">Restaurar valores
+    <div id="pantalla-inicial">
+        <button id="boton-tocar" onclick="pantallaPreguntarCantidad()" type="button">Tocar</button>
+        <div>
+            <button onclick="restaurarValores()">Restaurar valores
                 predeterminados</button>
-            <button class="boton" onclick="exportarDatos()" style="padding: 10px; cursor: pointer;">Exportar datos (JSON)</button>
-            <button class="boton" onclick="importarDatos()" style="padding: 10px; cursor: pointer;">Importar datos (JSON)</button>
+            <button onclick="exportarDatos()">Exportar datos (JSON)</button>
+            <button onclick="importarDatos()">Importar datos (JSON)</button>
         </div>
     </div>
     `;
@@ -220,10 +219,10 @@ function pantallaInicial() {
 function pantallaPreguntarCantidad() {
     document.getElementById("pantalla-inicial").remove();
     document.body.innerHTML = /*html*/`
-    <div id="preguntar-cantidad"><form style="display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 50px;">
-        <label id="texto-preguntar-cantidad" style="font-size: 20pt;">¿Cuántas escalas quieres tocar?</label>
-        <input type="number" name="cantidadHoy" id="cantidadHoy" style="font-size: 20pt; width: 100px; text-align: center;">
-        <input id="boton-preguntar-cantidad" class="boton" type="button" value="Empezar" onclick="tocar()" style="padding: 10px 40px; font-size: 15pt; cursor: pointer;">
+    <div id="preguntar-cantidad"><form id="form-preguntar-cantidad">
+        <label id="texto-preguntar-cantidad">¿Cuántas escalas quieres tocar?</label>
+        <input id="input-preguntar-cantidad" type="number" name="cantidadHoy">
+        <button id="boton-preguntar-cantidad" onclick="tocar()">Empezar</button>
     </form></div>
     `;
 }
@@ -269,7 +268,7 @@ function elegirEscalas() {
 function tocarApartado(tonalidad, apartado) {
     const v = datos[tonalidad].apartados[apartado][1].v;
     document.getElementById("forms-ejecucion").innerHTML += /*html*/`
-        <div class="div-apartado" style="display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 50px;">
+        <div class="div-apartado">
             <!-- <h2>Toca ${apartado} a ${v} BPM</h2>
                 <input class="ejecucion-input" type="radio" name="ejecucion" value="mal" id="mal-${apartado}">
                 <label for="mal-${apartado}">Mal</label>

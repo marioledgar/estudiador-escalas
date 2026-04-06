@@ -8,16 +8,17 @@ body {
     color: rgb(226, 226, 226)
 }
 
-.boton {
-    padding: 0;
+button {
+    padding: 10px;
     border: none;
+    cursor: pointer;
     background: none;
     background-color: var(--azul-boton);
     border-radius: 5px;
     color: #1f1f1f;
 }
 
-.boton:hover {
+.button {
     background-color: rgb(46, 131, 210);
 }
 
@@ -99,4 +100,51 @@ input:checked+.r-pill-form-item-perf {
     padding: 15px 30px;
     font-size: 14pt;
     cursor: pointer;
+}
+
+.div-apartado {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 50px;
+}
+
+#pantalla-inicial {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 50px;
+}
+
+#boton-tocar {
+    height: 150px;
+    width: 300px;
+    font-size: 40pt;
+    cursor: pointer;
+}
+
+#form-preguntar-cantidad {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 50px;
+}
+
+#boton-preguntar-cantidad {
+    padding: 10px 40px;
+    font-size: 15pt;
+    cursor: pointer;
+}
+
+#texto-preguntar-cantidad {
+    font-size: 20pt;
+}
+
+#input-preguntar-cantidad {
+    font-size: 20pt;
+    width: 100px;
+    text-align: center;
 }

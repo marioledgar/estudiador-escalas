@@ -20,7 +20,7 @@ La web actualmente no tiene **ningún archivo CSS**. Todo es inline y con estilo
 - [ ] **Pantalla de cantidad**:
   - Input numérico estilizado (bordes redondeados, fondo semitransparente)
   - Botón "Empezar" con el mismo estilo que "Tocar"
-- [ ] **Pantalla de ejecución (tocar tonalidad)**:
+- [x] **Pantalla de ejecución (tocar tonalidad)**:
   - Nombre de la tonalidad grande y centrado (e.g. "3#" con símbolo de sostenido)
   - Cada apartado como una **card** con fondo, borde redondeado, sombra suave
   - Radio buttons como botones de grupo segmentado (tipo toggle), no radios nativos. Colores: rojo para mal, amarillo/naranja para bien, verde para perfecto
@@ -31,7 +31,7 @@ La web actualmente no tiene **ningún archivo CSS**. Todo es inline y con estilo
   - Transición suave al cambiar de pantalla (fade-in con `opacity` + `transform`)
   - Hover effects en todos los botones
   - Feedback visual al seleccionar un radio (cambio de color, escala, checkmark)
-- [ ] **Eliminar todos los estilos inline** desde `main.js` y reemplazarlos por clases CSS
+- [x] **Eliminar todos los estilos inline** desde `main.js` y reemplazarlos por clases CSS
 
 ---
 
@@ -193,24 +193,24 @@ El `graficas()` de Python está vacío (`pass`). Implementación con **Chart.js*
 
 ## 7. Orden sugerido de implementación
 
-| Prioridad | Tarea | Esfuerzo |
-|-----------|-------|----------|
-| 🔴 Alta | Crear `style.css` con diseño base (dark mode, tipografía, botones) | Medio |
-| 🔴 Alta | Corregir bugs de lógica (guardar datos, actualizar dificultad y días) | Bajo |
-| 🔴 Alta | Eliminar estilos inline y usar clases CSS | Bajo |
-| 🟡 Media | Pantalla de resumen al acabar sesión | Bajo |
-| 🟡 Media | Nombres legibles de tonalidades (Mayor/menor + símbolo) | Bajo |
-| 🟡 Media | Menú de datos — ver tabla de tonalidades | Medio |
-| 🟡 Media | Menú de datos — edición individual | Medio |
-| 🟡 Media | Pantalla de settings | Bajo |
-| 🟡 Media | Barra de progreso en sesión | Bajo |
-| 🟢 Baja | Edición global de apartados | Medio |
-| 🟢 Baja | Insights desde historial | Medio |
-| 🟢 Baja | Gráficas con Chart.js | Alto |
-| 🟢 Baja | CSS radio buttons como botones de grupo | Bajo |
-| 🔵 Extra | Metrónomo integrado (Web Audio API) | Alto |
-| 🔵 Extra | PWA (manifest + service worker) | Medio |
-| 🔵 Extra | Círculo de quintas visual (SVG) | Alto |
-| 🔵 Extra | Gamificación (streaks, badges) | Medio |
-| 🔵 Extra | Modos de práctica alternativos | Medio |
-| 🔵 Extra | Backup en la nube | Alto |
+| Prioridad | Tarea                                                                 | Esfuerzo |
+| --------- | --------------------------------------------------------------------- | -------- |
+| 🔴 Alta    | Crear `style.css` con diseño base (dark mode, tipografía, botones)    | Medio    |
+| 🔴 Alta    | Corregir bugs de lógica (guardar datos, actualizar dificultad y días) | Bajo     |
+| 🔴 Alta    | Eliminar estilos inline y usar clases CSS                             | Bajo     |
+| 🟡 Media   | Pantalla de resumen al acabar sesión                                  | Bajo     |
+| 🟡 Media   | Nombres legibles de tonalidades (Mayor/menor + símbolo)               | Bajo     |
+| 🟡 Media   | Menú de datos — ver tabla de tonalidades                              | Medio    |
+| 🟡 Media   | Menú de datos — edición individual                                    | Medio    |
+| 🟡 Media   | Pantalla de settings                                                  | Bajo     |
+| 🟡 Media   | Barra de progreso en sesión                                           | Bajo     |
+| 🟢 Baja    | Edición global de apartados                                           | Medio    |
+| 🟢 Baja    | Insights desde historial                                              | Medio    |
+| 🟢 Baja    | Gráficas con Chart.js                                                 | Alto     |
+| 🟢 Baja    | CSS radio buttons como botones de grupo                               | Bajo     |
+| 🔵 Extra   | Metrónomo integrado (Web Audio API)                                   | Alto     |
+| 🔵 Extra   | PWA (manifest + service worker)                                       | Medio    |
+| 🔵 Extra   | Círculo de quintas visual (SVG)                                       | Alto     |
+| 🔵 Extra   | Gamificación (streaks, badges)                                        | Medio    |
+| 🔵 Extra   | Modos de práctica alternativos                                        | Medio    |
+| 🔵 Extra   | Backup en la nube                                                     | Alto     |
