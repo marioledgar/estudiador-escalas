@@ -12,7 +12,7 @@ body {
     max-width: 800px;
     margin: 0 auto;
     /* auto en los lados = centrado horizontal */
-    padding: 0 20px;
+    padding: 20px 20px;
     /* espacio interno en los laterales */
 }
 
@@ -26,7 +26,7 @@ button {
     color: #1f1f1f;
 }
 
-.button {
+button:hover {
     background-color: rgb(46, 131, 210);
 }
 
@@ -155,4 +155,56 @@ input:checked+.r-pill-form-item-perf {
     font-size: 20pt;
     width: 100px;
     text-align: center;
+}
+
+@media (max-width: 600px) {
+
+    /* Reduce padding on all the centered column layouts */
+    .div-apartado,
+    #pantalla-inicial,
+    #form-preguntar-cantidad {
+        padding: 20px 10px;
+    }
+
+    /* Prevent the big "Tocar" button from overflowing */
+    #boton-tocar {
+        width: 80vw;
+        max-width: 300px;
+        height: auto;
+        font-size: 28pt;
+        padding: 30px 0;
+    }
+
+    /* Scale down the question text */
+    #texto-preguntar-cantidad {
+        font-size: 16pt;
+        text-align: center;
+    }
+
+    /* Scale down the quantity input */
+    #input-preguntar-cantidad {
+        font-size: 16pt;
+    }
+
+    /* Make the pill buttons shrink gracefully */
+    .r-pill-form-item-mal,
+    .r-pill-form-item-bien,
+    .r-pill-form-item-perf {
+        min-width: 60px;
+        padding: 10px 12px;
+        font-size: 10pt;
+    }
+
+    /* Let the buttons in pantalla-inicial wrap */
+    #pantalla-inicial>div {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    /* Reduce container side padding */
+    .contenedor {
+        padding: 10px;
+    }
 }
