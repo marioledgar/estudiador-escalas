@@ -108,6 +108,7 @@ input:checked+.r-pill-form-item-perf {
     padding: 15px 30px;
     font-size: 14pt;
     cursor: pointer;
+    z-index: 10;
 }
 
 .div-apartado {
@@ -157,6 +158,64 @@ input:checked+.r-pill-form-item-perf {
     text-align: center;
 }
 
+/* Fieldset/legend base responsive styles */
+.r-pill-form-fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+.r-pill-form-fieldset legend {
+    font-size: 14pt;
+    text-align: center;
+    padding-bottom: 8px;
+}
+
+/* ===== TABLET (601px – 1024px) ===== */
+@media (max-width: 1024px) and (min-width: 601px) {
+
+    .div-apartado,
+    #pantalla-inicial,
+    #form-preguntar-cantidad {
+        padding: 30px 15px;
+    }
+
+    #boton-tocar {
+        width: 60vw;
+        max-width: 300px;
+        height: auto;
+        font-size: 34pt;
+        padding: 30px 0;
+    }
+
+    #texto-preguntar-cantidad {
+        font-size: 18pt;
+    }
+
+    .r-pill-form-fieldset legend {
+        font-size: 13pt;
+    }
+
+    .r-pill-form-item-mal,
+    .r-pill-form-item-bien,
+    .r-pill-form-item-perf {
+        min-width: 70px;
+        padding: 10px 16px;
+        font-size: 11pt;
+    }
+
+    .contenedor {
+        padding: 15px;
+    }
+
+    /* Botón siguiente: un poco más grande para táctil */
+    .boton-siguiente {
+        padding: 18px 35px;
+        font-size: 15pt;
+    }
+}
+
+/* ===== MÓVIL (≤600px) ===== */
 @media (max-width: 600px) {
 
     /* Reduce padding on all the centered column layouts */
@@ -195,6 +254,11 @@ input:checked+.r-pill-form-item-perf {
         font-size: 10pt;
     }
 
+    /* Legend más pequeña en móvil */
+    .r-pill-form-fieldset legend {
+        font-size: 12pt;
+    }
+
     /* Let the buttons in pantalla-inicial wrap */
     #pantalla-inicial>div {
         display: flex;
@@ -206,5 +270,28 @@ input:checked+.r-pill-form-item-perf {
     /* Reduce container side padding */
     .contenedor {
         padding: 10px;
+    }
+
+    /* Botón siguiente: barra fija en la parte inferior, fácil de pulsar */
+    .boton-siguiente {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        border-radius: 0;
+        padding: 18px 0;
+        font-size: 16pt;
+        text-align: center;
+    }
+
+    /* Espacio inferior para que el contenido no quede tapado por el botón fijo */
+    .contenedor {
+        padding-bottom: 80px;
+    }
+
+    /* Reducir tamaño del h3 (nombre de tonalidad) */
+    h3 {
+        font-size: 16pt;
     }
 }

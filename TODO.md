@@ -26,7 +26,7 @@ La web actualmente no tiene **ningún archivo CSS**. Todo es inline y con estilo
   - Radio buttons como botones de grupo segmentado (tipo toggle), no radios nativos. Colores: rojo para mal, amarillo/naranja para bien, verde para perfecto
   - Botones "Siguiente" / "Acabar sesión" con estilo consistente
 - [ ] **Dark mode**: hacer que toda la app sea dark by default (fondo oscuro, texto claro). Opcionalmente toggle claro/oscuro
-- [ ] **Responsividad**: media queries para móvil/tablet. La app debería ser cómoda con el móvil en un atril
+- [x] **Responsividad**: media queries para móvil/tablet. La app debería ser cómoda con el móvil en un atril
 - [ ] **Animaciones y transiciones**:
   - Transición suave al cambiar de pantalla (fade-in con `opacity` + `transform`)
   - Hover effects en todos los botones
