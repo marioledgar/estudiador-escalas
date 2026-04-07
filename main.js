@@ -203,7 +203,7 @@ function cambiarVelocidad(tonalidad, apartado, aumentar = true) {
 //fin cambiar velocidad
 
 function pantallaInicial() {
-    document.body.innerHTML = /*html*/`
+    document.getElementById("contenedor").innerHTML += /*html*/`
     <div id="pantalla-inicial">
         <button id="boton-tocar" onclick="pantallaPreguntarCantidad()" type="button">Tocar</button>
         <div>
@@ -218,18 +218,18 @@ function pantallaInicial() {
 
 function pantallaPreguntarCantidad() {
     document.getElementById("pantalla-inicial").remove();
-    document.body.innerHTML = /*html*/`
+    document.getElementById("contenedor").innerHTML += /*html*/`
     <div id="preguntar-cantidad"><form id="form-preguntar-cantidad">
         <label id="texto-preguntar-cantidad">¿Cuántas escalas quieres tocar?</label>
         <input id="input-preguntar-cantidad" type="number" name="cantidadHoy">
-        <button id="boton-preguntar-cantidad" onclick="tocar()">Empezar</button>
+        <button type="button" id="boton-preguntar-cantidad" onclick="tocar()">Empezar</button>
     </form></div>
     `;
 }
 
 async function tocar() {
-    const inputElement = document.getElementById("cantidadHoy");
-    cantidadHoy = inputElement ? parseInt(inputElement.value) : 3;
+    const inputElement = document.querySelector("#input-preguntar-cantidad");
+    cantidadHoy = inputElement ? inputElement.value : 3;
 
     settings = await loadSettings();
     datos = await loadData();
@@ -265,6 +265,26 @@ function elegirEscalas() {
     return tonalidadesHoy;
 }
 
+function tocarTonalidad(tonalidadActual) {
+    document.getElementById("contenedor").innerHTML = /*html*/`
+    <div id="${tonalidadActual}">
+    <h3>${tonalidadActual}</h3>
+    <div id="forms-ejecucion"></div></div>
+    `;
+    Object.keys(datos[tonalidadActual].apartados).forEach(apartado => {
+        if (datos[tonalidadActual].apartados[apartado][0]) {
+            tocarApartado(tonalidadActual, apartado);
+        }
+    });
+    if (tonalidadesHoy[tonalidadesHoy.length - 1] !== tonalidadActual) {
+        document.getElementById(`${tonalidadActual}`).innerHTML += /*html*/`
+        <button class="boton-siguiente" onclick="acabarTonalidad('${tonalidadActual}'); siguienteTonalidad('${tonalidadActual}')">Siguiente</button>`
+    } else {
+        document.getElementById(`${tonalidadActual}`).innerHTML += /*html*/`
+        <button class="boton-siguiente" onclick="acabarTonalidad('${tonalidadActual}'); acabarSesion()">Acabar sesión</button>`
+    }
+}
+
 function tocarApartado(tonalidad, apartado) {
     const v = datos[tonalidad].apartados[apartado][1].v;
     document.getElementById("forms-ejecucion").innerHTML += /*html*/`
@@ -293,30 +313,8 @@ function tocarApartado(tonalidad, apartado) {
                 </form>
             </div>
             </fieldset>
-            
-
         </div>
     `;
-}
-
-function tocarTonalidad(tonalidadActual) {
-    document.body.innerHTML = /*html*/`
-    <h3>${tonalidadActual}</h3>
-    <div id="${tonalidadActual}">
-    <div id="forms-ejecucion"></div><div></div>
-    `;
-    Object.keys(datos[tonalidadActual].apartados).forEach(apartado => {
-        if (datos[tonalidadActual].apartados[apartado][0]) {
-            tocarApartado(tonalidadActual, apartado);
-        }
-    });
-    if (tonalidadesHoy[tonalidadesHoy.length - 1] !== tonalidadActual) {
-        document.getElementById(`${tonalidadActual}`).innerHTML += /*html*/`
-        <button class="boton-siguiente" onclick="acabarTonalidad('${tonalidadActual}'); siguienteTonalidad('${tonalidadActual}')">Siguiente</button>`
-    } else {
-        document.getElementById(`${tonalidadActual}`).innerHTML += /*html*/`
-        <button class="boton-siguiente" onclick="acabarTonalidad('${tonalidadActual}'); acabarSesion()">Acabar sesión</button>`
-    }
 }
 
 function acabarTonalidad(tonalidad) {
@@ -332,17 +330,16 @@ function acabarTonalidad(tonalidad) {
             }
         }
     });
-
+    document.getElementById(`${tonalidad}`).remove();
 }
 function siguienteTonalidad(tonalidad) {
-    document.body.innerHTML = /*html*/``;
     let i = tonalidadesHoy.indexOf(tonalidad);
     tocarTonalidad(tonalidadesHoy[i + 1]);
 }
 
 function acabarSesion() {
     alert('Sesión guardada con éxito');
-    document.body.innerHTML = '';
+    //document.body.innerHTML =;
     pantallaInicial();
 }
 

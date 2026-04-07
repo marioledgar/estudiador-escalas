@@ -12,7 +12,7 @@ La web actualmente no tiene **ningún archivo CSS**. Todo es inline y con estilo
 - [x] **Crear `style.css`** y enlazarlo en `index.html`
 - [ ] **Sistema de variables CSS**: definir paleta de colores, tipografía, espaciados, radios y sombras como custom properties (`:root { --color-primary: ...; }`)
 - [x] **Tipografía**: importar una fuente de Google Fonts (Inter, Outfit o similar) y aplicarla globalmente
-- [ ] **Layout general**: usar CSS Grid o Flexbox para centrar el contenido, con un `max-width` y padding responsivo
+- [x] **Layout general**: usar CSS Grid o Flexbox para centrar el contenido, con un `max-width` y padding responsivo
 - [ ] **Pantalla inicial**:
   - Botón "Tocar" grande, con gradiente, sombra, hover con `transform: scale()` y `transition`
   - Botones secundarios (restaurar, exportar, importar) más pequeños, estilo outlined o ghost
@@ -197,7 +197,6 @@ El `graficas()` de Python está vacío (`pass`). Implementación con **Chart.js*
 | --------- | --------------------------------------------------------------------- | -------- |
 | 🔴 Alta    | Crear `style.css` con diseño base (dark mode, tipografía, botones)    | Medio    |
 | 🔴 Alta    | Corregir bugs de lógica (guardar datos, actualizar dificultad y días) | Bajo     |
-| 🔴 Alta    | Eliminar estilos inline y usar clases CSS                             | Bajo     |
 | 🟡 Media   | Pantalla de resumen al acabar sesión                                  | Bajo     |
 | 🟡 Media   | Nombres legibles de tonalidades (Mayor/menor + símbolo)               | Bajo     |
 | 🟡 Media   | Menú de datos — ver tabla de tonalidades                              | Medio    |
@@ -207,7 +206,6 @@ El `graficas()` de Python está vacío (`pass`). Implementación con **Chart.js*
 | 🟢 Baja    | Edición global de apartados                                           | Medio    |
 | 🟢 Baja    | Insights desde historial                                              | Medio    |
 | 🟢 Baja    | Gráficas con Chart.js                                                 | Alto     |
-| 🟢 Baja    | CSS radio buttons como botones de grupo                               | Bajo     |
 | 🔵 Extra   | Metrónomo integrado (Web Audio API)                                   | Alto     |
 | 🔵 Extra   | PWA (manifest + service worker)                                       | Medio    |
 | 🔵 Extra   | Círculo de quintas visual (SVG)                                       | Alto     |

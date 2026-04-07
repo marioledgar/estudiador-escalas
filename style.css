@@ -5,7 +5,15 @@
 body {
     font-family: lato;
     background-color: #1f1f1f;
-    color: rgb(226, 226, 226)
+    color: rgb(226, 226, 226);
+}
+
+.contenedor {
+    max-width: 800px;
+    margin: 0 auto;
+    /* auto en los lados = centrado horizontal */
+    padding: 0 20px;
+    /* espacio interno en los laterales */
 }
 
 button {
