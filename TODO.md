@@ -1,7 +1,7 @@
 # TODO — Estudiador de Escalas (Web)
 
 > Estado actual: la lógica principal (sesión, velocidades, historial, import/export) funciona.
-> Falta practicamente toda la UI/CSS, el menú de datos, y las features del Python que aún no están portadas.
+> Falta prácticamente toda la UI/CSS, el menú de datos, y las features del Python que aún no están portadas.
 
 ---
 
@@ -14,17 +14,18 @@ La web actualmente no tiene **ningún archivo CSS**. Todo es inline y con estilo
 - [x] **Tipografía**: importar una fuente de Google Fonts (Inter, Outfit o similar) y aplicarla globalmente
 - [x] **Layout general**: usar CSS Grid o Flexbox para centrar el contenido, con un `max-width` y padding responsivo
 - [ ] **Pantalla inicial**:
-  - Botón "Tocar" grande, con gradiente, sombra, hover con `transform: scale()` y `transition`
-  - Botones secundarios (restaurar, exportar, importar) más pequeños, estilo outlined o ghost
-  - Quizá un título/logo arriba con pyfiglet-style CSS (fuente monospace grande, o un SVG)
+- Botón "Tocar" grande, con gradiente, sombra, hover con `transform: scale()` y `transition`
+- Botones secundarios (restaurar, exportar, importar) más pequeños, estilo outlined o ghost
+- Quizá un título/logo arriba con pyfiglet-style CSS (fuente monospace grande, o un SVG)
+- [ ] Header 
 - [ ] **Pantalla de cantidad**:
-  - Input numérico estilizado (bordes redondeados, fondo semitransparente)
-  - Botón "Empezar" con el mismo estilo que "Tocar"
+- Input numérico estilizado (bordes redondeados, fondo semitransparente)
+- Botón "Empezar" con el mismo estilo que "Tocar"
 - [x] **Pantalla de ejecución (tocar tonalidad)**:
-  - Nombre de la tonalidad grande y centrado (e.g. "3#" con símbolo de sostenido)
-  - Cada apartado como una **card** con fondo, borde redondeado, sombra suave
-  - Radio buttons como botones de grupo segmentado (tipo toggle), no radios nativos. Colores: rojo para mal, amarillo/naranja para bien, verde para perfecto
-  - Botones "Siguiente" / "Acabar sesión" con estilo consistente
+- Nombre de la tonalidad grande y centrado (e.g. "3#" con símbolo de sostenido)
+- Cada apartado como una **card** con fondo, borde redondeado, sombra suave
+- Radio buttons como botones de grupo segmentado (tipo toggle), no radios nativos. Colores: rojo para mal, amarillo/naranja para bien, verde para perfecto
+- Botones "Siguiente" / "Acabar sesión" con estilo consistente
 - [ ] **Dark mode**: hacer que toda la app sea dark by default (fondo oscuro, texto claro). Opcionalmente toggle claro/oscuro
 - [x] **Responsividad**: media queries para móvil/tablet. La app debería ser cómoda con el móvil en un atril
 - [ ] **Animaciones y transiciones**:

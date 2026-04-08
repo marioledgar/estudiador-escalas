@@ -219,18 +219,46 @@ function pantallaInicial() {
 function pantallaPreguntarCantidad() {
     document.getElementById("pantalla-inicial").remove();
     document.getElementById("contenedor").innerHTML += /*html*/`
-    <div id="preguntar-cantidad"><form id="form-preguntar-cantidad">
+    <div id="preguntar-cantidad"><form id="form-preguntar-cantidad" novalidate>
         <label id="texto-preguntar-cantidad">¿Cuántas escalas quieres tocar?</label>
-        <input id="input-preguntar-cantidad" type="number" name="cantidadHoy">
+        <div class="cantidad-stepper">
+            <button type="button" class="cantidad-stepper-btn" onclick="cambiarCantidad(-1)">−</button>
+            <input id="input-preguntar-cantidad" type="number" name="cantidadHoy" min="1" value="2">
+            <button type="button" class="cantidad-stepper-btn" onclick="cambiarCantidad(1)">+</button>
+        </div>
+        <span id="error-cantidad" class="error-message"></span>
         <button type="button" id="boton-preguntar-cantidad" onclick="tocar()">Empezar</button>
     </form></div>
     `;
 }
 
+function cambiarCantidad(delta) {
+    const input = document.getElementById("input-preguntar-cantidad");
+    let val = parseInt(input.value) || 1;
+    val = Math.max(1, val + delta);
+    input.value = val;
+    clearErrorCantidad();
+}
+
+function clearErrorCantidad() {
+    const stepper = document.querySelector(".cantidad-stepper");
+    const errorSpan = document.getElementById("error-cantidad");
+    if (stepper) stepper.classList.remove("input-error");
+    if (errorSpan) errorSpan.textContent = "";
+}
+
 async function tocar() {
     const inputElement = document.querySelector("#input-preguntar-cantidad");
-    cantidadHoy = inputElement ? inputElement.value : 3;
+    const raw = inputElement ? inputElement.value.trim() : "";
+    cantidadHoy = parseInt(raw);
 
+    if (!raw || isNaN(cantidadHoy) || cantidadHoy < 1) {
+        const stepper = document.querySelector(".cantidad-stepper");
+        const errorSpan = document.getElementById("error-cantidad");
+        if (stepper) stepper.classList.add("input-error");
+        if (errorSpan) errorSpan.textContent = !raw ? "Introduce un número." : "El valor debe ser al menos 1.";
+        return;
+    }
     settings = await loadSettings();
     datos = await loadData();
     if (!datos) {

@@ -154,8 +154,53 @@ input:checked+.r-pill-form-item-perf {
 
 #input-preguntar-cantidad {
     font-size: 20pt;
-    width: 100px;
+    width: 80px;
     text-align: center;
+    border: none;
+    background: transparent;
+    color: rgb(226, 226, 226);
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+#input-preguntar-cantidad::-webkit-outer-spin-button,
+#input-preguntar-cantidad::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.cantidad-stepper {
+    display: flex;
+    align-items: center;
+    border: 2px solid var(--azul-boton);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.cantidad-stepper-btn {
+    font-size: 20pt;
+    padding: 8px 22px;
+    background: transparent;
+    color: var(--azul-boton);
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    line-height: 1;
+    transition: background 0.15s;
+}
+
+.cantidad-stepper-btn:hover {
+    background: rgba(32, 151, 255, 0.15);
+}
+
+.cantidad-stepper.input-error {
+    border-color: #e04040;
+}
+
+.error-message {
+    color: #e04040;
+    font-size: 11pt;
+    margin-top: -10px;
 }
 
 /* Fieldset/legend base responsive styles */
