@@ -17,8 +17,8 @@ La web actualmente no tiene **ningún archivo CSS**. Todo es inline y con estilo
 - Botón "Tocar" grande, con gradiente, sombra, hover con `transform: scale()` y `transition`
 - Botones secundarios (restaurar, exportar, importar) más pequeños, estilo outlined o ghost
 - Quizá un título/logo arriba con pyfiglet-style CSS (fuente monospace grande, o un SVG)
-- [ ] Header 
-- [ ] **Pantalla de cantidad**:
+- [x] Header/sidebar
+- [x] **Pantalla de cantidad**:
 - Input numérico estilizado (bordes redondeados, fondo semitransparente)
 - Botón "Empezar" con el mismo estilo que "Tocar"
 - [x] **Pantalla de ejecución (tocar tonalidad)**:
@@ -185,7 +185,7 @@ El `graficas()` de Python está vacío (`pass`). Implementación con **Chart.js*
 - [ ] **Dificultad `d` no se modifica con la ejecución** del usuario — la lógica está incompleta (ver sección 3)
 - [ ] **No se llama a `saveData()` tras la sesión**: los cambios de velocidad se pierden al recargar
 - [ ] **`cambios_recientes` nunca se usa**: el campo existe en el JSON pero no se consulta ni modifica en ningún sitio (ni en Python ni en JS). Decidir si se usa (e.g. para marcar tonalidades con cambios recientes en la UI) o se elimina
-- [ ] **`elegirEscalas()` puede dar problemas** si `cantidadHoy` es 0 o negativo — añadir validación
+- [x] **`elegirEscalas()` puede dar problemas** si `cantidadHoy` es 0 o negativo — añadir validación
 - [ ] **`simbolos` nunca se usa** en `main.js`: la constante está definida pero no se aplica para mostrar nombres bonitos de tonalidades
 - [ ] **No hay validación de formularios**: si el usuario no selecciona ningún radio button y pasa a siguiente, `ejecucion` queda `null`
 - [ ] Mover las funciones `window.exportarDatos` y `window.importarDatos` a funciones normales (actualmente se asignan a `window` explícitamente, lo cual es innecesario con `onclick` en innerHTML)

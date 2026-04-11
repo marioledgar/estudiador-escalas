@@ -173,6 +173,19 @@ const velocidadesDiscretas = [30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54
 const simbolos = { "ninguna": "b/#", "bemol": "b", "sostenidos": "#" };
 // fin de constantes
 
+//sidebar
+function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const hamburger = document.getElementById('hamburger');
+    const overlay = document.getElementById('overlay');
+    
+    if (!sidebar || !hamburger) return;
+
+    const isOpen = sidebar.classList.toggle('open');
+    hamburger.classList.toggle('open', isOpen);
+    if (overlay) overlay.classList.toggle('visible', isOpen);
+}
+
 //cambiar velocidad
 function cambiarVelocidad(tonalidad, apartado, aumentar = true) {
     let v = datos[tonalidad].apartados[apartado][1].v;
