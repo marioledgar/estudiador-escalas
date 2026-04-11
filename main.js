@@ -219,10 +219,6 @@ function pantallaInicial() {
     document.getElementById("contenedor").innerHTML += /*html*/`
     <div id="pantalla-inicial">
         <button id="boton-tocar" onclick="pantallaPreguntarCantidad()" type="button">Tocar</button>
-        <div>
-            <button onclick="restaurarValores()">Restaurar valores
-                predeterminados</button>
-        </div>
     </div>
     `;
 }
