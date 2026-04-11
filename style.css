@@ -30,6 +30,7 @@ button {
     background-color: var(--azul-boton);
     border-radius: 5px;
     color: var(--bg);
+    font-family: lato;
 }
 
 button:hover {
