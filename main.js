@@ -222,8 +222,6 @@ function pantallaInicial() {
         <div>
             <button onclick="restaurarValores()">Restaurar valores
                 predeterminados</button>
-            <button onclick="exportarDatos()">Exportar datos (JSON)</button>
-            <button onclick="importarDatos()">Importar datos (JSON)</button>
         </div>
     </div>
     `;
@@ -384,7 +382,7 @@ function acabarSesion() {
     pantallaInicial();
 }
 
-//controles con flechas!! editarlo q está mal
+
 document.addEventListener('keydown', function (event) {
     if (!document.getElementById("forms-ejecucion")) { return }; //hay q estar en la pantalla de tocar
 

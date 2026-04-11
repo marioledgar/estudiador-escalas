@@ -36,17 +36,18 @@
             </a>
             <a class="sidebar-link" href="#">
                 <span class="icon">📊</span> Datos
-            </a>
-            <a class="sidebar-link" href="#">
-                <span class="icon">📈</span> Gráficas
-            </a>
-            <a class="sidebar-link" href="#">
-                <span class="icon">💡</span> Insights
-            </a>
-            <div class="sidebar-divider"></div>
-            <a class="sidebar-link" href="#">
-                <span class="icon">⚙️</span> Ajustes
             </a> -->
+        </div>
+        <div class="sidebar-footer">
+            <a class="sidebar-link" onclick="exportarDatos()">
+                <span class="icon">📤</span> Exportar datos
+            </a>
+            <a class="sidebar-link" onclick="importarDatos()">
+                <span class="icon">📥</span> Importar datos
+            </a>
+            <a class="sidebar-link sidebar-dangerous" onclick="restaurarValores()">
+                <span class="icon">❌</span> Restaurar valores
+            </a>
         </div>
     </nav>
 
