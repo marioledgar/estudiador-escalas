@@ -10,7 +10,7 @@
 La web actualmente no tiene **ningún archivo CSS**. Todo es inline y con estilos mínimos.
 
 - [x] **Crear `style.css`** y enlazarlo en `index.html`
-- [ ] **Sistema de variables CSS**: definir paleta de colores, tipografía, espaciados, radios y sombras como custom properties (`:root { --color-primary: ...; }`)
+- [x] **Sistema de variables CSS**: definir paleta de colores, tipografía, espaciados, radios y sombras como custom properties (`:root { --color-primary: ...; }`)
 - [x] **Tipografía**: importar una fuente de Google Fonts (Inter, Outfit o similar) y aplicarla globalmente
 - [x] **Layout general**: usar CSS Grid o Flexbox para centrar el contenido, con un `max-width` y padding responsivo
 - [ ] **Pantalla inicial**:
@@ -196,7 +196,6 @@ El `graficas()` de Python está vacío (`pass`). Implementación con **Chart.js*
 
 | Prioridad | Tarea                                                                 | Esfuerzo |
 | --------- | --------------------------------------------------------------------- | -------- |
-| 🔴 Alta    | Crear `style.css` con diseño base (dark mode, tipografía, botones)    | Medio    |
 | 🔴 Alta    | Corregir bugs de lógica (guardar datos, actualizar dificultad y días) | Bajo     |
 | 🟡 Media   | Pantalla de resumen al acabar sesión                                  | Bajo     |
 | 🟡 Media   | Nombres legibles de tonalidades (Mayor/menor + símbolo)               | Bajo     |

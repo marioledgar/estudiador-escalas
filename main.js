@@ -178,7 +178,7 @@ function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
     const hamburger = document.getElementById('hamburger');
     const overlay = document.getElementById('overlay');
-    
+
     if (!sidebar || !hamburger) return;
 
     const isOpen = sidebar.classList.toggle('open');
