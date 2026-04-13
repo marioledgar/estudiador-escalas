@@ -278,7 +278,7 @@ async function tocar() {
     tonalidadesHoy = elegirEscalas();
 
     document.getElementById("preguntar-cantidad").remove();
-    tonalidades.forEach(tonalidad => datos[tonalidad].dias_sin_tocarla++);
+    tonalidades.forEach(tonalidad => { datos[tonalidad].dias_sin_tocarla++ });
     tocarTonalidad(tonalidadesHoy[0]);
 }
 
@@ -361,9 +361,9 @@ function acabarTonalidad(tonalidad) {
                 const data = new FormData(formulario);
                 const ejecucion = data.get('ejecucion'); // Obtiene el "value" del radio seleccionado
                 agregarAlHistorial(tonalidad, apartado, ejecucion);
-                if (ejecucion = 'perfecto') {
-                    datos[tonalidad].apartados[apartado][1].d++;
-                } else if (ejecucion = 'mal') { datos[tonalidad].apartados[apartado][1].d--; }
+                if (ejecucion === 'perfecto') {
+                    datos[tonalidad].apartados[apartado][1].d--;
+                } else if (ejecucion === 'mal') { datos[tonalidad].apartados[apartado][1].d++; }
                 if (datos[tonalidad].apartados[apartado][1].d === 8) { cambiarVelocidad(tonalidad, apartado, false); }
                 else if (datos[tonalidad].apartados[apartado][1].d === 0) { cambiarVelocidad(tonalidad, apartado, true); }
             }
