@@ -278,6 +278,7 @@ async function tocar() {
     tonalidadesHoy = elegirEscalas();
 
     document.getElementById("preguntar-cantidad").remove();
+    tonalidades.forEach(tonalidad => datos[tonalidad].dias_sin_tocarla++);
     tocarTonalidad(tonalidadesHoy[0]);
 }
 
@@ -368,6 +369,7 @@ function acabarTonalidad(tonalidad) {
             }
         }
     });
+    datos[tonalidad].dias_sin_tocarla = 0;
     document.getElementById(`${tonalidad}`).remove();
 }
 function siguienteTonalidad(tonalidad) {
