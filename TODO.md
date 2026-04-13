@@ -90,7 +90,6 @@ El `graficas()` de Python está vacío (`pass`). Implementación con **Chart.js*
   - Poner a 0 las tocadas hoy al acabar la sesión
   - Incrementar en 1 las no tocadas (esto requiere saber la fecha de la última sesión, o hacerlo en el momento)
 - [ ] **Feedback visual de ejecución → cambio de velocidad**: en `acabarTonalidad()`, la lógica de `d === 8` / `d === 0` existe, pero:
-  - Falta actualizar la dificultad (`d`) según la ejecución (perfecto → d-1, mal → d+1, bien → sin cambio). Actualmente solo cambia velocidad cuando d llega a los extremos, pero nunca se modifica d según la ejecución reportada
   - Falta llamar a `saveData(datos)` después de modificar los datos en la sesión
 - [ ] **Guardar datos al acabar sesión**: `acabarSesion()` solo hace `alert` y recarga la pantalla. Debería guardar los datos modificados con `saveData(datos)` antes
 - [ ] **Confirmación si se piden más escalas que las disponibles** (hay un TODO en el código): si `cantidadHoy > tonalidades.length`, avisar al usuario de que algunas se repetirán
