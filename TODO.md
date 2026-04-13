@@ -86,12 +86,12 @@ El `graficas()` de Python está vacío (`pass`). Implementación con **Chart.js*
 
 ## 3. Funcionalidades que faltan / paridad con Python
 
-- [ ] **`dias_sin_tocarla` no se actualiza**: en Python, al acabar la sesión se hace `datos[tonalidad]["dias_sin_tocarla"] = 0` para las tocadas y `+= 1` para las no tocadas. En JS solo se resetea a 0 en el Python; en `main.js` no se modifica nunca. Hay que:
+- [x] **`dias_sin_tocarla` no se actualiza**: en Python, al acabar la sesión se hace `datos[tonalidad]["dias_sin_tocarla"] = 0` para las tocadas y `+= 1` para las no tocadas. En JS solo se resetea a 0 en el Python; en `main.js` no se modifica nunca. Hay que:
   - Poner a 0 las tocadas hoy al acabar la sesión
   - Incrementar en 1 las no tocadas (esto requiere saber la fecha de la última sesión, o hacerlo en el momento)
 - [ ] **Feedback visual de ejecución → cambio de velocidad**: en `acabarTonalidad()`, la lógica de `d === 8` / `d === 0` existe, pero:
   - Falta llamar a `saveData(datos)` después de modificar los datos en la sesión
-- [ ] **Guardar datos al acabar sesión**: `acabarSesion()` solo hace `alert` y recarga la pantalla. Debería guardar los datos modificados con `saveData(datos)` antes
+- [x] **Guardar datos al acabar sesión**: `acabarSesion()` solo hace `alert` y recarga la pantalla. Debería guardar los datos modificados con `saveData(datos)` antes
 - [ ] **Confirmación si se piden más escalas que las disponibles** (hay un TODO en el código): si `cantidadHoy > tonalidades.length`, avisar al usuario de que algunas se repetirán
 - [ ] **Pantalla de settings**:
   - Opción de idioma (spanish / english) — actualmente no se usa para nada en la web
@@ -180,9 +180,9 @@ El `graficas()` de Python está vacío (`pass`). Implementación con **Chart.js*
 
 ## 6. Bugs conocidos y deuda técnica
 
-- [ ] **`dias_sin_tocarla` nunca se decrementa/incrementa** en la versión web (ver sección 3)
-- [ ] **Dificultad `d` no se modifica con la ejecución** del usuario — la lógica está incompleta (ver sección 3)
-- [ ] **No se llama a `saveData()` tras la sesión**: los cambios de velocidad se pierden al recargar
+- [x] **`dias_sin_tocarla` nunca se decrementa/incrementa** en la versión web (ver sección 3)
+- [x] **Dificultad `d` no se modifica con la ejecución** del usuario — la lógica está incompleta (ver sección 3)
+- [x] **No se llama a `saveData()` tras la sesión**: los cambios de velocidad se pierden al recargar
 - [ ] **`cambios_recientes` nunca se usa**: el campo existe en el JSON pero no se consulta ni modifica en ningún sitio (ni en Python ni en JS). Decidir si se usa (e.g. para marcar tonalidades con cambios recientes en la UI) o se elimina
 - [x] **`elegirEscalas()` puede dar problemas** si `cantidadHoy` es 0 o negativo — añadir validación
 - [ ] **`simbolos` nunca se usa** en `main.js`: la constante está definida pero no se aplica para mostrar nombres bonitos de tonalidades
