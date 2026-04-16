@@ -13,7 +13,7 @@ La web actualmente no tiene **ningún archivo CSS**. Todo es inline y con estilo
 - [x] **Sistema de variables CSS**: definir paleta de colores, tipografía, espaciados, radios y sombras como custom properties (`:root { --color-primary: ...; }`)
 - [x] **Tipografía**: importar una fuente de Google Fonts (Inter, Outfit o similar) y aplicarla globalmente
 - [x] **Layout general**: usar CSS Grid o Flexbox para centrar el contenido, con un `max-width` y padding responsivo
-- [ ] **Pantalla inicial**:
+- [x] **Pantalla inicial**:
 - Botón "Tocar" grande, con gradiente, sombra, hover con `transform: scale()` y `transition`
 - Botones secundarios (restaurar, exportar, importar) más pequeños, estilo outlined o ghost
 - Quizá un título/logo arriba con pyfiglet-style CSS (fuente monospace grande, o un SVG)
@@ -186,7 +186,7 @@ El `graficas()` de Python está vacío (`pass`). Implementación con **Chart.js*
 - [ ] **`cambios_recientes` nunca se usa**: el campo existe en el JSON pero no se consulta ni modifica en ningún sitio (ni en Python ni en JS). Decidir si se usa (e.g. para marcar tonalidades con cambios recientes en la UI) o se elimina
 - [x] **`elegirEscalas()` puede dar problemas** si `cantidadHoy` es 0 o negativo — añadir validación
 - [ ] **`simbolos` nunca se usa** en `main.js`: la constante está definida pero no se aplica para mostrar nombres bonitos de tonalidades
-- [ ] **No hay validación de formularios**: si el usuario no selecciona ningún radio button y pasa a siguiente, `ejecucion` queda `null`
+- [x] **No hay validación de formularios**: si el usuario no selecciona ningún radio button y pasa a siguiente, `ejecucion` queda `null`
 - [ ] Mover las funciones `window.exportarDatos` y `window.importarDatos` a funciones normales (actualmente se asignan a `window` explícitamente, lo cual es innecesario con `onclick` en innerHTML)
 
 ---
