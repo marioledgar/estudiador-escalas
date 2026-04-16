@@ -146,9 +146,9 @@ El `graficas()` de Python está vacío (`pass`). Implementación con **Chart.js*
 
 ### 5.6 PWA (Progressive Web App)
 
-- [ ] **Manifest + Service Worker**: convertir la app en una PWA instalable, con icono, splash screen, y que funcione offline (los datos ya están en localStorage)
-- [ ] Archivo `manifest.json` con nombre, iconos, colores
-- [ ] Service Worker para cachear `index.html`, `main.js`, `style.css`, `data_template.json`
+- [x] **Manifest + Service Worker**: convertir la app en una PWA instalable, con icono, splash screen, y que funcione offline (los datos ya están en localStorage)
+- [x] Archivo `manifest.json` con nombre, iconos, colores
+- [x] Service Worker para cachear `index.html`, `main.js`, `style.css`, `data_template.json`
 
 ### 5.7 Exportar/compartir resumen de sesión
 
@@ -205,7 +205,6 @@ El `graficas()` de Python está vacío (`pass`). Implementación con **Chart.js*
 | 🟢 Baja    | Insights desde historial                                | Medio    |
 | 🟢 Baja    | Gráficas con Chart.js                                   | Alto     |
 | 🔵 Extra   | Metrónomo integrado (Web Audio API)                     | Alto     |
-| 🔵 Extra   | PWA (manifest + service worker)                         | Medio    |
 | 🔵 Extra   | Círculo de quintas visual (SVG)                         | Alto     |
 | 🔵 Extra   | Gamificación (streaks, badges)                          | Medio    |
 | 🔵 Extra   | Modos de práctica alternativos                          | Medio    |
