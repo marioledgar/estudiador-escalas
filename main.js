@@ -128,7 +128,7 @@ async function restaurarValores() {
     }
 }
 
-window.exportarDatos = function () {
+function exportarDatos() {
     const backup = {
         datos: JSON.parse(localStorage.getItem(DATA_KEY)),
         settings: JSON.parse(localStorage.getItem(SETTINGS_KEY)),
@@ -143,7 +143,7 @@ window.exportarDatos = function () {
     URL.revokeObjectURL(url);
 }
 
-window.importarDatos = function () {
+function importarDatos() {
     const input = document.createElement("input");
     input.type = "file";
     input.accept = ".json";

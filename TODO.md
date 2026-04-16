@@ -187,7 +187,7 @@ El `graficas()` de Python está vacío (`pass`). Implementación con **Chart.js*
 - [x] **`elegirEscalas()` puede dar problemas** si `cantidadHoy` es 0 o negativo — añadir validación
 - [ ] **`simbolos` nunca se usa** en `main.js`: la constante está definida pero no se aplica para mostrar nombres bonitos de tonalidades
 - [x] **No hay validación de formularios**: si el usuario no selecciona ningún radio button y pasa a siguiente, `ejecucion` queda `null`
-- [ ] Mover las funciones `window.exportarDatos` y `window.importarDatos` a funciones normales (actualmente se asignan a `window` explícitamente, lo cual es innecesario con `onclick` en innerHTML)
+- [x] Mover las funciones `window.exportarDatos` y `window.importarDatos` a funciones normales (actualmente se asignan a `window` explícitamente, lo cual es innecesario con `onclick` en innerHTML)
 
 ---
 
