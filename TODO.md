@@ -193,21 +193,20 @@ El `graficas()` de Python está vacío (`pass`). Implementación con **Chart.js*
 
 ## 7. Orden sugerido de implementación
 
-| Prioridad | Tarea                                                                 | Esfuerzo |
-| --------- | --------------------------------------------------------------------- | -------- |
-| 🔴 Alta    | Corregir bugs de lógica (guardar datos, actualizar dificultad y días) | Bajo     |
-| 🟡 Media   | Pantalla de resumen al acabar sesión                                  | Bajo     |
-| 🟡 Media   | Nombres legibles de tonalidades (Mayor/menor + símbolo)               | Bajo     |
-| 🟡 Media   | Menú de datos — ver tabla de tonalidades                              | Medio    |
-| 🟡 Media   | Menú de datos — edición individual                                    | Medio    |
-| 🟡 Media   | Pantalla de settings                                                  | Bajo     |
-| 🟡 Media   | Barra de progreso en sesión                                           | Bajo     |
-| 🟢 Baja    | Edición global de apartados                                           | Medio    |
-| 🟢 Baja    | Insights desde historial                                              | Medio    |
-| 🟢 Baja    | Gráficas con Chart.js                                                 | Alto     |
-| 🔵 Extra   | Metrónomo integrado (Web Audio API)                                   | Alto     |
-| 🔵 Extra   | PWA (manifest + service worker)                                       | Medio    |
-| 🔵 Extra   | Círculo de quintas visual (SVG)                                       | Alto     |
-| 🔵 Extra   | Gamificación (streaks, badges)                                        | Medio    |
-| 🔵 Extra   | Modos de práctica alternativos                                        | Medio    |
-| 🔵 Extra   | Backup en la nube                                                     | Alto     |
+| Prioridad | Tarea                                                   | Esfuerzo |
+| --------- | ------------------------------------------------------- | -------- |
+| 🟡 Media   | Pantalla de resumen al acabar sesión                    | Bajo     |
+| 🟡 Media   | Nombres legibles de tonalidades (Mayor/menor + símbolo) | Bajo     |
+| 🟡 Media   | Menú de datos — ver tabla de tonalidades                | Medio    |
+| 🟡 Media   | Menú de datos — edición individual                      | Medio    |
+| 🟡 Media   | Pantalla de settings                                    | Bajo     |
+| 🟡 Media   | Barra de progreso en sesión                             | Bajo     |
+| 🟢 Baja    | Edición global de apartados                             | Medio    |
+| 🟢 Baja    | Insights desde historial                                | Medio    |
+| 🟢 Baja    | Gráficas con Chart.js                                   | Alto     |
+| 🔵 Extra   | Metrónomo integrado (Web Audio API)                     | Alto     |
+| 🔵 Extra   | PWA (manifest + service worker)                         | Medio    |
+| 🔵 Extra   | Círculo de quintas visual (SVG)                         | Alto     |
+| 🔵 Extra   | Gamificación (streaks, badges)                          | Medio    |
+| 🔵 Extra   | Modos de práctica alternativos                          | Medio    |
+| 🔵 Extra   | Backup en la nube                                       | Alto     |

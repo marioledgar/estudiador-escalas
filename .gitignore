@@ -1,6 +1,8 @@
 historial.json
 data.json
 settings.json
+icons/icon-512.ico
+icon-white*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
