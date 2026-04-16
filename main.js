@@ -2,6 +2,299 @@ const DATA_KEY = "estudiador_datos";
 const SETTINGS_KEY = "estudiador_settings";
 const HISTORY_KEY = "estudiador_historial";
 
+const DEFAULT_SETTINGS = {
+    "idioma": "spanish",
+    "velocidades": "discretas"
+};
+
+const DEFAULT_DATA = {
+    "alteraciones0": {
+        "alteraciones": "ninguna",
+        "cantidad": 0,
+        "mayor": "Do",
+        "menor": "La",
+        "apartados": {
+            "normal_mayor": [true, { "v": 80, "d": 5 }],
+            "terceras_mayor": [true, { "v": 80, "d": 5 }],
+            "cuartas_mayor": [true, { "v": 80, "d": 5 }],
+            "arpegio_mayor": [true, { "v": 80, "d": 5 }],
+            "armónica_menor": [true, { "v": 80, "d": 5 }],
+            "melódica_menor": [true, { "v": 80, "d": 5 }],
+            "terceras_menor": [true, { "v": 80, "d": 5 }],
+            "cuartas_menor": [true, { "v": 80, "d": 5 }],
+            "arpegio_menor": [true, { "v": 80, "d": 5 }]
+        },
+        "dias_sin_tocarla": 0,
+        "cambios_recientes": false
+    },
+    "sostenido1": {
+        "alteraciones": "sostenidos",
+        "cantidad": 1,
+        "mayor": "Sol",
+        "menor": "Mi",
+        "apartados": {
+            "normal_mayor": [true, { "v": 80, "d": 5 }],
+            "terceras_mayor": [true, { "v": 80, "d": 5 }],
+            "cuartas_mayor": [true, { "v": 80, "d": 5 }],
+            "arpegio_mayor": [true, { "v": 80, "d": 5 }],
+            "armónica_menor": [true, { "v": 80, "d": 5 }],
+            "melódica_menor": [true, { "v": 80, "d": 5 }],
+            "terceras_menor": [true, { "v": 80, "d": 5 }],
+            "cuartas_menor": [true, { "v": 80, "d": 5 }],
+            "arpegio_menor": [true, { "v": 80, "d": 5 }]
+        },
+        "dias_sin_tocarla": 0,
+        "cambios_recientes": false
+    },
+    "bemol1": {
+        "alteraciones": "bemoles",
+        "cantidad": 1,
+        "mayor": "Fa",
+        "menor": "Re",
+        "apartados": {
+            "normal_mayor": [true, { "v": 80, "d": 5 }],
+            "terceras_mayor": [true, { "v": 80, "d": 5 }],
+            "cuartas_mayor": [true, { "v": 80, "d": 5 }],
+            "arpegio_mayor": [true, { "v": 80, "d": 5 }],
+            "armónica_mayor": [true, { "v": 80, "d": 5 }],
+            "melódica_mayor": [true, { "v": 80, "d": 5 }],
+            "terceras_menor": [true, { "v": 80, "d": 5 }],
+            "cuartas_menor": [true, { "v": 80, "d": 5 }],
+            "arpegio_menor": [true, { "v": 80, "d": 5 }]
+        },
+        "dias_sin_tocarla": 0,
+        "cambios_recientes": false
+    },
+    "sostenido2": {
+        "alteraciones": "sostenidos",
+        "cantidad": 2,
+        "mayor": "Re",
+        "menor": "Si",
+        "apartados": {
+            "normal_mayor": [true, { "v": 80, "d": 5 }],
+            "terceras_mayor": [true, { "v": 80, "d": 5 }],
+            "cuartas_mayor": [true, { "v": 80, "d": 5 }],
+            "arpegio_mayor": [true, { "v": 80, "d": 5 }],
+            "armónica_mayor": [true, { "v": 80, "d": 5 }],
+            "melódica_mayor": [true, { "v": 80, "d": 5 }],
+            "terceras_menor": [true, { "v": 80, "d": 5 }],
+            "cuartas_menor": [true, { "v": 80, "d": 5 }],
+            "arpegio_menor": [true, { "v": 80, "d": 5 }]
+        },
+        "dias_sin_tocarla": 0,
+        "cambios_recientes": false
+    },
+    "bemol2": {
+        "alteraciones": "bemoles",
+        "cantidad": 2,
+        "mayor": "Sib",
+        "menor": "Sol",
+        "apartados": {
+            "normal_mayor": [true, { "v": 80, "d": 5 }],
+            "terceras_mayor": [true, { "v": 80, "d": 5 }],
+            "cuartas_mayor": [true, { "v": 80, "d": 5 }],
+            "arpegio_mayor": [true, { "v": 80, "d": 5 }],
+            "armónica_mayor": [true, { "v": 80, "d": 5 }],
+            "melódica_mayor": [true, { "v": 80, "d": 5 }],
+            "terceras_menor": [true, { "v": 80, "d": 5 }],
+            "cuartas_menor": [true, { "v": 80, "d": 5 }],
+            "arpegio_menor": [true, { "v": 80, "d": 5 }]
+        },
+        "dias_sin_tocarla": 0,
+        "cambios_recientes": false
+    },
+    "sostenido3": {
+        "alteraciones": "sostenidos",
+        "cantidad": 3,
+        "mayor": "La",
+        "menor": "Fa#",
+        "apartados": {
+            "normal_mayor": [true, { "v": 80, "d": 5 }],
+            "terceras_mayor": [true, { "v": 80, "d": 5 }],
+            "cuartas_mayor": [true, { "v": 80, "d": 5 }],
+            "arpegio_mayor": [true, { "v": 80, "d": 5 }],
+            "armónica_mayor": [true, { "v": 80, "d": 5 }],
+            "melódica_mayor": [true, { "v": 80, "d": 5 }],
+            "terceras_menor": [true, { "v": 80, "d": 5 }],
+            "cuartas_menor": [true, { "v": 80, "d": 5 }],
+            "arpegio_menor": [true, { "v": 80, "d": 5 }]
+        },
+        "dias_sin_tocarla": 0,
+        "cambios_recientes": false
+    },
+    "bemol3": {
+        "alteraciones": "bemoles",
+        "cantidad": 3,
+        "mayor": "Mib",
+        "menor": "Do",
+        "apartados": {
+            "normal_mayor": [true, { "v": 80, "d": 5 }],
+            "terceras_mayor": [true, { "v": 80, "d": 5 }],
+            "cuartas_mayor": [true, { "v": 80, "d": 5 }],
+            "arpegio_mayor": [true, { "v": 80, "d": 5 }],
+            "armónica_mayor": [true, { "v": 80, "d": 5 }],
+            "melódica_mayor": [true, { "v": 80, "d": 5 }],
+            "terceras_menor": [true, { "v": 80, "d": 5 }],
+            "cuartas_menor": [true, { "v": 80, "d": 5 }],
+            "arpegio_menor": [true, { "v": 80, "d": 5 }]
+        },
+        "dias_sin_tocarla": 0,
+        "cambios_recientes": false
+    },
+    "sostenido4": {
+        "alteraciones": "sostenidos",
+        "cantidad": 4,
+        "mayor": "Mi",
+        "menor": "Do#",
+        "apartados": {
+            "normal_mayor": [true, { "v": 80, "d": 5 }],
+            "terceras_mayor": [true, { "v": 80, "d": 5 }],
+            "cuartas_mayor": [true, { "v": 80, "d": 5 }],
+            "arpegio_mayor": [true, { "v": 80, "d": 5 }],
+            "armónica_mayor": [true, { "v": 80, "d": 5 }],
+            "melódica_mayor": [true, { "v": 80, "d": 5 }],
+            "terceras_menor": [true, { "v": 80, "d": 5 }],
+            "cuartas_menor": [true, { "v": 80, "d": 5 }],
+            "arpegio_menor": [true, { "v": 80, "d": 5 }]
+        },
+        "dias_sin_tocarla": 0,
+        "cambios_recientes": false
+    },
+    "bemol4": {
+        "alteraciones": "bemoles",
+        "cantidad": 4,
+        "mayor": "Lab",
+        "menor": "Fa",
+        "apartados": {
+            "normal_mayor": [true, { "v": 80, "d": 5 }],
+            "terceras_mayor": [true, { "v": 80, "d": 5 }],
+            "cuartas_mayor": [true, { "v": 80, "d": 5 }],
+            "arpegio_mayor": [true, { "v": 80, "d": 5 }],
+            "armónica_mayor": [true, { "v": 80, "d": 5 }],
+            "melódica_mayor": [true, { "v": 80, "d": 5 }],
+            "terceras_menor": [true, { "v": 80, "d": 5 }],
+            "cuartas_menor": [true, { "v": 80, "d": 5 }],
+            "arpegio_menor": [true, { "v": 80, "d": 5 }]
+        },
+        "dias_sin_tocarla": 0,
+        "cambios_recientes": false
+    },
+    "sostenido5": {
+        "alteraciones": "sostenidos",
+        "cantidad": 5,
+        "mayor": "Si",
+        "menor": "Sol#",
+        "apartados": {
+            "normal_mayor": [true, { "v": 80, "d": 5 }],
+            "terceras_mayor": [true, { "v": 80, "d": 5 }],
+            "cuartas_mayor": [true, { "v": 80, "d": 5 }],
+            "arpegio_mayor": [true, { "v": 80, "d": 5 }],
+            "armónica_mayor": [true, { "v": 80, "d": 5 }],
+            "melódica_mayor": [true, { "v": 80, "d": 5 }],
+            "terceras_menor": [true, { "v": 80, "d": 5 }],
+            "cuartas_menor": [true, { "v": 80, "d": 5 }],
+            "arpegio_menor": [true, { "v": 80, "d": 5 }]
+        },
+        "dias_sin_tocarla": 0,
+        "cambios_recientes": false
+    },
+    "bemol5": {
+        "alteraciones": "bemoles",
+        "cantidad": 5,
+        "mayor": "Reb",
+        "menor": "Sib",
+        "apartados": {
+            "normal_mayor": [true, { "v": 80, "d": 5 }],
+            "terceras_mayor": [true, { "v": 80, "d": 5 }],
+            "cuartas_mayor": [true, { "v": 80, "d": 5 }],
+            "arpegio_mayor": [true, { "v": 80, "d": 5 }],
+            "armónica_mayor": [true, { "v": 80, "d": 5 }],
+            "melódica_mayor": [true, { "v": 80, "d": 5 }],
+            "terceras_menor": [true, { "v": 80, "d": 5 }],
+            "cuartas_menor": [true, { "v": 80, "d": 5 }],
+            "arpegio_menor": [true, { "v": 80, "d": 5 }]
+        },
+        "dias_sin_tocarla": 0,
+        "cambios_recientes": false
+    },
+    "sostenido6": {
+        "alteraciones": "sostenidos",
+        "cantidad": 6,
+        "mayor": "Fa#",
+        "menor": "Re#",
+        "apartados": {
+            "normal_mayor": [true, { "v": 80, "d": 5 }],
+            "terceras_mayor": [true, { "v": 80, "d": 5 }],
+            "cuartas_mayor": [true, { "v": 80, "d": 5 }],
+            "arpegio_mayor": [true, { "v": 80, "d": 5 }],
+            "armónica_mayor": [true, { "v": 80, "d": 5 }],
+            "melódica_mayor": [true, { "v": 80, "d": 5 }],
+            "terceras_menor": [true, { "v": 80, "d": 5 }],
+            "cuartas_menor": [true, { "v": 80, "d": 5 }],
+            "arpegio_menor": [true, { "v": 80, "d": 5 }]
+        },
+        "dias_sin_tocarla": 0,
+        "cambios_recientes": false
+    },
+    "bemol6": {
+        "alteraciones": "bemoles",
+        "cantidad": 6,
+        "mayor": "Solb",
+        "menor": "Mib",
+        "apartados": {
+            "normal_mayor": [true, { "v": 80, "d": 5 }],
+            "terceras_mayor": [true, { "v": 80, "d": 5 }],
+            "cuartas_mayor": [true, { "v": 80, "d": 5 }],
+            "arpegio_mayor": [true, { "v": 80, "d": 5 }],
+            "armónica_mayor": [true, { "v": 80, "d": 5 }],
+            "melódica_mayor": [true, { "v": 80, "d": 5 }],
+            "terceras_menor": [true, { "v": 80, "d": 5 }],
+            "cuartas_menor": [true, { "v": 80, "d": 5 }],
+            "arpegio_menor": [true, { "v": 80, "d": 5 }]
+        },
+        "dias_sin_tocarla": 0,
+        "cambios_recientes": false
+    },
+    "sostenido7": {
+        "alteraciones": "sostenidos",
+        "cantidad": 7,
+        "mayor": "Do#",
+        "menor": "La#",
+        "apartados": {
+            "normal_mayor": [true, { "v": 80, "d": 5 }],
+            "terceras_mayor": [true, { "v": 80, "d": 5 }],
+            "cuartas_mayor": [true, { "v": 80, "d": 5 }],
+            "arpegio_mayor": [true, { "v": 80, "d": 5 }],
+            "armónica_mayor": [true, { "v": 80, "d": 5 }],
+            "melódica_mayor": [true, { "v": 80, "d": 5 }],
+            "terceras_menor": [true, { "v": 80, "d": 5 }],
+            "cuartas_menor": [true, { "v": 80, "d": 5 }],
+            "arpegio_menor": [true, { "v": 80, "d": 5 }]
+        },
+        "dias_sin_tocarla": 0,
+        "cambios_recientes": false
+    },
+    "bemol7": {
+        "alteraciones": "bemoles",
+        "cantidad": 7,
+        "mayor": "Dob",
+        "menor": "Lab",
+        "apartados": {
+            "normal_mayor": [true, { "v": 80, "d": 5 }],
+            "terceras_mayor": [true, { "v": 80, "d": 5 }],
+            "cuartas_mayor": [true, { "v": 80, "d": 5 }],
+            "arpegio_mayor": [true, { "v": 80, "d": 5 }],
+            "armónica_mayor": [true, { "v": 80, "d": 5 }],
+            "melódica_mayor": [true, { "v": 80, "d": 5 }],
+            "terceras_menor": [true, { "v": 80, "d": 5 }],
+            "cuartas_menor": [true, { "v": 80, "d": 5 }],
+            "arpegio_menor": [true, { "v": 80, "d": 5 }]
+        },
+        "dias_sin_tocarla": 0,
+        "cambios_recientes": false
+    }
+};
+
 let datos;
 let settings;
 let historial;
@@ -23,18 +316,7 @@ function pickRandom(array, n) {
 //
 
 // FILE HANDLING
-async function fetchJSON(filePath) {
-    try {
-        const response = await fetch(filePath);
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        return await response.json();
-    } catch (error) {
-        console.error(`Error loading ${filePath}:`, error);
-        return null;
-    }
-}
-
-async function loadSettings() {
+function loadSettings() {
     const localSettings = localStorage.getItem(SETTINGS_KEY);
     if (localSettings) {
         try {
@@ -45,10 +327,7 @@ async function loadSettings() {
     }
 
     // Default if not in localStorage
-    let settings = await fetchJSON('settings_default.json');
-    if (!settings) {
-        settings = { "idioma": "spanish", "velocidades": "discretas" };
-    }
+    const settings = { ...DEFAULT_SETTINGS };
     saveSettings(settings);
     return settings;
 }
@@ -58,7 +337,7 @@ function saveSettings(newSettings) {
     localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
 }
 
-async function loadData() {
+function loadData() {
     const localData = localStorage.getItem(DATA_KEY);
     if (localData) {
         try {
@@ -68,10 +347,8 @@ async function loadData() {
         }
     }
 
-    const template = await fetchJSON('data_template.json');
-    if (template) {
-        saveData(template);
-    }
+    const template = { ...DEFAULT_DATA };
+    saveData(template);
     return template;
 }
 
@@ -111,20 +388,15 @@ function agregarAlHistorial(tonalidad, apartado, ejecucion) {
     saveHistorial(historial);
 }
 
-async function restaurarValores() {
+function restaurarValores() {
     if (confirm("¿Estás seguro de que deseas restaurar los valores predeterminados? Se perderá todo el progreso.")) {
         localStorage.removeItem(DATA_KEY);
         localStorage.removeItem(SETTINGS_KEY);
         localStorage.removeItem(HISTORY_KEY);
 
-        const template = await fetchJSON('data_template.json');
-        if (template) {
-            saveData(template);
-            alert("Valores restaurados correctamente.");
-            location.reload();
-        } else {
-            alert("Error al cargar la plantilla de datos.");
-        }
+        saveData({ ...DEFAULT_DATA });
+        alert("Valores restaurados correctamente.");
+        location.reload();
     }
 }
 
