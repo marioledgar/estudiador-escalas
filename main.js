@@ -9,6 +9,7 @@ const DEFAULT_SETTINGS = {
 
 const DEFAULT_DATA = {
     "alteraciones0": {
+        "key": "0♭/♯",
         "alteraciones": "ninguna",
         "cantidad": 0,
         "mayor": "Do",
@@ -28,6 +29,7 @@ const DEFAULT_DATA = {
         "cambios_recientes": false
     },
     "sostenido1": {
+        "key": "1♯",
         "alteraciones": "sostenidos",
         "cantidad": 1,
         "mayor": "Sol",
@@ -47,6 +49,7 @@ const DEFAULT_DATA = {
         "cambios_recientes": false
     },
     "bemol1": {
+        "key": "1♭",
         "alteraciones": "bemoles",
         "cantidad": 1,
         "mayor": "Fa",
@@ -66,6 +69,7 @@ const DEFAULT_DATA = {
         "cambios_recientes": false
     },
     "sostenido2": {
+        "key": "2♯",
         "alteraciones": "sostenidos",
         "cantidad": 2,
         "mayor": "Re",
@@ -85,6 +89,7 @@ const DEFAULT_DATA = {
         "cambios_recientes": false
     },
     "bemol2": {
+        "key": "2♭",
         "alteraciones": "bemoles",
         "cantidad": 2,
         "mayor": "Sib",
@@ -104,6 +109,7 @@ const DEFAULT_DATA = {
         "cambios_recientes": false
     },
     "sostenido3": {
+        "key": "3♯",
         "alteraciones": "sostenidos",
         "cantidad": 3,
         "mayor": "La",
@@ -123,6 +129,7 @@ const DEFAULT_DATA = {
         "cambios_recientes": false
     },
     "bemol3": {
+        "key": "3♭",
         "alteraciones": "bemoles",
         "cantidad": 3,
         "mayor": "Mib",
@@ -142,6 +149,7 @@ const DEFAULT_DATA = {
         "cambios_recientes": false
     },
     "sostenido4": {
+        "key": "4♯",
         "alteraciones": "sostenidos",
         "cantidad": 4,
         "mayor": "Mi",
@@ -161,6 +169,7 @@ const DEFAULT_DATA = {
         "cambios_recientes": false
     },
     "bemol4": {
+        "key": "4♭",
         "alteraciones": "bemoles",
         "cantidad": 4,
         "mayor": "Lab",
@@ -180,6 +189,7 @@ const DEFAULT_DATA = {
         "cambios_recientes": false
     },
     "sostenido5": {
+        "key": "5♯",
         "alteraciones": "sostenidos",
         "cantidad": 5,
         "mayor": "Si",
@@ -199,6 +209,7 @@ const DEFAULT_DATA = {
         "cambios_recientes": false
     },
     "bemol5": {
+        "key": "5♭",
         "alteraciones": "bemoles",
         "cantidad": 5,
         "mayor": "Reb",
@@ -218,6 +229,7 @@ const DEFAULT_DATA = {
         "cambios_recientes": false
     },
     "sostenido6": {
+        "key": "6♯",
         "alteraciones": "sostenidos",
         "cantidad": 6,
         "mayor": "Fa#",
@@ -237,6 +249,7 @@ const DEFAULT_DATA = {
         "cambios_recientes": false
     },
     "bemol6": {
+        "key": "6♭",
         "alteraciones": "bemoles",
         "cantidad": 6,
         "mayor": "Solb",
@@ -256,6 +269,7 @@ const DEFAULT_DATA = {
         "cambios_recientes": false
     },
     "sostenido7": {
+        "key": "7♯",
         "alteraciones": "sostenidos",
         "cantidad": 7,
         "mayor": "Do#",
@@ -275,6 +289,7 @@ const DEFAULT_DATA = {
         "cambios_recientes": false
     },
     "bemol7": {
+        "key": "7♭",
         "alteraciones": "bemoles",
         "cantidad": 7,
         "mayor": "Dob",
@@ -341,7 +356,22 @@ function loadData() {
     const localData = localStorage.getItem(DATA_KEY);
     if (localData) {
         try {
-            return JSON.parse(localData);
+            let parsedData = JSON.parse(localData);
+            let migrado = false;
+            // Migración: Asegurar que todas las tonalidades tengan la propiedad 'key'
+            Object.keys(parsedData).forEach(t => {
+                if (!parsedData[t].key) {
+                    const cant = parsedData[t].cantidad;
+                    const alt = parsedData[t].alteraciones;
+                    parsedData[t].key = cant === 0 ? "0♭/♯" : (cant + (alt === "sostenidos" ? "♯" : "♭"));
+                    migrado = true;
+                }
+            });
+            if (migrado) {
+                datos = parsedData;
+                localStorage.setItem(DATA_KEY, JSON.stringify(datos));
+            }
+            return parsedData;
         } catch (e) {
             console.error("Error parsing local data:", e);
         }
@@ -394,7 +424,7 @@ function restaurarValores() {
         localStorage.removeItem(SETTINGS_KEY);
         localStorage.removeItem(HISTORY_KEY);
 
-        saveData({ ...DEFAULT_DATA });
+        saveData(DEFAULT_DATA);
         alert("Valores restaurados correctamente.");
         location.reload();
     }
@@ -442,7 +472,7 @@ function importarDatos() {
 
 // algunas constantes
 const velocidadesDiscretas = [30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60, 63, 66, 69, 72, 76, 80, 84, 88, 92, 96, 100, 104, 108, 112, 116, 120, 126, 132, 138, 144];
-const simbolos = { "ninguna": "b/#", "bemol": "b", "sostenidos": "#" };
+const simbolos = { "ninguna": "♭/♯", "bemoles": "♭", "sostenidos": "♯" };
 // fin de constantes
 
 //sidebar
@@ -576,7 +606,7 @@ function elegirEscalas() {
 function tocarTonalidad(tonalidadActual) {
     document.getElementById("contenedor").innerHTML = /*html*/`
     <div id="${tonalidadActual}">
-    <h3>${tonalidadActual}</h3>
+    <h3 class="tonalidad-header">${datos[tonalidadActual].key}</h3>
     <div id="forms-ejecucion"></div></div>
     `;
     Object.keys(datos[tonalidadActual].apartados).forEach(apartado => {

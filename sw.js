@@ -39,14 +39,21 @@ self.addEventListener('activate', event => {
 });
 
 // EVENTO 3: fetch — se ejecuta en cada petición de red
+// Estrategia: network-first (intenta red, si falla usa caché)
 self.addEventListener('fetch', event => {
     event.respondWith(
-        caches.match(event.request)
-            .then(respuestaEnCache => {
-                // Si está en caché, devuelve el caché
-                if (respuestaEnCache) return respuestaEnCache;
-                // Si no, va a internet
-                return fetch(event.request);
+        fetch(event.request)
+            .then(respuestaDeRed => {
+                // Si la red responde, actualiza la caché y devuelve la respuesta
+                const copia = respuestaDeRed.clone();
+                caches.open(CACHE_NAME).then(cache => {
+                    cache.put(event.request, copia);
+                });
+                return respuestaDeRed;
+            })
+            .catch(() => {
+                // Si no hay red, usa la caché como fallback
+                return caches.match(event.request);
             })
     );
 });
