@@ -1,5 +1,5 @@
 :root {
-    --azul-boton: rgb(32, 151, 255);
+    --button-blue: rgb(32, 151, 255);
     --bg: #1f1f1f;
     --text: rgb(226, 226, 226);
     --error-red: #e04040;
@@ -18,7 +18,7 @@ body {
     color: var(--text);
 }
 
-.contenedor {
+.container {
     max-width: 800px;
     margin: 0 auto;
     /* auto en los lados = centrado horizontal */
@@ -31,7 +31,7 @@ button {
     border: none;
     cursor: pointer;
     background: none;
-    background-color: var(--azul-boton);
+    background-color: var(--button-blue);
     border-radius: 5px;
     color: var(--bg);
     font-family: lato;
@@ -41,37 +41,37 @@ button:hover {
     background-color: rgb(46, 131, 210);
 }
 
-.tonalidad-header {
+.tonality-header {
     font-size: 50px;
     text-align: center;
     margin: 0;
 }
 
-.raya-hb {
+.hamburger-line {
     position: absolute;
     left: 0;
     right: 0;
     height: 2px;
-    background: var(--azul-boton);
+    background: var(--button-blue);
     border-radius: 2px;
     transition: transform 0.3s ease, opacity 0.3s ease, top 0.3s ease;
 }
 
-.raya-hb:nth-child(1) {
+.hamburger-line:nth-child(1) {
     top: 0;
 }
 
-.raya-hb:nth-child(2) {
+.hamburger-line:nth-child(2) {
     top: 50%;
     transform: translateY(-50%);
 }
 
-.raya-hb:nth-child(3) {
+.hamburger-line:nth-child(3) {
     top: 100%;
     transform: translateY(-100%);
 }
 
-.icono-hb {
+.hamburger-icon {
     width: 20px;
     height: 14px;
     position: relative;
@@ -99,17 +99,17 @@ button:hover {
     background: rgba(32, 151, 255, 0.2);
 }
 
-#hamburger.open .raya-hb:nth-child(1) {
+#hamburger.open .hamburger-line:nth-child(1) {
     top: 50%;
     transform: translateY(-50%) rotate(45deg);
 }
 
-#hamburger.open .raya-hb:nth-child(2) {
+#hamburger.open .hamburger-line:nth-child(2) {
     opacity: 0;
     transform: translateY(-50%) scaleX(0);
 }
 
-#hamburger.open .raya-hb:nth-child(3) {
+#hamburger.open .hamburger-line:nth-child(3) {
     top: 50%;
     transform: translateY(-50%) rotate(-45deg);
 }
@@ -181,7 +181,7 @@ button:hover {
 
 .sidebar-link.active {
     background: rgba(32, 151, 255, 0.15);
-    color: var(--azul-boton);
+    color: var(--button-blue);
 }
 
 .sidebar-dangerous {
@@ -199,27 +199,27 @@ button:hover {
     margin-top: auto;
 }
 
-/*#boton-preguntar-cantidad {
+/*#ask-amount-button {
     color: #1f1f1f;
     background-color: rgb(32, 151, 255);
     border: none;
     border-radius: 5px;
 }*/
 
-.ejecucion-input {
+.execution-input {
     display: none;
 }
 
-.ejecucion-form {
+.execution-form {
     display: flex;
     flex-direction: row;
     justify-content: center;
     gap: 0;
 }
 
-.r-pill-form-item-mal,
-.r-pill-form-item-bien,
-.r-pill-form-item-perf {
+.r-pill-form-item-bad,
+.r-pill-form-item-good,
+.r-pill-form-item-perfect {
     display: inline-block;
     padding: 10px 20px;
     color: rgba(255, 255, 255, 0.5);
@@ -235,42 +235,42 @@ button:hover {
     transition: background 0.2s, color 0.2s;
 }
 
-.r-pill-form-item-mal {
+.r-pill-form-item-bad {
     background-color: #4a0c0c;
     /* dim red */
     border-radius: 15px 0px 0px 15px;
 }
 
-.r-pill-form-item-bien {
+.r-pill-form-item-good {
     background-color: #0f3d0e;
     /* dim green */
     border-radius: 0px;
 }
 
-.r-pill-form-item-perf {
+.r-pill-form-item-perfect {
     background-color: #0a3d40;
     /* dim cyan */
     border-radius: 0px 15px 15px 0px;
 }
 
 /* Vivid when selected */
-input:checked+.r-pill-form-item-mal {
+input:checked+.r-pill-form-item-bad {
     background-color: #c62121;
     color: white;
 }
 
-input:checked+.r-pill-form-item-bien {
+input:checked+.r-pill-form-item-good {
     background-color: #2fc621;
     color: white;
 }
 
-input:checked+.r-pill-form-item-perf {
+input:checked+.r-pill-form-item-perfect {
     background-color: #1ac8d4;
     color: white;
 }
 
-.boton-siguiente {
-    background-color: var(--azul-boton);
+.next-button {
+    background-color: var(--button-blue);
     min-width: 80px;
     min-height: 40px;
     border-radius: 5px;
@@ -284,7 +284,7 @@ input:checked+.r-pill-form-item-perf {
     z-index: 10;
 }
 
-.div-apartado {
+.section-div {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -292,7 +292,7 @@ input:checked+.r-pill-form-item-perf {
     padding: 30px;
 }
 
-#pantalla-inicial {
+#initial-screen {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -300,14 +300,14 @@ input:checked+.r-pill-form-item-perf {
     padding: 50px;
 }
 
-#boton-tocar {
+#play-button {
     height: 150px;
     width: 300px;
     font-size: 40pt;
     cursor: pointer;
 }
 
-#form-preguntar-cantidad {
+#ask-amount-form {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -315,17 +315,17 @@ input:checked+.r-pill-form-item-perf {
     padding: 50px;
 }
 
-#boton-preguntar-cantidad {
+#ask-amount-button {
     padding: 10px 40px;
     font-size: 15pt;
     cursor: pointer;
 }
 
-#texto-preguntar-cantidad {
+#ask-amount-text {
     font-size: 20pt;
 }
 
-#input-preguntar-cantidad {
+#ask-amount-input {
     font-size: 20pt;
     width: 80px;
     text-align: center;
@@ -336,25 +336,25 @@ input:checked+.r-pill-form-item-perf {
     appearance: textfield;
 }
 
-#input-preguntar-cantidad::-webkit-outer-spin-button,
-#input-preguntar-cantidad::-webkit-inner-spin-button {
+#ask-amount-input::-webkit-outer-spin-button,
+#ask-amount-input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
 
-.cantidad-stepper {
+.amount-stepper {
     display: flex;
     align-items: center;
-    border: 2px solid var(--azul-boton);
+    border: 2px solid var(--button-blue);
     border-radius: 999px;
     overflow: hidden;
 }
 
-.cantidad-stepper-btn {
+.amount-stepper-btn {
     font-size: 20pt;
     padding: 8px 22px;
     background: transparent;
-    color: var(--azul-boton);
+    color: var(--button-blue);
     border: none;
     border-radius: 0;
     cursor: pointer;
@@ -362,11 +362,11 @@ input:checked+.r-pill-form-item-perf {
     transition: background 0.15s;
 }
 
-.cantidad-stepper-btn:hover {
+.amount-stepper-btn:hover {
     background: rgba(32, 151, 255, 0.15);
 }
 
-.cantidad-stepper.input-error {
+.amount-stepper.input-error {
     border-color: var(--error-red);
 }
 
@@ -392,13 +392,13 @@ input:checked+.r-pill-form-item-perf {
 /* ===== TABLET (601px – 1024px) ===== */
 @media (max-width: 1024px) and (min-width: 601px) {
 
-    .div-apartado,
-    #pantalla-inicial,
-    #form-preguntar-cantidad {
+    .section-div,
+    #initial-screen,
+    #ask-amount-form {
         padding: 30px 15px;
     }
 
-    #boton-tocar {
+    #play-button {
         width: 60vw;
         max-width: 300px;
         height: auto;
@@ -406,7 +406,7 @@ input:checked+.r-pill-form-item-perf {
         padding: 30px 0;
     }
 
-    #texto-preguntar-cantidad {
+    #ask-amount-text {
         font-size: 18pt;
     }
 
@@ -414,20 +414,20 @@ input:checked+.r-pill-form-item-perf {
         font-size: 13pt;
     }
 
-    .r-pill-form-item-mal,
-    .r-pill-form-item-bien,
-    .r-pill-form-item-perf {
+    .r-pill-form-item-bad,
+    .r-pill-form-item-good,
+    .r-pill-form-item-perfect {
         min-width: 70px;
         padding: 10px 16px;
         font-size: 11pt;
     }
 
-    .contenedor {
+    .container {
         padding: 15px;
     }
 
     /* Botón siguiente: un poco más grande para táctil */
-    .boton-siguiente {
+    .next-button {
         padding: 18px 35px;
         font-size: 15pt;
     }
@@ -437,14 +437,14 @@ input:checked+.r-pill-form-item-perf {
 @media (max-width: 600px) {
 
     /* Reduce padding on all the centered column layouts */
-    .div-apartado,
-    #pantalla-inicial,
-    #form-preguntar-cantidad {
+    .section-div,
+    #initial-screen,
+    #ask-amount-form {
         padding: 20px 10px;
     }
 
     /* Prevent the big "Tocar" button from overflowing */
-    #boton-tocar {
+    #play-button {
         width: 80vw;
         max-width: 250px;
         height: auto;
@@ -453,20 +453,20 @@ input:checked+.r-pill-form-item-perf {
     }
 
     /* Scale down the question text */
-    #texto-preguntar-cantidad {
+    #ask-amount-text {
         font-size: 16pt;
         text-align: center;
     }
 
     /* Scale down the quantity input */
-    #input-preguntar-cantidad {
+    #ask-amount-input {
         font-size: 16pt;
     }
 
     /* Make the pill buttons shrink gracefully */
-    .r-pill-form-item-mal,
-    .r-pill-form-item-bien,
-    .r-pill-form-item-perf {
+    .r-pill-form-item-bad,
+    .r-pill-form-item-good,
+    .r-pill-form-item-perfect {
         min-width: 60px;
         padding: 10px 12px;
         font-size: 10pt;
@@ -477,8 +477,8 @@ input:checked+.r-pill-form-item-perf {
         font-size: 12pt;
     }
 
-    /* Let the buttons in pantalla-inicial wrap */
-    #pantalla-inicial>div {
+    /* Let the buttons in initial-screen wrap */
+    #initial-screen>div {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
@@ -486,12 +486,12 @@ input:checked+.r-pill-form-item-perf {
     }
 
     /* Reduce container side padding */
-    .contenedor {
+    .container {
         padding: 10px;
     }
 
     /* Botón siguiente: barra fija en la parte inferior, fácil de pulsar */
-    .boton-siguiente {
+    .next-button {
         position: fixed;
         bottom: 15px;
         left: 15px;
@@ -503,7 +503,7 @@ input:checked+.r-pill-form-item-perf {
     }
 
     /* Espacio inferior para que el contenido no quede tapado por el botón fijo */
-    .contenedor {
+    .container {
         padding-bottom: 80px;
     }
 

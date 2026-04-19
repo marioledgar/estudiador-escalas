@@ -1,6 +1,6 @@
 const CACHE_NAME = 'escalas-v1';  // cambia el número cuando actualices la app
 
-const FICHEROS_A_CACHEAR = [
+const FILES_TO_CACHE = [
     './',
     './index.html',
     './main.js',
@@ -15,11 +15,12 @@ const FICHEROS_A_CACHEAR = [
     './icons/icon-512.png'
 ];
 
+
 // EVENTO 1: install — se ejecuta una vez al instalar el SW
 self.addEventListener('install', event => {
     event.waitUntil(
         caches.open(CACHE_NAME)
-            .then(cache => cache.addAll(FICHEROS_A_CACHEAR))
+            .then(cache => cache.addAll(FILES_TO_CACHE))
             .then(() => self.skipWaiting())  // activa el SW inmediatamente
     );
 });
@@ -28,11 +29,11 @@ self.addEventListener('install', event => {
 // Aquí borramos cachés de versiones anteriores
 self.addEventListener('activate', event => {
     event.waitUntil(
-        caches.keys().then(nombres => {
+        caches.keys().then(names => {
             return Promise.all(
-                nombres
-                    .filter(nombre => nombre !== CACHE_NAME)  // todos menos el actual
-                    .map(nombre => caches.delete(nombre))     // los borra
+                names
+                    .filter(name => name !== CACHE_NAME)  // todos menos el actual
+                    .map(name => caches.delete(name))     // los borra
             );
         }).then(() => self.clients.claim())  // toma el control de páginas abiertas
     );
@@ -43,13 +44,13 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
     event.respondWith(
         fetch(event.request)
-            .then(respuestaDeRed => {
+            .then(networkResponse => {
                 // Si la red responde, actualiza la caché y devuelve la respuesta
-                const copia = respuestaDeRed.clone();
+                const copy = networkResponse.clone();
                 caches.open(CACHE_NAME).then(cache => {
-                    cache.put(event.request, copia);
+                    cache.put(event.request, copy);
                 });
-                return respuestaDeRed;
+                return networkResponse;
             })
             .catch(() => {
                 // Si no hay red, usa la caché como fallback

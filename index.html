@@ -34,10 +34,10 @@
 
     <div id="overlay" onclick="toggleSidebar()"></div>
     <button id="hamburger" onclick="toggleSidebar()">
-        <div class="icono-hb">
-            <span class="raya-hb"></span>
-            <span class="raya-hb"></span>
-            <span class="raya-hb"></span>
+        <div class="hamburger-icon">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
         </div>
     </button>
 
@@ -51,22 +51,22 @@
             </a> -->
         </div>
         <div class="sidebar-footer">
-            <a class="sidebar-link" onclick="exportarDatos()">
+            <a class="sidebar-link" onclick="exportData()">
                 <span class="icon">📤</span> Exportar datos
             </a>
-            <a class="sidebar-link" onclick="importarDatos()">
+            <a class="sidebar-link" onclick="importData()">
                 <span class="icon">📥</span> Importar datos
             </a>
-            <a class="sidebar-link sidebar-dangerous" onclick="restaurarValores()">
+            <a class="sidebar-link sidebar-dangerous" onclick="restoreValues()">
                 <span class="icon">❌</span> Restaurar valores
             </a>
         </div>
     </nav>
 
-    <div class="contenedor" id="contenedor"></div>
+    <div class="container" id="container"></div>
 
     <script>
-        pantallaInicial();
+        initialScreen();
     </script>
 
     <script>
