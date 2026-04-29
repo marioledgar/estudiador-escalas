@@ -603,23 +603,23 @@ function chooseScales() {
     return tonalitiesToday;
 }
 
-function playTonality(tonalityActual) {
+function playTonality(currentTonality) {
     document.getElementById("container").innerHTML = /*html*/`
-    <div id="${tonalityActual}">
-    <h3 class="tonality-header">${data[tonalityActual].key}</h3>
+    <div id="${currentTonality}">
+    <h3 class="tonality-header">${data[currentTonality].key}</h3>
     <div id="forms-execution"></div></div>
     `;
-    Object.keys(data[tonalityActual].sections).forEach(section => {
-        if (data[tonalityActual].sections[section][0]) {
-            playSection(tonalityActual, section);
+    Object.keys(data[currentTonality].sections).forEach(section => {
+        if (data[currentTonality].sections[section][0]) {
+            playSection(currentTonality, section);
         }
     });
-    if (tonalitiesToday[tonalitiesToday.length - 1] !== tonalityActual) {
-        document.getElementById(`${tonalityActual}`).innerHTML += /*html*/`
-        <button class="next-button" onclick="finishTonality('${tonalityActual}'); nextTonality('${tonalityActual}')">Siguiente</button>`
+    if (tonalitiesToday[tonalitiesToday.length - 1] !== currentTonality) {
+        document.getElementById(`${currentTonality}`).innerHTML += /*html*/`
+        <button class="next-button" onclick="finishTonality('${currentTonality}'); nextTonality('${currentTonality}')">Siguiente</button>`
     } else {
-        document.getElementById(`${tonalityActual}`).innerHTML += /*html*/`
-        <button class="next-button" onclick="finishTonality('${tonalityActual}'); finishSession()">Acabar sesión</button>`
+        document.getElementById(`${currentTonality}`).innerHTML += /*html*/`
+        <button class="next-button" onclick="finishTonality('${currentTonality}'); finishSession()">Acabar sesión</button>`
     }
 }
 
