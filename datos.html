@@ -23,6 +23,38 @@
 </head>
 
 <body>
+    <script src="main.js"></script>
+
+    <div id="overlay" onclick="toggleSidebar()"></div>
+    <button id="hamburger" onclick="toggleSidebar()">
+        <div class="hamburger-icon">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </div>
+    </button>
+
+    <nav id="sidebar">
+        <div class="sidebar-nav">
+            <!-- <a class="sidebar-link active" href="#">
+                <span class="icon">🎵</span> Tocar
+            </a> -->
+            <a class="sidebar-link" href="./datos.html">
+                <span class="icon">📊</span> Datos
+            </a>
+        </div>
+        <div class="sidebar-footer">
+            <a class="sidebar-link" onclick="exportData()">
+                <span class="icon">📤</span> Exportar datos
+            </a>
+            <a class="sidebar-link" onclick="importData()">
+                <span class="icon">📥</span> Importar datos
+            </a>
+            <a class="sidebar-link sidebar-dangerous" onclick="restoreValues()">
+                <span class="icon">❌</span> Restaurar valores
+            </a>
+        </div>
+    </nav>
 
 </body>
 
