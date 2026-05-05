@@ -184,6 +184,19 @@ button:hover {
     color: var(--button-blue);
 }
 
+.sidebar-icon-img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    vertical-align: middle;
+}
+
+.sidebar-icon {
+    font-size: 18px;
+    width: 22px;
+    text-align: center;
+}
+
 .sidebar-dangerous {
     color: var(--error-red);
 }

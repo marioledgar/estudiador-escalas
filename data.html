@@ -36,22 +36,23 @@
 
     <nav id="sidebar">
         <div class="sidebar-nav">
-            <!-- <a class="sidebar-link active" href="#">
-                <span class="icon">🎵</span> Tocar
-            </a> -->
-            <a class="sidebar-link" href="./data.html">
+            <a class="sidebar-link" href="./index.html">
+                <span class="icon"><img src="icons/icon-no-background-192.png" class="sidebar-icon-img"></span>
+                Principal
+            </a>
+            <a class="sidebar-link active" href="./data.html">
                 <span class="icon">📊</span> Datos
             </a>
         </div>
         <div class="sidebar-footer">
             <a class="sidebar-link" onclick="exportData()">
-                <span class="icon">📤</span> Exportar datos
+                <span class="sidebar-icon">📤</span> Exportar datos
             </a>
             <a class="sidebar-link" onclick="importData()">
-                <span class="icon">📥</span> Importar datos
+                <span class="sidebar-icon">📥</span> Importar datos
             </a>
             <a class="sidebar-link sidebar-dangerous" onclick="restoreValues()">
-                <span class="icon">❌</span> Restaurar valores
+                <span class="sidebar-icon">❌</span> Restaurar valores
             </a>
         </div>
     </nav>
