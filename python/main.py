@@ -8,41 +8,41 @@ import shutil
 import tempfile
 import platform
 
-VERDE = "\033[92m"
+GREEN = "\033[92m"
 MAGENTA = "\033[35m"
-ROJO = "\033[31m"
-AMARILLO = "\033[93m"
+RED = "\033[31m"
+YELLOW = "\033[93m"
 RESET = "\033[0m"
 
 ################################
-## FUNCIONES Y COSAS BASICAS  ##
+## FUNCTIONS AND BASIC STUFF  ##
 ################################
 
-# importar datos
+# import data
 if not os.path.exists("data.json"):
     if os.path.exists("data_template.json"):
         shutil.copy("data_template.json", "data.json")
-        print(f"{VERDE}Se ha creado un nuevo archivo data.json desde la plantilla.{RESET}")
+        print(f"{GREEN}Se ha creado un nuevo archivo data.json desde la plantilla.{RESET}")
     else:
-        print(f"{ROJO}Error crítico: No existe data.json ni data_template.json.{RESET}")
+        print(f"{RED}Error crítico: No existe data.json ni data_template.json.{RESET}")
         sys.exit()
 try:
     with open("data.json", "r", encoding="utf-8") as data_json:
-        datos = json.load(data_json)
+        data = json.load(data_json)
 except Exception as e:
-    print(f"{ROJO}Error al leer data.json: {e}{RESET}")
+    print(f"{RED}Error al leer data.json: {e}{RESET}")
     sys.exit()
 
 try:
-    with open("historial.json", "r", encoding="utf-8") as f:
-        historia = json.load(f)
+    with open("history.json", "r", encoding="utf-8") as f:
+        history = json.load(f)
 except (FileNotFoundError, json.JSONDecodeError):
-        historia = []
+        history = []
 
-#texto grande
-def print_big(texto, COLOR=None, _justify=None, _font="block"):
-    grande = pyfiglet.figlet_format(texto, justify=_justify, font=_font)
-    print(f"{COLOR}{grande}{RESET}")
+# big text
+def print_big(text, color=None, _justify=None, _font="block"):
+    big_text = pyfiglet.figlet_format(text, justify=_justify, font=_font)
+    print(f"{color}{big_text}{RESET}")
 
 # settings
 try:
@@ -50,205 +50,206 @@ try:
         settings = json.load(settings_json)
 except:
     settings = {"idioma": "spanish", "velocidades": "discretas"}
-# tonalidades
-tonalidades = list(datos.keys())
 
-# valores predeterminados
-def restaurar_valores():
+# tonalities
+tonalities = list(data.keys())
+
+# default values
+def restore_values():
     try:
         os.remove("data.json")
         shutil.copy("data_template.json", "data.json")
         with open("data.json", "r", encoding="utf-8") as data_json:
-            datos = json.load(data_json)
+            global data
+            data = json.load(data_json)
     except:
         pass
     try:
-        os.remove("historial.json")
+        os.remove("history.json")
     except:
         pass
 
-# una lista con las valocidades discretas
-velocidades_discretas = [30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60, 63, 66, 69, 72, 76, 80, 84, 88, 92, 96, 100, 104, 108, 112, 116, 120, 126, 132, 138, 144]
+# discrete speeds list
+discrete_speeds = [30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60, 63, 66, 69, 72, 76, 80, 84, 88, 92, 96, 100, 104, 108, 112, 116, 120, 126, 132, 138, 144]
 
-# cambiar velocidad
-def cambiar_velocidad(tonalidad, apartado, aumentar=True):
-    v = datos[tonalidad]["apartados"][apartado][1]["v"]
-    if aumentar == True:
+# change speed
+def change_speed(tonality, section, increase=True):
+    v = data[tonality]["apartados"][section][1]["v"]
+    if increase == True:
         if v < 144:            
             if settings["velocidades"] == "discretas":
-                if v not in velocidades_discretas:
-                    v = min(x for x in velocidades_discretas if x >= v)
+                if v not in discrete_speeds:
+                    v = min(x for x in discrete_speeds if x >= v)
                 else:
-                    v = velocidades_discretas[velocidades_discretas.index(v) + 1]
+                    v = discrete_speeds[discrete_speeds.index(v) + 1]
             else:
                 v = v + 1
-    elif aumentar == False:
+    elif increase == False:
         if v > 30:
             if settings["velocidades"] == "discretas":
-                if v not in velocidades_discretas:
-                    v = max(x for x in velocidades_discretas if x <= v)
+                if v not in discrete_speeds:
+                    v = max(x for x in discrete_speeds if x <= v)
                 else:
-                    v = velocidades_discretas[velocidades_discretas.index(v) - 1]
+                    v = discrete_speeds[discrete_speeds.index(v) - 1]
             else:
                 v = v - 1
-    datos[tonalidad]["apartados"][apartado][1]["v"] = v
+    data[tonality]["apartados"][section][1]["v"] = v
 
-# simbolos de las alteraciones
-# simbolos = {"alteraciones": "\u266D/\u266F", "bemol": "\u266D", "sostenido": "\u266F"}
-simbolos = {"alteraciones": "b/#", "bemol": "b", "sostenido": "#"}
+# symbols for alterations
+symbols = {"alteraciones": "b/#", "bemol": "b", "sostenido": "#"}
 
-def guardar_historial(tonalidad, apartado, ejecucion): 
-    stats =  datos[tonalidad]["apartados"][apartado][1]
+def save_history(tonality, section, execution): 
+    stats = data[tonality]["apartados"][section][1]
     try:
-        with open("historial.json", "r", encoding="utf-8") as f:
-            historia = json.load(f)
+        with open("history.json", "r", encoding="utf-8") as f:
+            current_history = json.load(f)
     except (FileNotFoundError, json.JSONDecodeError):
-        historia = []
-    nuevo_evento = {
-        "fecha": str(dt.date.today()), 
-        "tonalidad": tonalidad, 
-        "apartado": apartado, 
-        "velocidad": stats["v"],
-        "dificultad": stats["d"],
-        "ejecucion": ejecucion
+        current_history = []
+    new_event = {
+        "date": str(dt.date.today()), 
+        "tonality": tonality, 
+        "section": section, 
+        "speed": stats["v"],
+        "difficulty": stats["d"],
+        "execution": execution
     }
-    historia.append(nuevo_evento)
-    with open("historial.json", "w", encoding="utf-8") as f:
-        json.dump(historia, f, indent=4)
+    current_history.append(new_event)
+    with open("history.json", "w", encoding="utf-8") as f:
+        json.dump(current_history, f, indent=4)
 
-# Lo que hay que hacer al tocar la escala
-def tocar(tonalidad):
-    for apartado in datos[tonalidad]["apartados"]:
+# what to do when playing the scale
+def play_tonality(tonality):
+    for section in data[tonality]["apartados"]:
         os.system('cls' if os.name == 'nt' else 'clear')
-        print_big(f"{tonalidad[-1]}{simbolos[tonalidad[:-1]]}", MAGENTA)
+        print_big(f"{tonality[-1]}{symbols[tonality[:-1]]}", MAGENTA)
 
-        if datos[tonalidad]["apartados"][apartado][0] == True:
-            stats = datos[tonalidad]["apartados"][apartado][1]
-            print(f"{MAGENTA}{apartado[-5:]}: Toca {apartado[:-6]} a {stats['v']}.\n{RESET}")
+        if data[tonality]["apartados"][section][0] == True:
+            stats = data[tonality]["apartados"][section][1]
+            print(f"{MAGENTA}{section[-5:]}: Toca {section[:-6]} a {stats['v']}.\n{RESET}")
             try:
-                ejec = input(F"{VERDE}¿Cómo te ha salido? Elige: perfecto, bien, o mal.\n {RESET}").strip().lower()[0]
+                exec_result = input(F"{GREEN}¿Cómo te ha salido? Elige: perfecto, bien, o mal.\n {RESET}").strip().lower()[0]
             except:
-                ejec = "b"
-            ejecucion = ejec if ejec in ["b", "m", "p"] else "b"
-            guardar_historial(tonalidad, apartado, ejecucion)
-            if ejecucion.startswith("p"):
+                exec_result = "b"
+            execution = exec_result if exec_result in ["b", "m", "p"] else "b"
+            save_history(tonality, section, execution)
+            if execution.startswith("p"):
                 stats["d"] -= 1
-            elif ejecucion.startswith("m"):
+            elif execution.startswith("m"):
                 stats["d"] += 1
-            elif ejecucion.startswith("b"):
+            elif execution.startswith("b"):
                 pass
             else:
                 print("No es un resultado admitido. (Se usará 'bien')")
             if stats["d"] <= 0:
-                cambiar_velocidad(tonalidad, apartado, True)
+                change_speed(tonality, section, True)
                 stats["d"] = 5
             elif stats["d"] >= 8:
-                cambiar_velocidad(tonalidad, apartado, False)
+                change_speed(tonality, section, False)
                 stats["d"] = 5
-            datos[tonalidad]["apartados"][apartado][1] = stats 
-    datos[tonalidad]["dias_sin_tocarla"] = 0
+            data[tonality]["apartados"][section][1] = stats 
+    data[tonality]["dias_sin_tocarla"] = 0
 
 #########
-# DATOS #
+# DATA  #
 #########
 
-def editar_global():
+def edit_global():
     msg = ""
     while True:
         os.system('cls' if os.name == 'nt' else 'clear')
-        apartado_cambiar = input(f"¿Qué apartado deseas cambiar?\nOpciones:\n{"\n".join(apartado for apartado in datos["alteraciones0"]["apartados"])}\n").strip().lower()
+        section_to_change = input(f"¿Qué apartado deseas cambiar?\nOpciones:\n{"\n".join(section for section in data["alteraciones0"]["apartados"])}\n").strip().lower()
         if msg:
             print(f"--- {msg} ---")
             msg = ""
-        if apartado_cambiar not in datos["alteraciones0"]["apartados"]:
+        if section_to_change not in data["alteraciones0"]["apartados"]:
             msg = "Apartado no válido, intenta de nuevo."
         else:
             break
         
-    apartado_actual = datos["alteraciones0"]["apartados"][apartado_cambiar]
-    texto_inicial = json.dumps(apartado_actual, indent=4)
+    current_section = data["alteraciones0"]["apartados"][section_to_change]
+    initial_text = json.dumps(current_section, indent=4)
 
     with tempfile.NamedTemporaryFile(mode='w+', suffix='.json', delete=False, encoding='utf-8') as tf:
-        tf.write(texto_inicial)
-        ruta_temporal = tf.name
+        tf.write(initial_text)
+        temp_path = tf.name
     
-    print(f"{AMARILLO}Abriendo el editor de texto...{RESET}")
+    print(f"{YELLOW}Abriendo el editor de texto...{RESET}")
     print("Guarda el archivo (Ctrl+S) y ciérralo cuando termines para continuar.")
 
     try:
-        os.system(f'code --wait "{ruta_temporal}"')
+        os.system(f'code --wait "{temp_path}"')
     except:
         if platform.system() == "Windows":
-            os.system(f'notepad "{ruta_temporal}"')
+            os.system(f'notepad "{temp_path}"')
         else:
-            os.system(f'nano "{ruta_temporal}"')
+            os.system(f'nano "{temp_path}"')
         
-    with open(ruta_temporal, 'r', encoding='utf-8') as tf:
-        texto_editado = tf.read()
-    os.remove(ruta_temporal)
+    with open(temp_path, 'r', encoding='utf-8') as tf:
+        edited_text = tf.read()
+    os.remove(temp_path)
 
     try:
-        nuevo_apartado = json.loads(texto_editado)
-        for tonalidad in datos:
-            datos[tonalidad]["apartados"][apartado_cambiar] = nuevo_apartado
+        new_section = json.loads(edited_text)
+        for tonality in data:
+            data[tonality]["apartados"][section_to_change] = new_section
         with open("data.json", "w", encoding="utf-8") as f:
-            json.dump(datos, f, indent=4)
-        print(f"{VERDE}¡Datos actualizados correctamente!{RESET}")
+            json.dump(data, f, indent=4)
+        print(f"{GREEN}¡Datos actualizados correctamente!{RESET}")
     except json.JSONDecodeError:
-        print(f"{ROJO}Error al guardar: El formato JSON se ha roto. Cambios cancelados.{RESET}")
+        print(f"{RED}Error al guardar: El formato JSON se ha roto. Cambios cancelados.{RESET}")
 
-def ver_editar_datos():
+def view_edit_data():
     if input("¿Deseas editar globalmente? Si editass globalmente, podrás cambiar los datos de todas las escalas a la vez. [Y/n]").lower().strip() == "y":
-        editar_global()
+        edit_global()
     else:
         os.system('cls' if os.name == 'nt' else 'clear')
-        tonalidad_mostrar = input("¿Qué tonalidad quieres ver?\nPor ejemplo, alteraciones0, sostenido2, bemol4...\n").strip()
+        tonality_to_show = input("¿Qué tonalidad quieres ver?\nPor ejemplo, alteraciones0, sostenido2, bemol4...\n").strip()
         
-        if tonalidad_mostrar not in datos:
-            print(f"{ROJO}Esa tonalidad no existe.{RESET}")
+        if tonality_to_show not in data:
+            print(f"{RED}Esa tonalidad no existe.{RESET}")
             return
 
-        apartados_actuales = datos[tonalidad_mostrar]["apartados"]
-        texto_inicial = json.dumps(apartados_actuales, indent=4)
+        current_sections = data[tonality_to_show]["apartados"]
+        initial_text = json.dumps(current_sections, indent=4)
         
         with tempfile.NamedTemporaryFile(mode='w+', suffix='.json', delete=False, encoding='utf-8') as tf:
-            tf.write(texto_inicial)
-            ruta_temporal = tf.name
+            tf.write(initial_text)
+            temp_path = tf.name
 
-        print(f"{AMARILLO}Abriendo el editor de texto...{RESET}")
+        print(f"{YELLOW}Abriendo el editor de texto...{RESET}")
         print("Guarda el archivo (Ctrl+S) y ciérralo cuando termines para continuar.")
 
         try:
-            os.system(f'code --wait "{ruta_temporal}"')
+            os.system(f'code --wait "{temp_path}"')
         except:
             if platform.system() == "Windows":
-                os.system(f'notepad "{ruta_temporal}"')
+                os.system(f'notepad "{temp_path}"')
             else:
-                os.system(f'nano "{ruta_temporal}"')
+                os.system(f'nano "{temp_path}"')
 
-        with open(ruta_temporal, 'r', encoding='utf-8') as tf:
-            texto_editado = tf.read()
+        with open(temp_path, 'r', encoding='utf-8') as tf:
+            edited_text = tf.read()
 
-        os.remove(ruta_temporal)
+        os.remove(temp_path)
 
         try:
-            nuevos_apartados = json.loads(texto_editado)
-            datos[tonalidad_mostrar]["apartados"] = nuevos_apartados
+            new_sections = json.loads(edited_text)
+            data[tonality_to_show]["apartados"] = new_sections
             
             with open("data.json", "w", encoding="utf-8") as f:
-                json.dump(datos, f, indent=4)
+                json.dump(data, f, indent=4)
                 
-            print(f"{VERDE}¡Datos actualizados correctamente!{RESET}")
+            print(f"{GREEN}¡Datos actualizados correctamente!{RESET}")
             
         except json.JSONDecodeError:
-            print(f"{ROJO}Error al guardar: El formato JSON se ha roto. Cambios cancelados.{RESET}")
+            print(f"{RED}Error al guardar: El formato JSON se ha roto. Cambios cancelados.{RESET}")
 
 def insights():
     pass
-def graficas():
+def graphics():
     pass
 
-def menu_datos():
+def menu_data():
     msg = ""
     while True:
         os.system('cls' if os.name == 'nt' else 'clear')
@@ -265,11 +266,11 @@ def menu_datos():
 """)
         match input("Selecciona una opción: "):
             case "1":
-                ver_editar_datos()
+                view_edit_data()
             case "2":
                 insights()
             case "3":
-                graficas()
+                graphics()
             case "4":
                 break
             case _:
@@ -277,49 +278,49 @@ def menu_datos():
 
 ################################
 
-def ejecutar_sesion():
-    # cuantas vas a tocar
+def run_session():
+    # how many are you going to play
     try:
-        cantidad_hoy = int(input("¿Cuántas escalas vas a tocar? "))
+        amount_today = int(input("¿Cuántas escalas vas a tocar? "))
     except ValueError:
-        cantidad_hoy = 3
+        amount_today = 3
         print("Número no válido, usaremos 3.")
 
-    # Elige cuales vas a tocar
-    mitad_antigua = cantidad_hoy // 2
-    mitad_aleatoria = cantidad_hoy - mitad_antigua
+    # choose which ones you are going to play
+    old_half = amount_today // 2
+    random_half = amount_today - old_half
 
-    ordenadas = sorted(datos, key=lambda k: datos[k]["dias_sin_tocarla"], reverse=True)
-    antiguas = ordenadas[:mitad_antigua]
-    disponibles_azar = [t for t in ordenadas if t not in antiguas]
-    if len(disponibles_azar) < mitad_aleatoria:
-        aleatorias = disponibles_azar
+    sorted_tonalities = sorted(data, key=lambda k: data[k]["dias_sin_tocarla"], reverse=True)
+    old_tonalities = sorted_tonalities[:old_half]
+    available_random = [t for t in sorted_tonalities if t not in old_tonalities]
+    if len(available_random) < random_half:
+        random_tonalities = available_random
     else:
-        aleatorias = random.sample(disponibles_azar, mitad_aleatoria)
-    escalas_hoy = antiguas + aleatorias
-    random.shuffle(escalas_hoy)
+        random_tonalities = random.sample(available_random, random_half)
+    tonalities_today = old_tonalities + random_tonalities
+    random.shuffle(tonalities_today)
 
-    # tocar cada escala
-    for x in escalas_hoy:
-        tocar(x)
+    # play each scale
+    for x in tonalities_today:
+        play_tonality(x)
 
-    # Cambiar los dias sin tocarla
-    for tonalidad in tonalidades:
-        if tonalidad not in escalas_hoy: datos[tonalidad]["dias_sin_tocarla"] += 1
+    # change days without playing it
+    for tonality in tonalities:
+        if tonality not in tonalities_today: data[tonality]["dias_sin_tocarla"] += 1
 
-    print(f"{VERDE}Sesión terminada!{RESET}")
+    print(f"{GREEN}Sesión terminada!{RESET}")
 
 # menu
 
-def menu_principal():
+def main_menu():
     msg = ""
     while True:
         os.system('cls' if os.name == 'nt' else 'clear')
         print(f"""
 1. Empezar sesión
 2. Datos
-{ROJO}3. Restaurar datos{RESET}
-{AMARILLO}4. Salir{RESET}
+{RED}3. Restaurar datos{RESET}
+{YELLOW}4. Salir{RESET}
 """)
         if msg:
             print(f"--- {msg} ---")
@@ -327,16 +328,16 @@ def menu_principal():
 
         match input("Selecciona una opción: "):
             case "1":
-                ejecutar_sesion()
+                run_session()
             case "2":
-                menu_datos()
+                menu_data()
             case "3":
-                restaurar_valores()
+                restore_values()
             case "4":
                 with open("data.json", mode="w", encoding="utf-8") as write_file:
-                    json.dump(datos, write_file, indent=4)  
+                    json.dump(data, write_file, indent=4)  
                 break
             case _:
                 msg = "Opción no válida, intenta de nuevo"
 
-menu_principal()
+main_menu()

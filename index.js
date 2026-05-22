@@ -318,7 +318,6 @@ let amountToday;
 let tonalitiesToday;
 let activeForm = 0;
 
-// función importante
 function pickRandom(array, n) {
     const copy = [...array];
     const result = [];
@@ -328,7 +327,6 @@ function pickRandom(array, n) {
     }
     return result;
 }
-//
 
 // FILE HANDLING
 function loadSettings() {
@@ -341,7 +339,6 @@ function loadSettings() {
         }
     }
 
-    // Default if not in localStorage
     const settings = { ...DEFAULT_SETTINGS };
     saveSettings(settings);
     return settings;
@@ -357,17 +354,16 @@ function loadData() {
     if (localData) {
         try {
             let parsedData = JSON.parse(localData);
-            let migrado = false;
-            // Migración: Asegurar que todas las tonalityes tengan la propiedad 'key'
+            let migrated = false;
             Object.keys(parsedData).forEach(t => {
                 if (!parsedData[t].key) {
-                    const cant = parsedData[t].cantidad;
+                    const amount = parsedData[t].cantidad;
                     const alt = parsedData[t].alteraciones;
-                    parsedData[t].key = cant === 0 ? "0♭/♯" : (cant + (alt === "sostenidos" ? "♯" : "♭"));
-                    migrado = true;
+                    parsedData[t].key = amount === 0 ? "0♭/♯" : (amount + (alt === "sostenidos" ? "♯" : "♭"));
+                    migrated = true;
                 }
             });
-            if (migrado) {
+            if (migrated) {
                 data = parsedData;
                 localStorage.setItem(DATA_KEY, JSON.stringify(data));
             }
@@ -401,20 +397,20 @@ function loadHistory() {
 
 function saveHistory(newHistory) {
     historyData = newHistory;
-    localStorage.setItem(HISTORY_KEY, JSON.stringify(historial));
+    localStorage.setItem(HISTORY_KEY, JSON.stringify(historyData));
 }
 
 function addToHistory(tonality, section, execution) {
     const stats = data[tonality].sections[section][1];
-    const nuevoEvento = {
-        fecha: new Date().toISOString().split('T')[0],
+    const newEvent = {
+        date: new Date().toISOString().split('T')[0],
         tonality: tonality,
         section: section,
-        velocidad: stats.v,
-        dificultad: stats.d,
+        speed: stats.v,
+        difficulty: stats.d,
         execution: execution
     };
-    historyData.push(nuevoEvento);
+    historyData.push(newEvent);
     saveHistory(historyData);
 }
 
@@ -432,9 +428,9 @@ function restoreValues() {
 
 function exportData() {
     const backup = {
-        datos: JSON.parse(localStorage.getItem(DATA_KEY)),
+        data: JSON.parse(localStorage.getItem(DATA_KEY)),
         settings: JSON.parse(localStorage.getItem(SETTINGS_KEY)),
-        historial: JSON.parse(localStorage.getItem(HISTORY_KEY))
+        history: JSON.parse(localStorage.getItem(HISTORY_KEY))
     };
     const blob = new Blob([JSON.stringify(backup, null, 4)], { type: "application/json" });
     const url = URL.createObjectURL(blob);
@@ -457,7 +453,7 @@ function importData() {
                 const backup = JSON.parse(event.target.result);
                 if (backup.data) localStorage.setItem(DATA_KEY, JSON.stringify(backup.data));
                 if (backup.settings) localStorage.setItem(SETTINGS_KEY, JSON.stringify(backup.settings));
-                if (backup.historial) localStorage.setItem(HISTORY_KEY, JSON.stringify(backup.historial));
+                if (backup.history) localStorage.setItem(HISTORY_KEY, JSON.stringify(backup.history));
                 alert("Datos importados correctamente. La página se recargará.");
                 location.reload();
             } catch (err) {
@@ -468,14 +464,10 @@ function importData() {
     };
     input.click();
 }
-//fin file handling
 
-// algunas constantes
 const discreteSpeeds = [30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60, 63, 66, 69, 72, 76, 80, 84, 88, 92, 96, 100, 104, 108, 112, 116, 120, 126, 132, 138, 144];
 const symbols = { "ninguna": "♭/♯", "bemoles": "♭", "sostenidos": "♯" };
-// fin de constantes
 
-//sidebar
 function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
     const hamburger = document.getElementById('hamburger');
@@ -488,10 +480,9 @@ function toggleSidebar() {
     if (overlay) overlay.classList.toggle('visible', isOpen);
 }
 
-//cambiar velocidad
-function changeSpeed(tonality, section, aumentar = true) {
+function changeSpeed(tonality, section, increase = true) {
     let v = data[tonality].sections[section][1].v;
-    if (aumentar) {
+    if (increase) {
         if (v < 144) {
             if (settings.speeds === 'discretas') {
                 if (!discreteSpeeds.includes(v)) {
@@ -515,12 +506,11 @@ function changeSpeed(tonality, section, aumentar = true) {
     data[tonality].sections[section][1].v = v;
     data[tonality].sections[section][1].d = 5;
 }
-//fin cambiar velocidad
 
 function initialScreen() {
     document.getElementById("container").innerHTML += /*html*/`
     <div id="initial-screen">
-        <button id="play-button" onclick="pantallaPreguntarCantidad()" type="button">Tocar</button>
+        <button id="play-button" onclick="askAmountScreen()" type="button">Tocar</button>
     </div>
     `;
 }
@@ -531,12 +521,12 @@ function askAmountScreen() {
     <div id="ask-amount-container"><form id="ask-amount-form" novalidate>
         <label id="ask-amount-text">¿Cuántas escalas quieres tocar?</label>
         <div class="amount-stepper">
-            <button type="button" class="amount-stepper-btn" onclick="cambiarCantidad(-1)">−</button>
-            <input id="ask-amount-input" type="number" name="cantidadHoy" min="1" value="2">
-            <button type="button" class="amount-stepper-btn" onclick="cambiarCantidad(1)">+</button>
+            <button type="button" class="amount-stepper-btn" onclick="changeAmount(-1)">−</button>
+            <input id="ask-amount-input" type="number" name="amountToday" min="1" value="2">
+            <button type="button" class="amount-stepper-btn" onclick="changeAmount(1)">+</button>
         </div>
         <span id="amount-error" class="error-message"></span>
-        <button type="button" id="ask-amount-button" onclick="tocar()">Empezar</button>
+        <button type="button" id="ask-amount-button" onclick="play()">Empezar</button>
     </form></div>
     `;
 }
@@ -546,7 +536,7 @@ function changeAmount(delta) {
     let val = parseInt(input.value) || 1;
     val = Math.max(1, val + delta);
     input.value = val;
-    clearErrorCantidad();
+    clearAmountError();
 }
 
 function clearAmountError() {
@@ -561,7 +551,7 @@ async function play() {
     const raw = inputElement ? inputElement.value.trim() : "";
     amountToday = parseInt(raw);
 
-    if (!raw || isNaN(amountToday) || cantidadHoy < 1) {
+    if (!raw || isNaN(amountToday) || amountToday < 1) {
         const stepper = document.querySelector(".amount-stepper");
         const errorSpan = document.getElementById("amount-error");
         if (stepper) stepper.classList.add("input-error");
@@ -585,22 +575,21 @@ async function play() {
 }
 
 function chooseScales() {
-    // TODO: añadir un user prompt para confirmar si quiere tocar demasiadas escalas (y tendría q repetir algunas)
-    let tonalitiesToday = [];
-    let resto = amountToday;
-    while (tonalities.length < resto) {
-        resto -= tonalities.length;
-        tonalitiesToday.push(...tonalities);
+    let chosenTonalities = [];
+    let remainder = amountToday;
+    while (tonalities.length < remainder) {
+        remainder -= tonalities.length;
+        chosenTonalities.push(...tonalities);
     }
-    let mitadAntigua = Math.floor(resto / 2);
-    let mitadAleatoria = resto - mitadAntigua;
-    const ordenadas = Object.keys(data).sort((a, b) => data[b].dias_sin_tocarla - data[a].dias_sin_tocarla);
-    const antiguas = ordenadas.slice(0, mitadAntigua);
-    tonalitiesToday.push(...antiguas);
-    const disponiblesAzar = ordenadas.filter(x => !antiguas.includes(x));
-    tonalitiesToday.push(...pickRandom(disponiblesAzar, mitadAleatoria));
-    tonalitiesToday.sort(() => Math.random() - 0.5);
-    return tonalitiesToday;
+    let oldHalf = Math.floor(remainder / 2);
+    let randomHalf = remainder - oldHalf;
+    const sortedTonalities = Object.keys(data).sort((a, b) => data[b].dias_sin_tocarla - data[a].dias_sin_tocarla);
+    const oldTonalities = sortedTonalities.slice(0, oldHalf);
+    chosenTonalities.push(...oldTonalities);
+    const availableRandom = sortedTonalities.filter(x => !oldTonalities.includes(x));
+    chosenTonalities.push(...pickRandom(availableRandom, randomHalf));
+    chosenTonalities.sort(() => Math.random() - 0.5);
+    return chosenTonalities;
 }
 
 function playTonality(currentTonality) {
@@ -627,19 +616,10 @@ function playSection(tonality, section) {
     const v = data[tonality].sections[section][1].v;
     document.getElementById("forms-execution").innerHTML += /*html*/`
         <div class="div-section">
-            <!-- <h2>Toca ${section} a ${v} BPM</h2>
-                <input class="execution-input" type="radio" name="execution" value="mal" id="mal-${section}">
-                <label for="mal-${section}">Mal</label>
-                <input class="execution-input" type="radio" name="execution" value="bien" id="bien-${section}" checked>
-                <label for="bien-${section}">Bien</label>
-                <input class="execution-input" type="radio" name="execution" value="perfecto" id="perf-${section}">
-                <label for="perf-${section}">Perfecto</label>
-            </form> -->
-
             <fieldset class="r-pill-form-fieldset">
             <legend>Toca ${section} a ${v} BPM</legend>
             <div class="r-pill-form-group">
-                <form class="execution-form" id="formEjecucion${section}">
+                <form class="execution-form" id="formExecution${section}">
 	                <input class="execution-input" type="radio" name="execution" value="mal" id="mal-${section}">
                     <label class="r-pill-form-item-bad" for="mal-${section}">Mal</label>
 
@@ -658,22 +638,28 @@ function playSection(tonality, section) {
 function finishTonality(tonality) {
     Object.keys(data[tonality].sections).forEach(section => {
         if (data[tonality].sections[section][0]) {
-            const formulario = document.getElementById(`formEjecucion${section}`);
-            if (formulario) {
-                const data = new FormData(formulario);
-                const execution = data.get('execution'); // Obtiene el "value" del radio seleccionado
+            const formElement = document.getElementById(`formExecution${section}`);
+            if (formElement) {
+                const formData = new FormData(formElement);
+                const execution = formData.get('execution');
                 addToHistory(tonality, section, execution);
                 if (execution === 'perfecto') {
                     data[tonality].sections[section][1].d--;
-                } else if (execution === 'mal') { data[tonality].sections[section][1].d++; }
-                if (data[tonality].sections[section][1].d === 8) { changeSpeed(tonality, section, false); }
-                else if (data[tonality].sections[section][1].d === 0) { changeSpeed(tonality, section, true); }
+                } else if (execution === 'mal') {
+                    data[tonality].sections[section][1].d++;
+                }
+                if (data[tonality].sections[section][1].d === 8) {
+                    changeSpeed(tonality, section, false);
+                } else if (data[tonality].sections[section][1].d === 0) {
+                    changeSpeed(tonality, section, true);
+                }
             }
         }
     });
     data[tonality].dias_sin_tocarla = 0;
     document.getElementById(`${tonality}`).remove();
 }
+
 function nextTonality(tonality) {
     let i = tonalitiesToday.indexOf(tonality);
     playTonality(tonalitiesToday[i + 1]);
@@ -681,42 +667,33 @@ function nextTonality(tonality) {
 
 function finishSession() {
     alert('Sesión guardada con éxito');
-    //document.body.innerHTML =;
     saveData(data);
     initialScreen();
 }
 
-
 document.addEventListener('keydown', function (event) {
-    if (!document.getElementById("forms-execution")) { return }; //hay q estar en la pantalla de tocar
+    if (!document.getElementById("forms-execution")) { return };
 
     const forms = document.querySelectorAll('.execution-form');
     if (forms.length === 0) return;
 
-    const form = forms[activeForm]; // grab the currently active form
+    const form = forms[activeForm];
     const radios = Array.from(form.querySelectorAll('input[type="radio"]'));
 
-    // Find which radio is currently checked
-    let indiceActual = radios.findIndex(r => r.checked);
-    if (indiceActual === -1) indiceActual = 1; // default to "bien" if none checked
+    let currentIndex = radios.findIndex(r => r.checked);
+    if (currentIndex === -1) currentIndex = 1;
 
     if (event.key === 'ArrowLeft') {
-        // Move left, but don't go below 0
-        const nuevoIndice = Math.max(0, indiceActual - 1);
-        radios[nuevoIndice].checked = true;
-
+        const newIndex = Math.max(0, currentIndex - 1);
+        radios[newIndex].checked = true;
     } else if (event.key === 'ArrowRight') {
-        // Move right, but don't go past the last option
-        const nuevoIndice = Math.min(radios.length - 1, indiceActual + 1);
-        radios[nuevoIndice].checked = true;
-
+        const newIndex = Math.min(radios.length - 1, currentIndex + 1);
+        radios[newIndex].checked = true;
     } else if (event.key === 'Enter') {
         if (activeForm === forms.length - 1) {
             document.querySelector('.next-button').click();
         } else {
             activeForm = Math.min(forms.length - 1, activeForm + 1);
-            /*if (event.key === 'ArrowDown') 
-            if (event.key === 'ArrowUp') activeForm = Math.max(0, activeForm - 1);*/
         }
     }
 });
