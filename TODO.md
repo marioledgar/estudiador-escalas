@@ -42,7 +42,7 @@ En Python hay un `menu_datos()` completo con ver/editar datos, insights y gráfi
 
 ### 2.1 Pantalla de datos — ver/editar
 
-- [ ] **Botón "Datos"** en la pantalla inicial que lleve al menú de datos
+- [x] **Botón "Datos"** en la pantalla inicial que lleve al menú de datos
 - [ ] **Vista de tabla de todas las tonalidades**: una tabla o grid de cards mostrando, por cada tonalidad:
   - Nombre de la tonalidad (mayor / menor)
   - Número de alteraciones + símbolo

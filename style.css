@@ -224,6 +224,7 @@ button:hover {
 }
 
 .execution-form {
+    margin-bottom: 20px;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -244,6 +245,7 @@ button:hover {
     align-items: center;
     justify-content: center;
     min-width: 80px;
+    max-width: 100px;
     margin: 0;
     transition: background 0.2s, color 0.2s;
 }
@@ -303,6 +305,7 @@ input:checked+.r-pill-form-item-perfect {
     align-items: center;
     gap: 20px;
     padding: 30px;
+
 }
 
 #initial-screen {
