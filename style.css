@@ -451,6 +451,12 @@ input:checked+.r-pill-form-item-perfect {
 
 /* ===== MÓVIL (≤600px) ===== */
 @media (max-width: 600px) {
+    #hamburger {
+        top: max(12px, calc(env(safe-area-inset-top) + 10px));
+        left: 12px;
+        width: 42px;
+        height: 42px;
+    }
 
     /* Reduce padding on all the centered column layouts */
     .section-div,
@@ -503,7 +509,7 @@ input:checked+.r-pill-form-item-perfect {
 
     /* Reduce container side padding */
     .container {
-        padding: 10px;
+        padding: calc(env(safe-area-inset-top, 0px) + 68px) 10px 10px;
     }
 
     /* Botón siguiente: barra fija en la parte inferior, fácil de pulsar */
@@ -520,6 +526,7 @@ input:checked+.r-pill-form-item-perfect {
 
     /* Espacio inferior para que el contenido no quede tapado por el botón fijo */
     .container {
+        padding-top: calc(env(safe-area-inset-top, 0px) + 68px);
         padding-bottom: 80px;
     }
 
@@ -530,5 +537,6 @@ input:checked+.r-pill-form-item-perfect {
 
     #sidebar {
         width: 100%;
+        padding-top: calc(env(safe-area-inset-top, 0px) + 80px);
     }
 }
