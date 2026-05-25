@@ -1,3 +1,5 @@
+import { localDateStr } from data.js
+
 const DATA_KEY = "estudiador_datos";
 const SETTINGS_KEY = "estudiador_settings";
 const HISTORY_KEY = "estudiador_historial";
@@ -403,7 +405,7 @@ function saveHistory(newHistory) {
 function addToHistory(tonality, section, execution) {
     const stats = data[tonality].sections[section][1];
     const newEvent = {
-        date: new Date().toISOString().split('T')[0],
+        date: localDateStr(),
         tonality: tonality,
         section: section,
         speed: stats.v,
