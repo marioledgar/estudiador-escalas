@@ -1,5 +1,3 @@
-import { localDateStr } from data.js
-
 const DATA_KEY = "estudiador_datos";
 const SETTINGS_KEY = "estudiador_settings";
 const HISTORY_KEY = "estudiador_historial";
@@ -319,6 +317,13 @@ let tonalities;
 let amountToday;
 let tonalitiesToday;
 let activeForm = 0;
+
+function localDateStr(date = new Date()) {
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, '0');
+    const d = String(date.getDate()).padStart(2, '0');
+    return `${y}-${m}-${d}`;
+}
 
 function pickRandom(array, n) {
     const copy = [...array];
