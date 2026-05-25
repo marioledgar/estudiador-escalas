@@ -6,6 +6,7 @@ settings_default.json
 icons/icon-512.ico
 icon-white*
 .vscode/
+.antigravitycli/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
