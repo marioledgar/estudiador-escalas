@@ -344,7 +344,7 @@ input:checked+.r-pill-form-item-perfect {
 
 #ask-amount-input {
     font-size: 20pt;
-    width: 80px;
+    max-width: 50px;
     text-align: center;
     border: none;
     background: transparent;
