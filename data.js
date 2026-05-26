@@ -32,6 +32,22 @@ function getStreak() {
     return streak;
 }
 
+function getTotalScales() {
+    const unique = new Set(historyData.map(e => e.date + e.tonality));
+    return unique.size;
+}
+
+function getTotalSections() {
+    return history.length;
+}
+
+function getSectionValues() {
+    let m = history.filter(e => { return e.execution === 'm' }).length;
+    let b = history.filter(e => { return e.execution === 'b' }).length;
+    let p = history.filter(e => { return e.execution === 'p' }).length;
+    return [m, b, p]
+}
+
 function displayMainStatsBar() {
 
 }

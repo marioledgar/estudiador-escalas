@@ -648,11 +648,11 @@ function finishTonality(tonality) {
             const formElement = document.getElementById(`formExecution${section}`);
             if (formElement) {
                 const formData = new FormData(formElement);
-                const execution = formData.get('execution');
+                const execution = formData.get('execution')[0];
                 addToHistory(tonality, section, execution);
-                if (execution === 'perfecto') {
+                if (execution === 'p') {
                     data[tonality].sections[section][1].d--;
-                } else if (execution === 'mal') {
+                } else if (execution === 'm') {
                     data[tonality].sections[section][1].d++;
                 }
                 if (data[tonality].sections[section][1].d === 8) {
