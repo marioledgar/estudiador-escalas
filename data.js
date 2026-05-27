@@ -1,7 +1,8 @@
 let scaleHistory = [];
 
 try {
-    scaleHistory = JSON.parse(localStorage.getItem("estudiador_historial") || "[]");
+    const storedHistory = JSON.parse(localStorage.getItem("estudiador_historial") || "[]");
+    scaleHistory = Array.isArray(storedHistory) ? storedHistory : [];
 } catch (e) {
     console.error("Error parsing local history:", e);
 }
@@ -20,7 +21,7 @@ function previousDay(dateStr) {
 }
 
 function getStreak() {
-    const dates = [...new Set(scaleHistory.map(e => e.date))].sort().reverse();
+    const dates = [...new Set(scaleHistory.map(e => e.date).filter(Boolean))].sort().reverse();
 
     if (dates.length === 0) return 0;
 
@@ -39,7 +40,11 @@ function getStreak() {
 }
 
 function getTotalScales() {
-    const unique = new Set(scaleHistory.map(e => e.date + e.tonality));
+    const unique = new Set(
+        scaleHistory
+            .filter(e => e.date && e.tonality)
+            .map(e => e.date + e.tonality)
+    );
     return unique.size;
 }
 
@@ -72,10 +77,11 @@ function displayMainStatsBar() {
     streakItem.appendChild(streakValue);
     mainStatsBar.appendChild(streakItem);
 
+    const sectionQuantities = getSectionQuantities();
     const stats = [
         ["played scales", getTotalScales(), "totalScalesMainStats"],
         ["played sections", getTotalSections(), "totalSectionsMainStats"],
-        ["perfect sections", getSectionQuantities()[2], "perfectSectionsMainStats"]
+        ["perfect sections", sectionQuantities[2], "perfectSectionsMainStats"]
     ];
 
     stats.forEach(([label, value, id]) => {
