@@ -1,10 +1,26 @@
 let scaleHistory = [];
+let scaleData = {};
+
+if (!Array.prototype.average) {
+    Array.prototype.average = function () {
+        // 'this' refers to the array the method is called on
+        if (this.length === 0) return 0;
+        return this.reduce((sum, num) => sum + num, 0) / this.length;
+    };
+}
 
 try {
     const storedHistory = JSON.parse(localStorage.getItem("estudiador_historial") || "[]");
     scaleHistory = Array.isArray(storedHistory) ? storedHistory : [];
 } catch (e) {
     console.error("Error parsing local history:", e);
+}
+
+try {
+    const storedData = JSON.parse(localStorage.getItem("estudiador_datos") || "[]");
+    scaleData = storedData;
+} catch (e) {
+    console.error("Error parsing local data:", e);
 }
 
 function localDateStr(date = new Date()) {
@@ -105,6 +121,12 @@ function displayMainStatsBar() {
 
 
     container.appendChild(mainStatsBar);
+}
+
+
+function getAverageSpeed(scale) {
+    average = Object.values(scaleData[scale].sections).map(e => { return e[1].v }).average();
+    return average;
 }
 
 document.addEventListener('DOMContentLoaded', displayMainStatsBar);
