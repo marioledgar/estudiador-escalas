@@ -73,15 +73,30 @@ button:hover {
 }
 
 .stats-bar-item {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    padding: 0 36px;
-    border-left: 6px solid rgba(31, 35, 46, 0.95);
+    padding: 0 36px 0 42px;
+}
+
+.stats-bar-item::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 6px;
+    border-radius: 999px;
+    background: rgba(31, 35, 46, 0.95);
 }
 
 .stats-bar-item:first-child {
-    border-left: 0;
+    padding-left: 36px;
+}
+
+.stats-bar-item:first-child::before {
+    display: none;
 }
 
 .stats-bar-label {
@@ -523,7 +538,7 @@ input:checked+.r-pill-form-item-perfect {
     }
 
     .stats-bar-item {
-        padding: 0 20px;
+        padding: 0 20px 0 26px;
     }
 
     .stats-bar-label {
@@ -640,8 +655,11 @@ input:checked+.r-pill-form-item-perfect {
 
     .stats-bar-item {
         padding: 0 0 20px;
-        border-left: 0;
         border-bottom: 4px solid rgba(31, 35, 46, 0.95);
+    }
+
+    .stats-bar-item::before {
+        display: none;
     }
 
     .stats-bar-item:last-child {

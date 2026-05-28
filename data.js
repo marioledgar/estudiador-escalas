@@ -124,8 +124,8 @@ function displayMainStatsBar() {
 }
 
 
-function getAverageSpeed(scale) {
-    average = Object.values(scaleData[scale].sections).map(e => { return e[1].v }).average();
+function getAverageSpeed(tonality) {
+    average = Object.values(scaleData[tonality].sections).map(e => { return e[1].v }).average();
     return average;
 }
 
