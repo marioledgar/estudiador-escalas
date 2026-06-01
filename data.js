@@ -1,5 +1,6 @@
 let scaleHistory = [];
 let scaleData = {};
+let container = document.getElementById('container');
 
 if (!Array.prototype.average) {
     Array.prototype.average = function () {
@@ -9,19 +10,45 @@ if (!Array.prototype.average) {
     };
 }
 
-try {
-    const storedHistory = JSON.parse(localStorage.getItem("estudiador_historial") || "[]");
-    scaleHistory = Array.isArray(storedHistory) ? storedHistory : [];
-} catch (e) {
-    console.error("Error parsing local history:", e);
+function cloneDefaultData() {
+    return JSON.parse(JSON.stringify(DEFAULT_DATA));
 }
 
-try {
-    const storedData = JSON.parse(localStorage.getItem("estudiador_datos") || "[]");
-    scaleData = storedData;
-} catch (e) {
-    console.error("Error parsing local data:", e);
+function loadScaleHistory() {
+    const localHistory = localStorage.getItem(HISTORY_KEY);
+    if (!localHistory) return [];
+
+    try {
+        const storedHistory = JSON.parse(localHistory);
+        return Array.isArray(storedHistory) ? storedHistory : [];
+    } catch (e) {
+        console.error("Error parsing local history:", e);
+        return [];
+    }
 }
+
+function loadScaleData() {
+    const localData = localStorage.getItem(DATA_KEY);
+    if (localData) {
+        try {
+            const storedData = JSON.parse(localData);
+            if (storedData && typeof storedData === "object" && !Array.isArray(storedData) && Object.keys(storedData).length > 0) {
+                return storedData;
+            }
+        } catch (e) {
+            console.error("Error parsing local data:", e);
+        }
+    }
+
+    const defaultData = cloneDefaultData();
+    localStorage.setItem(DATA_KEY, JSON.stringify(defaultData));
+    return defaultData;
+}
+
+scaleHistory = loadScaleHistory();
+scaleData = loadScaleData();
+
+tonalities = Object.keys(scaleData)
 
 function localDateStr(date = new Date()) {
     const y = date.getFullYear();
@@ -76,7 +103,7 @@ function getSectionQuantities() {
 }
 
 function displayMainStatsBar() {
-    let container = document.getElementById('container');
+    container = document.getElementById('container');
     if (!container) return;
 
     let mainStatsBar = document.createElement('div');
@@ -120,16 +147,49 @@ function displayMainStatsBar() {
 
 
 
-    container.appendChild(mainStatsBar);
+    let dataWrapper = document.createElement('div');
+    dataWrapper.id = "data-page-wrapper";
+    dataWrapper.style.display = "flex";
+    dataWrapper.style.flexDirection = "column";
+    dataWrapper.style.width = "fit-content";
+    dataWrapper.style.maxWidth = "100%";
+    dataWrapper.style.margin = "0 auto";
+    
+    dataWrapper.appendChild(mainStatsBar);
+    container.appendChild(dataWrapper);
 }
 
 
-function getAverageSpeed(tonality) {
-    average = Object.values(scaleData[tonality].sections).map(e => { return e[1].v }).average();
-    return average;
+const getAverageSpeed = (tonality) => { return Object.values(scaleData[tonality].sections).map(e => { return e[1].v }).average(); }
+
+function statsCard(tonality) {
+    averageSpeed = getAverageSpeed(tonality);
+
+}
+
+function displayStatCards() {
+    container = document.getElementById('container');
+    if (!container) return;
+
+    let statCardContainer = document.createElement('div');
+    statCardContainer.className = 'tonality-grid';
+    for (let i = 0; i < tonalities.length; i++) {
+        const tonality = tonalities[i];
+        let tonalityCard = document.createElement('div');
+        tonalityCard.className = 'tonality-card';
+        console.log(tonalityCard)
+        statCardContainer.appendChild(tonalityCard);
+    }
+    let dataWrapper = document.getElementById('data-page-wrapper');
+    if (dataWrapper) {
+        dataWrapper.appendChild(statCardContainer);
+    } else {
+        container.appendChild(statCardContainer);
+    }
 }
 
 document.addEventListener('DOMContentLoaded', displayMainStatsBar);
+document.addEventListener('DOMContentLoaded', displayStatCards);
 
 /*
 {
