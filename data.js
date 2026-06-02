@@ -154,7 +154,7 @@ function displayMainStatsBar() {
     dataWrapper.style.width = "fit-content";
     dataWrapper.style.maxWidth = "100%";
     dataWrapper.style.margin = "0 auto";
-    
+
     dataWrapper.appendChild(mainStatsBar);
     container.appendChild(dataWrapper);
 }
@@ -163,8 +163,31 @@ function displayMainStatsBar() {
 const getAverageSpeed = (tonality) => { return Object.values(scaleData[tonality].sections).map(e => { return e[1].v }).average(); }
 
 function statsCard(tonality) {
-    averageSpeed = getAverageSpeed(tonality);
+    const averageSpeed = getAverageSpeed(tonality);
+    const key = scaleData[tonality].key;
+    const match = key.match(/^(\d+)(.*)$/);
+    const number = match ? match[1] : key;
+    let accidentals = match ? match[2] : "";
 
+    if (number === "0" && accidentals === "♭/♯") {
+        accidentals = `<div class="stacked-accidentals"><span>♭</span><span>♯</span></div>`;
+    }
+
+    return `
+        <div class="tonality-card-header">
+            <div class="tonality-card-number">${number}</div>
+            <div class="tonality-card-accidentals">${accidentals}</div>
+        </div>
+        <div class="tonality-card-stats">
+            <div class="tonality-card-speed">
+                <svg width="24" height="36" viewBox="0 0 20 30" fill="currentColor">
+                    <ellipse cx="6" cy="24" rx="6" ry="4" transform="rotate(-20 6 24)" />
+                    <rect x="9.78" y="1.38" width="2" height="22" />
+                </svg>
+                <span>= ${averageSpeed.toFixed(0)}</span>
+            </div>
+        </div>
+    `;
 }
 
 function displayStatCards() {
@@ -175,11 +198,20 @@ function displayStatCards() {
     statCardContainer.className = 'tonality-grid';
     for (let i = 0; i < tonalities.length; i++) {
         const tonality = tonalities[i];
+
         let tonalityCard = document.createElement('div');
         tonalityCard.className = 'tonality-card';
-        console.log(tonalityCard)
+        tonalityCard.id = `tonality-card-${tonality}`;
+        tonalityCard.innerHTML = statsCard(tonality);
+
         statCardContainer.appendChild(tonalityCard);
     }
+
+    let newTonalityCard = document.createElement('div');
+    newTonalityCard.className = 'tonality-card new-tonality-card';
+    newTonalityCard.innerHTML = '<div class="tonality-card-symbol">+</div>';
+    statCardContainer.appendChild(newTonalityCard);
+
     let dataWrapper = document.getElementById('data-page-wrapper');
     if (dataWrapper) {
         dataWrapper.appendChild(statCardContainer);
