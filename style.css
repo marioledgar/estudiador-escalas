@@ -58,7 +58,7 @@ body {
 
 .tonality-card-number {
     font-size: 64px;
-    font-weight: 700;
+    font-weight: 300;
     line-height: 0.8;
     color: var(--text);
 }
@@ -90,10 +90,8 @@ body {
     display: flex;
     align-items: center;
     gap: 0px;
-    font-weight: 700;
+    font-weight: 100;
     line-height: 0.9;
-    padding-bottom: 4px;
-    padding-left: 8px;
 }
 
 .tonality-card-speed svg {
@@ -104,6 +102,22 @@ body {
 .new-tonality-card {
     align-items: center;
     justify-content: center;
+}
+
+.tonality-card-symbol {
+    color: var(--button-blue);
+    opacity: 0.6;
+    transition: opacity 0.15s;
+}
+
+.tonality-card:hover .tonality-card-symbol {
+    opacity: 1;
+}
+
+.new-tonality-card-plus {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 button {

@@ -196,6 +196,7 @@ function displayStatCards() {
 
     let statCardContainer = document.createElement('div');
     statCardContainer.className = 'tonality-grid';
+    statCardContainer.id = 'stat-card-container';
     for (let i = 0; i < tonalities.length; i++) {
         const tonality = tonalities[i];
 
@@ -209,7 +210,14 @@ function displayStatCards() {
 
     let newTonalityCard = document.createElement('div');
     newTonalityCard.className = 'tonality-card new-tonality-card';
-    newTonalityCard.innerHTML = '<div class="tonality-card-symbol">+</div>';
+    newTonalityCard.innerHTML = `
+        <div class="tonality-card-symbol">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+        </div>
+    `;
     statCardContainer.appendChild(newTonalityCard);
 
     let dataWrapper = document.getElementById('data-page-wrapper');
